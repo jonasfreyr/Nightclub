@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public float tileSize;
+    public float spacing;
     private LineRenderer _lineRenderer;
     
     public void Set()

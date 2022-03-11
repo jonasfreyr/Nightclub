@@ -19,14 +19,16 @@ public class Draggable : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            Debug.Log(GameManager.Instance.draggingObject);
+            
             var currentMousePos = GameManager.GetMouseTo2DWorldPos();
-            if (_collider.bounds.Contains(currentMousePos))
+            if (_collider.bounds.Contains(currentMousePos) && GameManager.Instance.draggingObject == null)
             {
-
                 _offset = currentMousePos - transform.position;
                 _offset.z = 0;
-
+        
                 _isDragging = true;
+                GameManager.Instance.draggingObject = gameObject;
             }
         }
         
@@ -40,7 +42,6 @@ public class Draggable : MonoBehaviour
         {
             mousePos -= _offset;
             transform.position = mousePos;
-
         }
         else
         {   
@@ -56,6 +57,7 @@ public class Draggable : MonoBehaviour
         if (Input.GetButtonUp("Fire1"))
         {
             _isDragging = false;
+            GameManager.Instance.draggingObject = null;
         }
     }
 }

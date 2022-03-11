@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GridManager gridManager;
+    public GameObject draggingObject = null;
     
     private void Awake()
     {

@@ -12,6 +12,9 @@ public class GridManager : MonoBehaviour
     public GameObject tilePrefab;
 
     public float _spacing = 0.2f;
+
+
+    private bool testing = false;
     
     // Start is called before the first frame update
     void Start()
@@ -37,10 +40,7 @@ public class GridManager : MonoBehaviour
     {
         var tilePosX = Mathf.FloorToInt((mousePos.x - xStart) / (tileSize + _spacing));
         var tilePosY = Mathf.FloorToInt((mousePos.y - yStart) / (tileSize + _spacing));
-            
-        Debug.Log(tilePosX);
-        Debug.Log(tilePosY);
-
+        
         if (tilePosX < 0 || tilePosY < 0)
         {
             return null;
@@ -51,6 +51,7 @@ public class GridManager : MonoBehaviour
     
     private void Update()
     {
+        if (!testing) return;
         if (Input.GetButtonDown("Fire1"))
         {
             var clickedTile = GetTileFromPos(GameManager.GetMouseTo2DWorldPos());

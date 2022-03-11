@@ -11,7 +11,7 @@ public class GridManager : MonoBehaviour
     public float tileSize;
     public GameObject tilePrefab;
 
-    private float _spacing = 0.2f;
+    public float _spacing = 0.2f;
     
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,6 @@ public class GridManager : MonoBehaviour
 
                 var tileScript = newTile.GetComponent<Tile>();
                 tileScript.tileSize = tileSize;
-                tileScript.spacing = _spacing;
                 tileScript.Set();
 
                 GridArray[x, y] = newTile;
@@ -34,16 +33,19 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private GameObject GetTileClicked()
+    public GameObject GetTileFromPos(Vector3 mousePos)
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
         var tilePosX = Mathf.FloorToInt((mousePos.x - xStart) / (tileSize + _spacing));
         var tilePosY = Mathf.FloorToInt((mousePos.y - yStart) / (tileSize + _spacing));
             
         Debug.Log(tilePosX);
         Debug.Log(tilePosY);
 
+        if (tilePosX < 0 || tilePosY < 0)
+        {
+            return null;
+        }
+        
         return GridArray[tilePosX, tilePosY];
     }
     
@@ -51,12 +53,14 @@ public class GridManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            var clickedTile = GetTileClicked();
-
-            var _linerenderer = clickedTile.GetComponent<LineRenderer>();
+            var clickedTile = GetTileFromPos(GameManager.GetMouseTo2DWorldPos());
             
-            _linerenderer.startColor = Color.green;
-            _linerenderer.endColor = Color.green;
+            if (clickedTile == null) return;
+            
+            var lineRenderer = clickedTile.GetComponent<LineRenderer>();
+            
+            lineRenderer.startColor = Color.green;
+            lineRenderer.endColor = Color.green;
             
         }
     }

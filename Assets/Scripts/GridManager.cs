@@ -10,9 +10,8 @@ public class GridManager : MonoBehaviour
     public GameObject[,] GridArray;
     public float tileSize;
     public GameObject tilePrefab;
-
-    public float _spacing = 0.2f;
-
+    public float spacing = 0.2f;
+    public float lineThickness = 0.0001f;
 
     private bool testing = false;
     
@@ -25,10 +24,11 @@ public class GridManager : MonoBehaviour
         {
             for (var y = 0; y < height; y++)
             {
-                var newTile = Instantiate(tilePrefab, new Vector3(xStart + (tileSize * x) + x*_spacing, yStart + tileSize * y + y*_spacing), Quaternion.identity, transform);
+                var newTile = Instantiate(tilePrefab, new Vector3(xStart + (tileSize * x) + x*spacing, yStart + tileSize * y + y*spacing), Quaternion.identity, transform);
 
                 var tileScript = newTile.GetComponent<Tile>();
                 tileScript.tileSize = tileSize;
+                tileScript.lineThickness = lineThickness;
                 tileScript.Set();
 
                 GridArray[x, y] = newTile;
@@ -38,8 +38,8 @@ public class GridManager : MonoBehaviour
 
     public GameObject GetTileFromPos(Vector3 mousePos)
     {
-        var tilePosX = Mathf.FloorToInt((mousePos.x - xStart) / (tileSize + _spacing));
-        var tilePosY = Mathf.FloorToInt((mousePos.y - yStart) / (tileSize + _spacing));
+        var tilePosX = Mathf.FloorToInt((mousePos.x - xStart) / (tileSize + spacing));
+        var tilePosY = Mathf.FloorToInt((mousePos.y - yStart) / (tileSize + spacing));
         
         if (tilePosX < 0 || tilePosY < 0)
         {

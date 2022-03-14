@@ -45,14 +45,6 @@ public class Draggable : MonoBehaviour
   
         }
         
-        var tileScript = tile.GetComponent<Tile>();
-
-        if (tileScript.objectInTile == null)
-        {
-            mousePos -= _offset;
-            transform.position = mousePos;
-            return;
-        }
         
         var tilePos = tile.transform.position;
         var tileSizeHalf = GameManager.Instance.gridManager.tileSize / 2;
@@ -66,8 +58,6 @@ public class Draggable : MonoBehaviour
         {
             _isDragging = false;
             GameManager.Instance.draggingObject = null;
-
-            tileScript.objectInTile = gameObject;
         }
     }
 }

@@ -263,6 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74db1cb8acf6e7d468f47259b18a2c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilesX: 1
+  tilesY: 1
 --- !u!212 &803480767
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -424,6 +426,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74db1cb8acf6e7d468f47259b18a2c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilesX: 1
+  tilesY: 1
 --- !u!58 &827750086
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -501,6 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74db1cb8acf6e7d468f47259b18a2c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilesX: 2
+  tilesY: 1
 --- !u!61 &1403650342
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -739,6 +745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74db1cb8acf6e7d468f47259b18a2c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilesX: 1
+  tilesY: 2
 --- !u!61 &1508027276
 BoxCollider2D:
   m_ObjectHideFlags: 0

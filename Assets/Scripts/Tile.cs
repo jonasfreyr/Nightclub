@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour
 {
     public float tileSize;
     private LineRenderer _lineRenderer;
+    public GameObject objectInTile;
     
     public void Set()
     {

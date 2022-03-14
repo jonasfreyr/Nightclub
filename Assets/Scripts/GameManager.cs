@@ -8,7 +8,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GridManager gridManager;
     public GameObject draggingObject = null;
-    
+    private static Camera _camera;
+
+    private void Start()
+    {
+        _camera = Camera.main;
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -16,9 +22,10 @@ public class GameManager : MonoBehaviour
 
     public static Vector3 GetMouseTo2DWorldPos()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
 
         return mousePos;
+ 
     }
 }

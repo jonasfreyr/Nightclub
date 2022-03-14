@@ -37,27 +37,37 @@ public class Draggable : MonoBehaviour
         var mousePos = GameManager.GetMouseTo2DWorldPos();
 
         var tile = GameManager.Instance.gridManager.GetTileFromPos(mousePos);
-
+        
         if (tile == null)
         {
             mousePos -= _offset;
             transform.position = mousePos;
+  
         }
-        else
-        {   
-            var tilePos = tile.transform.position;
-            var tileSizeHalf = GameManager.Instance.gridManager.tileSize / 2;
+        
+        var tileScript = tile.GetComponent<Tile>();
 
-            tilePos.y += tileSizeHalf;
-            tilePos.x += tileSizeHalf;
-
-            transform.position = tilePos;
+        if (tileScript.objectInTile == null)
+        {
+            mousePos -= _offset;
+            transform.position = mousePos;
+            return;
         }
+        
+        var tilePos = tile.transform.position;
+        var tileSizeHalf = GameManager.Instance.gridManager.tileSize / 2;
 
+        tilePos.y += tileSizeHalf;
+        tilePos.x += tileSizeHalf;
+
+        transform.position = tilePos;
+        
         if (Input.GetButtonUp("Fire1"))
         {
             _isDragging = false;
             GameManager.Instance.draggingObject = null;
+
+            tileScript.objectInTile = gameObject;
         }
     }
 }

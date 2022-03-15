@@ -16,7 +16,7 @@ public class Draggable : MonoBehaviour
     private Vector3 _offset;
 
     private bool _placed = false;
-    private GameObject _tile = null;
+    private Vector2Int _tilePos;
     
     // Start is called before the first frame update
     void Start()
@@ -40,11 +40,12 @@ public class Draggable : MonoBehaviour
             {
                 _offset = currentMousePos - transform.position;
                 _offset.z = 0;
-        
+
                 _isDragging = true;
                 GameManager.Instance.draggingObject = gameObject;
                 
-                GameManager.Instance.gridManager.RemoveFromGrid(mousePos, tilesX, tilesY);
+                
+                GameManager.Instance.gridManager.RemoveFromGridByGridPos(_tilePos, tilesX, tilesY);
             }
         }
         
@@ -80,7 +81,7 @@ public class Draggable : MonoBehaviour
             _isDragging = false;
             GameManager.Instance.draggingObject = null;
             GameManager.Instance.gridManager.PlaceInGrid(mousePos, gameObject, tilesX, tilesY);
-            _tile = tile;
+            _tilePos = GameManager.Instance.gridManager.GetGridPos(mousePos);
             _placed = true;
         }
     }

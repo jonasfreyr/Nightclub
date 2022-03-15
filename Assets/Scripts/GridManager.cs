@@ -44,9 +44,14 @@ public class GridManager : MonoBehaviour
         return new Vector2Int(tilePosX, tilePosY);
     }
     
+    public void RemoveFromGrid(Vector3 mousePos, int numOfTilesX, int numOfTilesY)
+    {
+        PlaceInGrid(mousePos, null, numOfTilesX, numOfTilesY, false);
+    }
+    
     public GameObject GetTileFromGridPos(Vector2Int gridPos)
     {
-        if (gridPos.x < 0 || gridPos.y < 0)
+        if (gridPos.x < 0 || gridPos.y < 0 || gridPos.x > width-1 || gridPos.y > height-1)
         {
             return null;
         }
@@ -60,8 +65,16 @@ public class GridManager : MonoBehaviour
 
         return GetTileFromGridPos(tilePos);
     }
-
-    public void PlaceInGrid(Vector3 mousePos, GameObject objectToPlace, int numOfTilesX, int numOfTilesY)
+    
+    /// <summary>
+    /// Sets the object in the grid with the correct number of tiles.
+    /// Call first IsTileFree, to see if it is safe to place
+    /// </summary>
+    /// <param name="mousePos"></param>
+    /// <param name="objectToPlace"></param>
+    /// <param name="numOfTilesX"></param>
+    /// <param name="numOfTilesY"></param>
+    public void PlaceInGrid(Vector3 mousePos, GameObject objectToPlace, int numOfTilesX, int numOfTilesY, bool safe = true)
     {
         var tilePos = GetGridPos(mousePos);
 
@@ -73,6 +86,9 @@ public class GridManager : MonoBehaviour
             for (var x = 0; x < numOfTilesX; x++)
             {
                 var tile = GetTileFromGridPos(new Vector2Int(tilePosX, tilePosY));
+                
+                if (!safe && tile == null) continue;
+                
                 var tileScript = tile.GetComponent<Tile>();
 
                 tileScript.objectInTile = objectToPlace;

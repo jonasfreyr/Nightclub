@@ -14,8 +14,7 @@ public class Draggable : MonoBehaviour
     private Collider2D _collider;
     private bool _isDragging;
     private Vector3 _offset;
-
-    private bool _placed = false;
+    
     private Vector2Int _tilePos;
     
     // Start is called before the first frame update
@@ -81,8 +80,13 @@ public class Draggable : MonoBehaviour
             _isDragging = false;
             GameManager.Instance.draggingObject = null;
             GameManager.Instance.gridManager.PlaceInGrid(mousePos, gameObject, tilesX, tilesY);
-            _tilePos = GameManager.Instance.gridManager.GetGridPos(mousePos);
-            _placed = true;
+            var newTilePos = GameManager.Instance.gridManager.GetGridPos(mousePos);
+
+            if (!newTilePos.Equals(_tilePos))
+                GameManager.Instance.updatePath = true;
+
+            _tilePos = newTilePos;
+
         }
     }
 }

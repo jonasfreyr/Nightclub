@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,7 +10,10 @@ public class GameManager : MonoBehaviour
     public GridManager gridManager;
     public GameObject draggingObject = null;
     private static Camera _camera;
-
+    
+    public AstarPath gridPath;
+    public bool updatePath = false;
+    
     private void Start()
     {
         _camera = Camera.main;
@@ -27,5 +31,19 @@ public class GameManager : MonoBehaviour
 
         return mousePos;
  
+    }
+
+    private void LateUpdate()
+    {
+
+
+        if (updatePath)
+        {
+            Debug.Log("Yay");
+            gridPath.Scan();
+        }
+            
+
+        updatePath = false;
     }
 }

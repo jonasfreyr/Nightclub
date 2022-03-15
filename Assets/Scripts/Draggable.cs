@@ -16,7 +16,7 @@ public class Draggable : MonoBehaviour
     private Vector3 _offset;
     
     private Vector2Int _tilePos;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +45,9 @@ public class Draggable : MonoBehaviour
                 
                 
                 GameManager.Instance.gridManager.RemoveFromGridByGridPos(_tilePos, tilesX, tilesY);
+
+                _collider.enabled = false;
+
             }
         }
         
@@ -86,7 +89,9 @@ public class Draggable : MonoBehaviour
                 GameManager.Instance.updatePath = true;
 
             _tilePos = newTilePos;
-
+            
+            _collider.enabled = true;
+            
         }
     }
 }

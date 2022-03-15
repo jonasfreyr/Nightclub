@@ -50,3 +50,5 @@ MonoBehaviour:
   startHour: 12
   clubOpeningHour: 20
   clubClosingHour: 5
+  gridPath: {fileID: 0}
+  updatePath: 0

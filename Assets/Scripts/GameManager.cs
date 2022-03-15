@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _camera = Camera.main;
-        Time.timeScale = 30;
+        Time.timeScale = 1;
     }
 
     private void Awake()

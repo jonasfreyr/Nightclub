@@ -47,12 +47,15 @@ public class CustomerManager : MonoBehaviour
 
         var customerScript = customer.GetComponent<CustomerBehaviour>();
         customerScript.customerManager = this;
+        
+        _customers.Add(customer);
     }
     
     // Update is called once per frame
     void Update()
-    {
-        if (_customers.Count == maxCustomers)
+    {   
+        
+        if (_customers.Count >= maxCustomers)
         {
             _lastSpawned = Time.time;
             

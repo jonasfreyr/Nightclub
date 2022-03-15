@@ -16,7 +16,7 @@ namespace Pathfinding {
 	public class AIDestinationSetter : VersionedMonoBehaviour {
 		/// <summary>The object that the AI should move to</summary>
 		public Transform target;
-		public Vector3 targetV;
+		public Vector3? targetV;
 		IAstarAI ai;
 
 		void OnEnable () {
@@ -40,7 +40,7 @@ namespace Pathfinding {
 					ai.destination = target.position;
 				else if (targetV != null)
 				{
-					ai.destination = targetV;
+					ai.destination = targetV.Value;
 				}
 			}
 		}

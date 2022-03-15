@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CustomerManager : MonoBehaviour
 {
+    
     public int maxCustomers;
-
     public float lowerEndTime;
     public float upperEndTime;
 
@@ -14,9 +14,12 @@ public class CustomerManager : MonoBehaviour
 
     public Transform[] spawnPoints;
     
+    public PointOfInterest[] bars;
+    
     private List<GameObject> _customers;
     private float _timeToNextCustomer;
     private float _lastSpawned;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -24,16 +27,26 @@ public class CustomerManager : MonoBehaviour
         _customers = new List<GameObject>();
     }
 
+    public Vector3 GetRandomPOIPosition(PointOfInterest[] pois)
+    {
+        var poi = pois[Random.Range(0, pois.Length)];
+
+        return poi.GetRandomPointWithinCollider();
+    }
+    
     void SpawnCustomer()
     {
         var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         var customerSprite = customerSprites[Random.Range(0, customerSprites.Length)];
 
         var customer = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity, transform);
-        var customerGraphics = customer.transform.GetChild(0);
         
+        var customerGraphics = customer.transform.GetChild(0);
         var customersSpriteRenderer = customerGraphics.GetComponent<SpriteRenderer>();
         customersSpriteRenderer.sprite = customerSprite;
+
+        var customerScript = customer.GetComponent<CustomerBehaviour>();
+        customerScript.customerManager = this;
     }
     
     // Update is called once per frame

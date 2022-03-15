@@ -48,6 +48,11 @@ public class GridManager : MonoBehaviour
     {
         PlaceInGrid(mousePos, null, numOfTilesX, numOfTilesY, false);
     }
+
+    public void RemoveFromGridByGridPos(Vector2Int gridPos, int numOfTilesX, int numOfTilesY)
+    {
+        PlaceInGridByGridPos(gridPos, null, numOfTilesX, numOfTilesY);
+    }
     
     public GameObject GetTileFromGridPos(Vector2Int gridPos)
     {
@@ -65,23 +70,12 @@ public class GridManager : MonoBehaviour
 
         return GetTileFromGridPos(tilePos);
     }
-    
-    /// <summary>
-    /// Sets the object in the grid with the correct number of tiles.
-    /// Call first IsTileFree, to see if it is safe to place
-    /// </summary>
-    /// <param name="mousePos"></param>
-    /// <param name="objectToPlace"></param>
-    /// <param name="numOfTilesX"></param>
-    /// <param name="numOfTilesY"></param>
-    public void PlaceInGrid(Vector3 mousePos, GameObject objectToPlace, int numOfTilesX, int numOfTilesY, bool safe = true)
-    {
-        var tilePos = GetGridPos(mousePos);
 
+    public void PlaceInGridByGridPos(Vector2Int tilePos,GameObject objectToPlace, int numOfTilesX, int numOfTilesY, bool safe = true)
+    {
         var tilePosY = tilePos.y;
         for (var y = 0; y < numOfTilesY; y++)
         {
-
             var tilePosX = tilePos.x;
             for (var x = 0; x < numOfTilesX; x++)
             {
@@ -96,9 +90,22 @@ public class GridManager : MonoBehaviour
 
                 tilePosX++;
             }
-
             tilePosY++;
         }
+    }
+    
+    /// <summary>
+    /// Sets the object in the grid with the correct number of tiles.
+    /// Call first IsTileFree, to see if it is safe to place
+    /// </summary>
+    /// <param name="mousePos"></param>
+    /// <param name="objectToPlace"></param>
+    /// <param name="numOfTilesX"></param>
+    /// <param name="numOfTilesY"></param>
+    public void PlaceInGrid(Vector3 mousePos, GameObject objectToPlace, int numOfTilesX, int numOfTilesY, bool safe = true)
+    {
+        var tilePos = GetGridPos(mousePos);
+        PlaceInGridByGridPos(tilePos, objectToPlace, numOfTilesX, numOfTilesY, safe);
     }
     
     public bool IsTileFree(Vector3 mousePos, int numOfTilesX, int numOfTilesY)

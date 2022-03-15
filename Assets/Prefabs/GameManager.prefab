@@ -43,5 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74fadb1377c73974d8ef72491bd2cb4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightsController: {fileID: 0}
   gridManager: {fileID: 0}
   draggingObject: {fileID: 0}
+  clockText: {fileID: 0}
+  startHour: 12
+  clubOpeningHour: 20
+  clubClosingHour: 5

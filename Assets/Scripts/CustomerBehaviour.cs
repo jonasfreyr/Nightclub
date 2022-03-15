@@ -73,7 +73,5 @@ public class CustomerBehaviour : MonoBehaviour
         {
             _targetSetter.targetV = null;
         }
-        
-        
     }
 }

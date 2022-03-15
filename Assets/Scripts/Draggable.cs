@@ -14,7 +14,9 @@ public class Draggable : MonoBehaviour
     private Collider2D _collider;
     private bool _isDragging;
     private Vector3 _offset;
-    
+
+    private bool _placed = false;
+    private GameObject _tile = null;
     
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,8 @@ public class Draggable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_placed) return;
+        
         if (Input.GetButtonDown("Fire1"))
         {
             var currentMousePos = GameManager.GetMouseTo2DWorldPos();
@@ -46,15 +50,25 @@ public class Draggable : MonoBehaviour
         
         var mousePos = GameManager.GetMouseTo2DWorldPos();
 
-        var tile = GameManager.Instance.gridManager.GetTileFromPos(mousePos);
+        var tile = GameManager.Instance.gridManager.GetTileFromMousePos(mousePos);
         
         if (tile == null)
         {
             mousePos -= _offset;
             transform.position = mousePos;
+            return;
         }
         
-        
+        Debug.Log("----------------------------------");
+        Debug.Log("Checking: " + GameManager.Instance.gridManager.GetGridPos(mousePos)+"...");
+        if (!GameManager.Instance.gridManager.IsTileFree(mousePos, tilesX, tilesY))
+        {
+            Debug.Log("Not empty");
+            mousePos -= _offset;
+            transform.position = mousePos;
+            return;
+        }
+        Debug.Log("Empty");
         var tilePos = tile.transform.position;
         var tileSizeHalf = GameManager.Instance.gridManager.tileSize / 2;
 
@@ -67,6 +81,11 @@ public class Draggable : MonoBehaviour
         {
             _isDragging = false;
             GameManager.Instance.draggingObject = null;
+            GameManager.Instance.gridManager.PlaceInGrid(mousePos, gameObject, tilesX, tilesY);
+            _tile = tile;
+            _placed = true;
+            
+            Debug.Log("Placed: " + GameManager.Instance.gridManager.GetGridPos(mousePos));
         }
     }
 }

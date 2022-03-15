@@ -36,17 +36,81 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public GameObject GetTileFromPos(Vector3 mousePos)
+    public Vector2Int GetGridPos(Vector3 mousePos)
     {
         var tilePosX = Mathf.FloorToInt((mousePos.x - xStart) / (tileSize + spacing));
         var tilePosY = Mathf.FloorToInt((mousePos.y - yStart) / (tileSize + spacing));
-        
-        if (tilePosX < 0 || tilePosY < 0)
+
+        return new Vector2Int(tilePosX, tilePosY);
+    }
+    
+    public GameObject GetTileFromGridPos(Vector2Int gridPos)
+    {
+        if (gridPos.x < 0 || gridPos.y < 0)
         {
             return null;
         }
         
-        return GridArray[tilePosX, tilePosY];
+        return GridArray[gridPos.x, gridPos.y];
+    }
+    
+    public GameObject GetTileFromMousePos(Vector3 mousePos)
+    {   
+        var tilePos = GetGridPos(mousePos);
+
+        return GetTileFromGridPos(tilePos);
+    }
+
+    public void PlaceInGrid(Vector3 mousePos, GameObject objectToPlace, int numOfTilesX, int numOfTilesY)
+    {
+        var tilePos = GetGridPos(mousePos);
+
+        var tilePosY = tilePos.y;
+        for (var y = 0; y < numOfTilesY; y++)
+        {
+
+            var tilePosX = tilePos.x;
+            for (var x = 0; x < numOfTilesX; x++)
+            {
+                var tile = GetTileFromGridPos(new Vector2Int(tilePosX, tilePosY));
+                var tileScript = tile.GetComponent<Tile>();
+
+                tileScript.objectInTile = objectToPlace;
+                
+
+                tilePosX++;
+            }
+
+            tilePosY++;
+        }
+    }
+    
+    public bool IsTileFree(Vector3 mousePos, int numOfTilesX, int numOfTilesY)
+    {
+        var tilePos = GetGridPos(mousePos);
+        
+        var tilePosY = tilePos.y;
+        for (var y = 0; y < numOfTilesY; y++)
+        {   
+            var tilePosX = tilePos.x;
+            for (var x = 0; x < numOfTilesX; x++)
+            {
+                var tile = GetTileFromGridPos(new Vector2Int(tilePosX, tilePosY));
+
+                if (tile == null) return false;
+
+                var tileScript = tile.GetComponent<Tile>();
+
+                if (tileScript.objectInTile != null) return false;
+                
+
+                tilePosX++;
+            }
+
+            tilePosY++;
+        }
+
+        return true;
     }
     
     private void Update()
@@ -54,7 +118,7 @@ public class GridManager : MonoBehaviour
         if (!testing) return;
         if (Input.GetButtonDown("Fire1"))
         {
-            var clickedTile = GetTileFromPos(GameManager.GetMouseTo2DWorldPos());
+            var clickedTile = GetTileFromMousePos(GameManager.GetMouseTo2DWorldPos());
             
             if (clickedTile == null) return;
             

@@ -105,12 +105,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7879793468623563611}
-  - component: {fileID: 6702437664415593859}
   - component: {fileID: 1808806716}
   - component: {fileID: 1808806713}
   - component: {fileID: 1808806714}
   - component: {fileID: 1808806715}
   - component: {fileID: 2097963843040151915}
+  - component: {fileID: 13666464}
   m_Layer: 9
   m_Name: Customer
   m_TagString: Untagged
@@ -133,32 +133,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &6702437664415593859
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5938709523273457736}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.00032813847, y: -0.0052499026}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.12, y: 0.22}
-    newSize: {x: 0.12, y: 0.22}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.040595353, y: 0.17012593}
-  m_EdgeRadius: 0
 --- !u!114 &1808806716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +165,7 @@ MonoBehaviour:
   dancing: 0
   peeing: 0
   puking: 0
+  standing: 0
   lowerStandingTime: 1.3
   upperStandingTime: 6.2
   customerManager: {fileID: 0}
@@ -231,7 +206,7 @@ MonoBehaviour:
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 1.2
-  endReachedDistance: 0.8
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -300,3 +275,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &13666464
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5938709523273457736}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0003783226, y: -0.008160573}
+  m_Size: {x: 0.03926773, y: 0.03926773}
+  m_Direction: 0

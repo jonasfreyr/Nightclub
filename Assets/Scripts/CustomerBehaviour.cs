@@ -1,12 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
 public class CustomerBehaviour : MonoBehaviour
 {
-    public float thrist = 0f;
+    public float thirst = 0f;
     public float funky = 0f;
     public float mictury = 0f;
     public float pukeness = 0f;
@@ -30,8 +27,16 @@ public class CustomerBehaviour : MonoBehaviour
     public bool dancing;
     public bool peeing;
     public bool puking;
-
+    public bool standing;
+    
+    public float lowerStandingTime = 1.3f;
+    public float upperStandingTime = 6.2f;
+    
+    private float startedStandingTime = 0f;
+    private float standDuration = 0f;
+    
     private bool goingToPOI = false;
+    private PointOfInterest _currentPOI;
     
     private AIDestinationSetter _targetSetter;
     public CustomerManager customerManager;
@@ -42,36 +47,156 @@ public class CustomerBehaviour : MonoBehaviour
         _targetSetter.targetV = null;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("POI")) return;
+
+        if (other.gameObject == _currentPOI.gameObject)
+        {
+            if (_currentPOI.bar)
+                drinking = true;
+            else if (_currentPOI.bathroom)
+                peeing = true;
+            else if (_currentPOI.danceFloor)
+                dancing = true;
+            else if (_currentPOI.commonArea)
+            {
+                startedStandingTime = Time.time;
+
+                standDuration = Random.Range(lowerStandingTime, upperStandingTime);
+                
+                standing = true;
+            }
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        thrist += thirstIncrease;
+        if (!drinking)
+        {
+            thirst += thirstIncrease;
 
-        if (goingToPOI) return;
+            if (thirst > 100)
+                thirst = 100;
+        }
+            
+        else
+        {
+            thirst -= thirstDecrease;
+
+            if (thirst <= 0)
+            {
+                drinking = false;
+
+                thirst = 0;
+            }
+        }
+
+
+        if (!dancing)
+        {
+            funky += funkIncrease;
+            
+            if (funky > 100)
+                funky = 100;
+        }
+            
+        else
+        {
+            funky -= funkDecrease;
+            
+            if (funky <= 0)
+            {
+                dancing = false;
+
+                funky = 0;
+            }
+        }
+
+
+        if (!peeing)
+        {
+            mictury += micturyIncrease;
+            
+            if (mictury > 100)
+                mictury = 100;
+        }
+
+        else
+        {
+            mictury -= micturyDecrease;
+            
+            if (mictury <= 0)
+            {
+                peeing = false;
+
+                mictury = 0;
+            }
+        }
+
+
+        
+        if (!puking)
+        {
+            pukeness += pukeIncrease;
+            
+            if (pukeness > 100)
+                pukeness = 100;
+        }
+
+        else
+        {
+            pukeness -= pukeDecrease;
+            
+            if (pukeness <= 0)
+            {
+                puking = false;
+
+                pukeness = 0;
+            }
+        }
+
+        if (standing)
+        {
+            if (startedStandingTime + standDuration < Time.time)
+            {
+                standing = false;
+            }
+        }
+        
+        if (_targetSetter.done)
+            goingToPOI = false;
+        
+        if (goingToPOI || drinking || peeing || dancing || puking || standing) return;
+        
+        PointOfInterest target;
         
         if (pukeness >= pukeThreshold)
         {
-            
+            target = customerManager.GetRandomPOI(customerManager.bathrooms);
         }
         else if (mictury >= micturyThreshold)
         {
-            
+            target = customerManager.GetRandomPOI(customerManager.bathrooms);
         }
-        else if (thrist >= thirstThreshold)
+        else if (thirst >= thirstThreshold)
         {
-            var target = customerManager.GetRandomPOIPosition(customerManager.bars);
-
-            _targetSetter.targetV = target;
-            
-            goingToPOI = true;
+            target = customerManager.GetRandomPOI(customerManager.bars);
         }
         else if (funky >= funkThreshold)
         {
-            
+            target = customerManager.GetRandomPOI(customerManager.danceFloors);
         }
         else
         {
-            _targetSetter.targetV = null;
+            target = customerManager.GetRandomPOI(customerManager.commonAreas);
         }
+
+        
+        _currentPOI = target;
+        _targetSetter.targetV = target.GetRandomPointWithinCollider();
+        goingToPOI = true;
+ 
     }
 }

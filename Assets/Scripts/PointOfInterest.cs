@@ -1,11 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PointOfInterest : MonoBehaviour
 {
 
     private BoxCollider2D _box;
+
+    public bool bar;
+    public bool danceFloor;
+    public bool bathroom;
+    public bool commonArea;
+
     // Start is called before the first frame update
     void Start()
     {

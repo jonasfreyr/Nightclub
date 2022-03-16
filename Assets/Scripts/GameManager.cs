@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     private void _setupForNightTime()
     {
         lightsController.NightLightsEnabled = true;
+        lightsController.SetLightShow(Lightshow.Lightshow1);
         _gameCycleState = GameCycleState.NightTime;
     }
 

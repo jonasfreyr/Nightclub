@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8347863852536042270}
   - component: {fileID: 4896490392224783346}
   - component: {fileID: 7101604919093122233}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Customer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 46f68855111a73b40a7da6950867f25f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 41673565a97a07a40bf939931e9e3024, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 1808806714}
   - component: {fileID: 1808806715}
   - component: {fileID: 2097963843040151915}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Customer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ffec168f5312f458058dcbf63ab31a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrist: 0
+  thirst: 0
   funky: 0
   mictury: 0
   pukeness: 0
@@ -191,6 +191,8 @@ MonoBehaviour:
   dancing: 0
   peeing: 0
   puking: 0
+  lowerStandingTime: 1.3
+  upperStandingTime: 6.2
   customerManager: {fileID: 0}
 --- !u!114 &1808806713
 MonoBehaviour:
@@ -205,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.09
+  radius: 0.1
   height: 0.1
   canMove: 1
   maxSpeed: 3
@@ -222,14 +224,14 @@ MonoBehaviour:
     mode: 2
     interval: 0.5
     sensitivity: 10
-    maximumInterval: 2
+    maximumInterval: 0.5
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0.6
   pickNextWaypointDist: 1.2
-  endReachedDistance: 0.2
+  endReachedDistance: 0.8
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -276,6 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+  done: 0
 --- !u!50 &2097963843040151915
 Rigidbody2D:
   serializedVersion: 4

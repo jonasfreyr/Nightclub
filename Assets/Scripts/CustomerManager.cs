@@ -15,6 +15,9 @@ public class CustomerManager : MonoBehaviour
     public Transform[] spawnPoints;
     
     public PointOfInterest[] bars;
+    public PointOfInterest[] danceFloors;
+    public PointOfInterest[] bathrooms;
+    public PointOfInterest[] commonAreas;
     
     private List<GameObject> _customers;
     private float _timeToNextCustomer;
@@ -27,9 +30,14 @@ public class CustomerManager : MonoBehaviour
         _customers = new List<GameObject>();
     }
 
+    public PointOfInterest GetRandomPOI(PointOfInterest[] pois)
+    {
+        return pois[Random.Range(0, pois.Length)];
+    }
+    
     public Vector3 GetRandomPOIPosition(PointOfInterest[] pois)
     {
-        var poi = pois[Random.Range(0, pois.Length)];
+        var poi = GetRandomPOI(pois);
 
         return poi.GetRandomPointWithinCollider();
     }

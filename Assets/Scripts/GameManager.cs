@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GridManager gridManager;
     public GameObject draggingObject = null;
     public TextMeshProUGUI clockText;
+    public AudioManager audioManager;
     public int startHour;
     public int clubOpeningHour = 20;
     public int clubClosingHour = 5;

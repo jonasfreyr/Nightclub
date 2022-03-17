@@ -115,7 +115,7 @@ public class CustomerManager : MonoBehaviour
 
         if (Time.time >= _lastSpawned + _timeToNextCustomer)
         {
-            // SpawnCustomer();
+            SpawnCustomer();
             _lastSpawned = Time.time;
 
             _timeToNextCustomer = Random.Range(lowerEndTime, upperEndTime);

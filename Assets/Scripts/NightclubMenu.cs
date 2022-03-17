@@ -4,16 +4,17 @@ using UnityEngine;
 public class NightclubMenu : MonoBehaviour
 {
     public GameObject hireEmployeeMenu;
+    public GameObject changeTrackMenu;
     
     [Header("Submenus")]
     public GameObject inventoryMenu;
-    public GameObject cleaningMenu;
+    public GameObject audioMenu;
     public GameObject assetsMenu;
     public GameObject staffMenu;
     [CanBeNull] private GameObject _currentOpenMenu;
     
     public void OpenInventoryMenu() => _openMenu(inventoryMenu);
-    public void OpenCleaningMenu() => _openMenu(cleaningMenu);
+    public void OpenAudioMenu() => _openMenu(audioMenu);
     public void OpenEditAssets() => _openMenu(assetsMenu);
     public void OpenStaffMenu() => _openMenu(staffMenu);
 
@@ -21,6 +22,11 @@ public class NightclubMenu : MonoBehaviour
     {
         hireEmployeeMenu.SetActive(true);
     }
+
+    public void OpenChangeTrackMenu()
+    {
+        changeTrackMenu.SetActive(true);
+    } 
     
     private void _openMenu(GameObject menu)
     {

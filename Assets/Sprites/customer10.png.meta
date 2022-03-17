@@ -4,13 +4,13 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 1370996761791106991
-    second: Body
+    second: customer10_body
   - first:
       213: 4959501599048434144
-    second: LeftLeg
+    second: customer10_leftLeg
   - first:
       213: -5576646919687408780
-    second: RightLeg
+    second: customer10_rightLeg
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Body
+      name: customer10_body
       rect:
         serializedVersion: 2
         x: 3
@@ -120,7 +120,7 @@ TextureImporter:
         width: 6
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -133,7 +133,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LeftLeg
+      name: customer10_leftLeg
       rect:
         serializedVersion: 2
         x: 4
@@ -141,7 +141,7 @@ TextureImporter:
         width: 1
         height: 4
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -154,7 +154,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RightLeg
+      name: customer10_rightLeg
       rect:
         serializedVersion: 2
         x: 7
@@ -162,7 +162,7 @@ TextureImporter:
         width: 1
         height: 4
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

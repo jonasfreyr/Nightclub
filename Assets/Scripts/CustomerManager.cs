@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CustomerManager : MonoBehaviour
 {
@@ -10,7 +12,17 @@ public class CustomerManager : MonoBehaviour
     public float upperEndTime;
 
     public GameObject customerPrefab;
-    public Sprite[] customerSprites;
+    
+    [Serializable]
+    public class customerBody
+    {
+        public Sprite body;
+        public Sprite leftLeg;
+        public Sprite rightLeg;
+        
+    }
+    
+    public customerBody[] customerSprites;
 
     public Transform[] spawnPoints;
     
@@ -22,8 +34,7 @@ public class CustomerManager : MonoBehaviour
     private List<GameObject> _customers;
     private float _timeToNextCustomer;
     private float _lastSpawned;
-    
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +57,23 @@ public class CustomerManager : MonoBehaviour
 
         return poi.GetRandomPointWithinCollider();
     }
+
+    private void SetCustomerSprites(GameObject customer)
+    {
+        var customerSprite = customerSprites[Random.Range(0, customerSprites.Length)];
+        
+        var customerBody = customer.transform.GetChild(0);
+        var customerLeftLeg = customerBody.transform.GetChild(0);
+        var customerRightLeg = customerBody.transform.GetChild(1);
+        
+        var bodySpriteRenderer = customerBody.GetComponent<SpriteRenderer>();
+        var leftLegSpriteRenderer = customerLeftLeg.GetComponent<SpriteRenderer>();
+        var rightLegSpriteRenderer = customerRightLeg.GetComponent<SpriteRenderer>();
+        
+        bodySpriteRenderer.sprite = customerSprite.body;
+        leftLegSpriteRenderer.sprite = customerSprite.leftLeg;
+        rightLegSpriteRenderer.sprite = customerSprite.rightLeg;
+    }
     
     void SpawnCustomer()
     {
@@ -53,14 +81,11 @@ public class CustomerManager : MonoBehaviour
         if (!GameManager.Instance.IsNightTime) return;
         
         var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        var customerSprite = customerSprites[Random.Range(0, customerSprites.Length)];
-
-        var customer = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity, transform);
         
-        var customerGraphics = customer.transform.GetChild(0);
-        var customersSpriteRenderer = customerGraphics.GetComponent<SpriteRenderer>();
-        customersSpriteRenderer.sprite = customerSprite;
+        var customer = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity, transform);
 
+        SetCustomerSprites(customer);
+        
         var customerScript = customer.GetComponent<CustomerBehaviour>();
         customerScript.customerManager = this;
 
@@ -90,7 +115,7 @@ public class CustomerManager : MonoBehaviour
 
         if (Time.time >= _lastSpawned + _timeToNextCustomer)
         {
-            SpawnCustomer();
+            // SpawnCustomer();
             _lastSpawned = Time.time;
 
             _timeToNextCustomer = Random.Range(lowerEndTime, upperEndTime);

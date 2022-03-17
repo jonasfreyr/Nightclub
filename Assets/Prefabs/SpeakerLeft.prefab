@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7180327037721107553}
   - component: {fileID: 7180327037721107583}
   - component: {fileID: 1539290252}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpeakerLeft
   m_TagString: AudioSources
   m_Icon: {fileID: 0}

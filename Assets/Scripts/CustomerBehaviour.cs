@@ -34,6 +34,10 @@ public class CustomerBehaviour : MonoBehaviour
     private float standDuration = 0f;
     
     public bool goingToPOI = false;
+    
+    private bool wasStanding = false;
+    private bool wasDancing = false;
+    
     public bool finished_task = true;
     private PointOfInterest _currentPOI;
     
@@ -41,6 +45,12 @@ public class CustomerBehaviour : MonoBehaviour
     public CustomerManager customerManager;
     public GameObject puke;
     
+    public Animator animator;
+
+    private static readonly int Dancing = Animator.StringToHash("Dancing");
+    private static readonly int Walking = Animator.StringToHash("Walking");
+    private static readonly int Standing = Animator.StringToHash("Standing");
+
     private void Start()
     {
         _targetSetter = gameObject.GetComponent<AIDestinationSetter>();
@@ -51,7 +61,7 @@ public class CustomerBehaviour : MonoBehaviour
     {
         if (!other.CompareTag("POI")) return;
 
-        if (other.gameObject == _currentPOI.gameObject && !doingSomething())
+        if (other.gameObject == _currentPOI.gameObject && !DoingSomething())
         {
             if (_currentPOI.bar)
             {
@@ -76,7 +86,7 @@ public class CustomerBehaviour : MonoBehaviour
         }
     }
 
-    private bool doingSomething()
+    private bool DoingSomething()
     {
         return drinking || peeing || dancing || standing || goingToPOI;
     }
@@ -84,11 +94,12 @@ public class CustomerBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        
         if (!GameManager.Instance.IsNightTime)
         {
             _targetSetter.SetTarget(customerManager.GetRandomSpawnpoint(customerManager.spawnPoints).position);
-
+            goingToPOI = true;
+            
             if (_targetSetter.done)
             {
                 Destroy(gameObject);
@@ -140,6 +151,7 @@ public class CustomerBehaviour : MonoBehaviour
         
         if (!dancing)
         {
+
             funky += funkIncrease;
 
             if (funky > 100)
@@ -148,6 +160,9 @@ public class CustomerBehaviour : MonoBehaviour
             
         else if (dancing)
         {
+            if (dancing != wasDancing) 
+                animator.SetTrigger(Dancing);
+            
             funky -= funkDecrease;
             thirst += thirstIncrease;
 
@@ -164,6 +179,9 @@ public class CustomerBehaviour : MonoBehaviour
 
         if (standing)
         {
+            if (standing != wasStanding)
+                animator.SetTrigger(Standing);
+            
             if (startedStandingTime + standDuration < Time.time)
             {
                 standing = false;
@@ -173,8 +191,12 @@ public class CustomerBehaviour : MonoBehaviour
         
         if (_targetSetter.done)
             goingToPOI = false;
-
-        if (doingSomething() || !finished_task) return;
+        
+        
+        wasStanding = standing;
+        wasDancing = dancing;
+        
+        if (DoingSomething() || !finished_task) return;
         
         PointOfInterest target = null;
         
@@ -213,6 +235,7 @@ public class CustomerBehaviour : MonoBehaviour
             _targetSetter.targetV = target.GetRandomPointWithinCollider();
             goingToPOI = true;
             finished_task = false;
+            animator.SetTrigger(Walking);
         }
     }
 }

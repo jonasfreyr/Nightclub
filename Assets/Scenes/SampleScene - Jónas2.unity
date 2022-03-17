@@ -22274,6 +22274,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 844326084723332843, guid: e13313fd51cf4024691fdc86c2c1d4c5, type: 3}
   m_PrefabInstance: {fileID: 1959577543}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2040394961 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 828259179784147857, guid: 98957ca7ed072924a8ba9ae590ad4219, type: 3}
+  m_PrefabInstance: {fileID: 1138060725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2040394964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040394961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8eb51ed17c08cd47bc8234d46cb50bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightsController: {fileID: 1925315400}
+  gridManager: {fileID: 1688927648}
+  draggingObject: {fileID: 0}
+  clockText: {fileID: 1904439297}
+  startHour: 0
+  clubOpeningHour: 20
+  clubClosingHour: 5
+  gridPath: {fileID: 248932790}
+  updatePath: 0
 --- !u!1001 &2053258362
 PrefabInstance:
   m_ObjectHideFlags: 0

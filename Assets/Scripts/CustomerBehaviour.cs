@@ -1,5 +1,6 @@
 using UnityEngine;
 using Pathfinding;
+using System.Collections.Generic;
 
 public class CustomerBehaviour : MonoBehaviour
 {
@@ -40,11 +41,18 @@ public class CustomerBehaviour : MonoBehaviour
     
     private AIDestinationSetter _targetSetter;
     public CustomerManager customerManager;
-    
+
+    private int maxAttr = 100;
+    public float cozy;
+    public float romantic;
+    public float chaotic;
+    public float satisfaction;
+
     private void Start()
     {
         _targetSetter = gameObject.GetComponent<AIDestinationSetter>();
         _targetSetter.targetV = null;
+        generateCustomerStats();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -198,5 +206,97 @@ public class CustomerBehaviour : MonoBehaviour
         _targetSetter.targetV = target.GetRandomPointWithinCollider();
         goingToPOI = true;
  
+    }
+
+    private void generateCustomerStats() {
+        // TODO: Add Synergies between customer stats ?
+        cozy = Random.Range(0, maxAttr + 1);
+        romantic = Random.Range(0, maxAttr + 1);
+        chaotic = Random.Range(0, maxAttr + 1);
+        // Debug.Log("Cozy: " + cozy + " Romantic: " + romantic + " Chaotic: " + chaotic);
+    }
+
+    public void generateReview() {
+        // Customer gives better reviews the better their preferences are catered to
+        Dictionary<string, float> preferences_dict = new Dictionary<string, float>();
+
+        preferences_dict.Add("cozy", 20);
+        preferences_dict.Add("romantic", 40);
+        preferences_dict.Add("chaotic", 70);
+
+        double modifier = 0;
+        double cozyScore = 0;
+        double romanticScore = 0;
+        double chaoticScore = 0;
+        string review = "";
+        foreach (KeyValuePair<string, float> kvp in preferences_dict) {
+            if (kvp.Value <= 20f) {
+                // Hates
+                modifier = -0.25;
+            }
+            else if (20f < kvp.Value && kvp.Value <= 40f) {
+                // Dislikes
+                modifier = -0.5;
+            }
+            else if (40f < kvp.Value && kvp.Value <= 60f) {
+                // Doesn't care
+                modifier = 1;
+            }
+            else if (60f < kvp.Value && kvp.Value <= 80f) {
+                // Likes
+                modifier = 1.25;
+            }
+            else if (80f < kvp.Value && kvp.Value <= 100f) {
+                // Loves
+                modifier = 1.5;
+            }
+
+            if (kvp.Key == "cozy") {
+                cozyScore = GameManager.Instance.cozy * modifier;
+            }
+            else if (kvp.Key == "romantic") {
+                romanticScore = GameManager.Instance.romantic * modifier;
+            }
+            else if (kvp.Key == "chaotic") {
+                chaoticScore = GameManager.Instance.chaotic * modifier;
+            }
+            else {
+                Debug.Log("Trait not recognized");
+            }
+        }
+        double totalScore = cozyScore + romanticScore + chaoticScore;
+        // Debug.Log("cozy: " + cozyScore + " romantic: " + romanticScore + " chaotic: " + chaoticScore);
+        // Debug.Log("Total Score: " + totalScore);
+
+        // TODO: Needs a whole lot of balancing depending on assets and how simple/complex we would like to have the satisfaction measure.
+        if (totalScore <= 25) {
+            // Customer hated the club
+            review = "The customer feels like they walked into a tin of sardines";
+        }
+        else if (25 < totalScore && totalScore <= 45) {
+            // customer disliked the club
+            review = "The customer thinks the drinks are crappy and the floors are sticky";
+        }
+        else if (45 < totalScore && totalScore <= 65) {
+            // It was ok
+            review = "The customer compares your club to a mediocre cup of coffee";
+        }
+        else if (65 < totalScore && totalScore <= 85) {
+            // Liked it
+            review = "The customer had a decent time jumping on the dance floor";
+        }
+        else if (85 < totalScore && totalScore <= 110) {
+            // Loved it
+            review = "The customer considers this one of the best clubs out there";
+        }
+        else if (totalScore > 110) {
+            // Experience of a life time
+            review = "The customer considers selling their first born to fund you";
+        }
+        else {
+            Debug.Log("Review Generation Error");
+        }
+
+        GameManager.Instance.addReview(review);
     }
 }

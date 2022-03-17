@@ -23,10 +23,23 @@ public class PointOfInterest : MonoBehaviour
     public Vector3 GetRandomPointWithinCollider()
     {
         var size = _box.size;
-        var position = (Vector2)transform.position + _box.offset;
-        var x = Random.Range(position.x - (size.x / 2), position.x + (size.x / 2));
-        var y = Random.Range(position.y - (size.y / 2), position.y + (size.y / 2));
+        while (true)
+        {
+            
+            var position = (Vector2) transform.position + _box.offset;
+            var x = Random.Range(position.x - (size.x / 2), position.x + (size.x / 2));
+            var y = Random.Range(position.y - (size.y / 2), position.y + (size.y / 2));
 
-        return new Vector3(x, y);
+            var tile = GameManager.Instance.gridManager.GetTileFromMousePos(new Vector3(x, y));
+
+            var tileScript = tile.GetComponent<Tile>();
+
+            if (tile != null && tileScript.objectInTile != null)
+            {
+                continue;
+            }
+
+            return new Vector3(x, y);
+        }
     }
 }

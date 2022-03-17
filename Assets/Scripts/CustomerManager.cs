@@ -55,6 +55,16 @@ public class CustomerManager : MonoBehaviour
 
         var customerScript = customer.GetComponent<CustomerBehaviour>();
         customerScript.customerManager = this;
+
+        customerScript.thirst = Random.Range(0f, 100f);
+        customerScript.funky = Random.Range(0f, 100f);
+        customerScript.mictury = Random.Range(0f, 100f);
+        customerScript.pukeness = Random.Range(0f, 20f);
+
+        customerScript.thirstThreshold = Random.Range(60f, 100f);
+        customerScript.funkThreshold = Random.Range(60f, 100f);
+        customerScript.micturyThreshold = Random.Range(60f, 100f);
+        customerScript.pukeThreshold = Random.Range(80f, 100f);
         
         _customers.Add(customer);
     }

@@ -36,6 +36,7 @@ public class CustomerBehaviour : MonoBehaviour
     private float standDuration = 0f;
     
     private bool goingToPOI = false;
+    private bool finished_task = true;
     private PointOfInterest _currentPOI;
     
     private AIDestinationSetter _targetSetter;
@@ -47,20 +48,31 @@ public class CustomerBehaviour : MonoBehaviour
         _targetSetter.targetV = null;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (!other.CompareTag("POI")) return;
 
-        if (other.gameObject == _currentPOI.gameObject)
+        if (other.gameObject == _currentPOI.gameObject && !doingSomething())
         {
             if (_currentPOI.bar)
+            {
+                Debug.Log("_currentPOI.bar");
                 drinking = true;
+            }
             else if (_currentPOI.bathroom)
+            {
+                Debug.Log("_currentPOI.bathroom");
                 peeing = true;
+            }
             else if (_currentPOI.danceFloor)
+            {
+                Debug.Log("_currentPOI.dancefloor");
                 dancing = true;
+            }
             else if (_currentPOI.commonArea)
             {
+                Debug.Log("_currentPOI.commonArea");
+                
                 startedStandingTime = Time.time;
 
                 standDuration = Random.Range(lowerStandingTime, upperStandingTime);
@@ -70,9 +82,40 @@ public class CustomerBehaviour : MonoBehaviour
         }
     }
 
+    private bool doingSomething()
+    {
+        return drinking || peeing || dancing || puking || standing || goingToPOI;
+    }
+    
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (puking)
+        {
+            pukeness -= pukeDecrease;
+            
+            if (pukeness <= 0)
+            {
+                puking = false;
+                finished_task = true;
+                pukeness = 0;
+            }
+        }
+        
+
+        if (peeing)
+        {
+            mictury -= micturyDecrease;
+            
+            if (mictury <= 0)
+            {
+                peeing = false;
+                finished_task = true;
+                mictury = 0;
+            }
+        }
+        
         if (!drinking)
         {
             thirst += thirstIncrease;
@@ -81,79 +124,47 @@ public class CustomerBehaviour : MonoBehaviour
                 thirst = 100;
         }
             
-        else
+        else if (drinking)
         {
             thirst -= thirstDecrease;
-
-            if (thirst <= 0)
-            {
-                drinking = false;
-
-                thirst = 0;
-            }
-        }
-
-
-        if (!dancing)
-        {
-            funky += funkIncrease;
-            
-            if (funky > 100)
-                funky = 100;
-        }
-            
-        else
-        {
-            funky -= funkDecrease;
-            
-            if (funky <= 0)
-            {
-                dancing = false;
-
-                funky = 0;
-            }
-        }
-
-
-        if (!peeing)
-        {
             mictury += micturyIncrease;
-            
-            if (mictury > 100)
-                mictury = 100;
-        }
-
-        else
-        {
-            mictury -= micturyDecrease;
-            
-            if (mictury <= 0)
-            {
-                peeing = false;
-
-                mictury = 0;
-            }
-        }
-
-
-        
-        if (!puking)
-        {
             pukeness += pukeIncrease;
             
             if (pukeness > 100)
                 pukeness = 100;
-        }
-
-        else
-        {
-            pukeness -= pukeDecrease;
             
-            if (pukeness <= 0)
+            if (mictury > 100)
+                mictury = 100;
+            
+            if (thirst <= 0)
             {
-                puking = false;
+                drinking = false;
+                finished_task = true;
+                thirst = 0;
+            }
+        }
+        
+        if (!dancing)
+        {
+            funky += funkIncrease;
 
-                pukeness = 0;
+            if (funky > 100)
+                funky = 100;
+        }
+            
+        else if (dancing)
+        {
+            funky -= funkDecrease;
+            thirst += thirstIncrease;
+
+            if (thirst > 100)
+                thirst = 100;
+            
+            if (funky <= 0)
+            {
+                dancing = false;
+                finished_task = true;
+                funky = 0;
             }
         }
 
@@ -162,19 +173,20 @@ public class CustomerBehaviour : MonoBehaviour
             if (startedStandingTime + standDuration < Time.time)
             {
                 standing = false;
+                finished_task = true;
             }
         }
         
         if (_targetSetter.done)
             goingToPOI = false;
-        
-        if (goingToPOI || drinking || peeing || dancing || puking || standing) return;
+
+        if (doingSomething() || !finished_task) return;
         
         PointOfInterest target;
         
         if (pukeness >= pukeThreshold)
         {
-            target = customerManager.GetRandomPOI(customerManager.bathrooms);
+            target = customerManager.GetRandomPOI(customerManager.commonAreas);
         }
         else if (mictury >= micturyThreshold)
         {
@@ -197,6 +209,6 @@ public class CustomerBehaviour : MonoBehaviour
         _currentPOI = target;
         _targetSetter.targetV = target.GetRandomPointWithinCollider();
         goingToPOI = true;
- 
+        finished_task = false;
     }
 }

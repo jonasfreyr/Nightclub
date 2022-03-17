@@ -153,14 +153,14 @@ MonoBehaviour:
   funkThreshold: 80
   micturyThreshold: 80
   pukeThreshold: 80
-  thirstIncrease: 0.2
-  funkIncrease: 0.2
-  micturyIncrease: 0.2
-  pukeIncrease: 0.2
-  thirstDecrease: 0.2
+  thirstIncrease: 0.02
+  funkIncrease: 0.04
+  micturyIncrease: 0.3
+  pukeIncrease: 0.02
+  thirstDecrease: 0.4
   funkDecrease: 0.2
-  micturyDecrease: 0.2
-  pukeDecrease: 0.2
+  micturyDecrease: 0.5
+  pukeDecrease: 0.8
   drinking: 0
   dancing: 0
   peeing: 0
@@ -288,6 +288,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0003783226, y: -0.008160573}
-  m_Size: {x: 0.03926773, y: 0.03926773}
+  m_Offset: {x: -0.0003783226, y: 0.0017416597}
+  m_Size: {x: 0.03926773, y: 0.10285051}
   m_Direction: 0

@@ -6097,6 +6097,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6995129966593169002, guid: 5bba3e4975652ba4d89b599ce6ed18b1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995129966593169002, guid: 5bba3e4975652ba4d89b599ce6ed18b1, type: 3}
       propertyPath: m_ChunkCullingBounds.y
       value: 0
       objectReference: {fileID: 0}
@@ -22525,10 +22529,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1808806713, guid: 447aa882bf996fa43863ec8a5f4bde87, type: 3}
-      propertyPath: endReachedDistance
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1808806716, guid: 447aa882bf996fa43863ec8a5f4bde87, type: 3}
       propertyPath: customerManager
       value: 

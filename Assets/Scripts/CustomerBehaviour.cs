@@ -37,6 +37,8 @@ public class CustomerBehaviour : MonoBehaviour
     
     private bool wasStanding = false;
     private bool wasDancing = false;
+    private bool wasDrinking = false;
+    private bool wasPeeing = false;
     
     public bool finished_task = true;
     private PointOfInterest _currentPOI;
@@ -111,6 +113,9 @@ public class CustomerBehaviour : MonoBehaviour
 
         if (peeing)
         {
+            if (peeing != wasPeeing)
+                animator.SetTrigger(Standing);
+            
             mictury -= micturyDecrease;
             
             if (mictury <= 0)
@@ -130,7 +135,10 @@ public class CustomerBehaviour : MonoBehaviour
         }
             
         else if (drinking)
-        {
+        {   
+            if (drinking != wasDrinking)
+                animator.SetTrigger(Standing);
+            
             thirst -= thirstDecrease;
             mictury += micturyIncrease;
             pukeness += pukeIncrease;
@@ -195,6 +203,8 @@ public class CustomerBehaviour : MonoBehaviour
         
         wasStanding = standing;
         wasDancing = dancing;
+        wasPeeing = peeing;
+        wasDrinking = drinking;
         
         if (DoingSomething() || !finished_task) return;
         

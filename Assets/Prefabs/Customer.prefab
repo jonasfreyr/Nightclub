@@ -156,7 +156,7 @@ MonoBehaviour:
   thirstIncrease: 0.02
   funkIncrease: 0.04
   micturyIncrease: 0.3
-  pukeIncrease: 0.02
+  pukeIncrease: 0.06
   thirstDecrease: 0.4
   funkDecrease: 0.2
   micturyDecrease: 0.5
@@ -169,6 +169,7 @@ MonoBehaviour:
   lowerStandingTime: 1.3
   upperStandingTime: 6.2
   customerManager: {fileID: 0}
+  puke: {fileID: 9135415369871464267, guid: 19554b270afdb9443802adbc1cc0ac81, type: 3}
 --- !u!114 &1808806713
 MonoBehaviour:
   m_ObjectHideFlags: 0

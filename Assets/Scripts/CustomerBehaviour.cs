@@ -21,12 +21,10 @@ public class CustomerBehaviour : MonoBehaviour
     public float thirstDecrease = 0.2f;
     public float funkDecrease = 0.2f;
     public float micturyDecrease = 0.2f;
-    public float pukeDecrease = 0.2f;
 
     public bool drinking;
     public bool dancing;
     public bool peeing;
-    public bool puking;
     public bool standing;
     
     public float lowerStandingTime = 1.3f;
@@ -35,12 +33,13 @@ public class CustomerBehaviour : MonoBehaviour
     private float startedStandingTime = 0f;
     private float standDuration = 0f;
     
-    private bool goingToPOI = false;
-    private bool finished_task = true;
+    public bool goingToPOI = false;
+    public bool finished_task = true;
     private PointOfInterest _currentPOI;
     
     private AIDestinationSetter _targetSetter;
     public CustomerManager customerManager;
+    public GameObject puke;
     
     private void Start()
     {
@@ -56,23 +55,18 @@ public class CustomerBehaviour : MonoBehaviour
         {
             if (_currentPOI.bar)
             {
-                Debug.Log("_currentPOI.bar");
                 drinking = true;
             }
             else if (_currentPOI.bathroom)
             {
-                Debug.Log("_currentPOI.bathroom");
                 peeing = true;
             }
             else if (_currentPOI.danceFloor)
             {
-                Debug.Log("_currentPOI.dancefloor");
                 dancing = true;
             }
             else if (_currentPOI.commonArea)
             {
-                Debug.Log("_currentPOI.commonArea");
-                
                 startedStandingTime = Time.time;
 
                 standDuration = Random.Range(lowerStandingTime, upperStandingTime);
@@ -84,25 +78,13 @@ public class CustomerBehaviour : MonoBehaviour
 
     private bool doingSomething()
     {
-        return drinking || peeing || dancing || puking || standing || goingToPOI;
+        return drinking || peeing || dancing || standing || goingToPOI;
     }
     
     // Update is called once per frame
     void FixedUpdate()
     {
 
-        if (puking)
-        {
-            pukeness -= pukeDecrease;
-            
-            if (pukeness <= 0)
-            {
-                puking = false;
-                finished_task = true;
-                pukeness = 0;
-            }
-        }
-        
 
         if (peeing)
         {
@@ -182,11 +164,19 @@ public class CustomerBehaviour : MonoBehaviour
 
         if (doingSomething() || !finished_task) return;
         
-        PointOfInterest target;
+        PointOfInterest target = null;
         
         if (pukeness >= pukeThreshold)
         {
-            target = customerManager.GetRandomPOI(customerManager.commonAreas);
+            Instantiate(puke, transform.position, Quaternion.identity);
+            pukeness = 0f;
+
+            startedStandingTime = Time.time;
+
+            standDuration = Random.Range(lowerStandingTime, upperStandingTime);
+                
+            standing = true;
+            
         }
         else if (mictury >= micturyThreshold)
         {
@@ -205,10 +195,12 @@ public class CustomerBehaviour : MonoBehaviour
             target = customerManager.GetRandomPOI(customerManager.commonAreas);
         }
 
-        
-        _currentPOI = target;
-        _targetSetter.targetV = target.GetRandomPointWithinCollider();
-        goingToPOI = true;
-        finished_task = false;
+        if (target != null)
+        {
+            _currentPOI = target;
+            _targetSetter.targetV = target.GetRandomPointWithinCollider();
+            goingToPOI = true;
+            finished_task = false;
+        }
     }
 }

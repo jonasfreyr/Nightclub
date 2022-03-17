@@ -29,6 +29,12 @@ namespace Pathfinding {
 			if (ai != null) ai.onSearchPath += Update;
 		}
 
+		public void SetTarget(Vector3 position)
+		{
+			targetV = position;
+			ai.destination = position;
+		}
+		
 		void OnDisable () {
 			if (ai != null) ai.onSearchPath -= Update;
 		}

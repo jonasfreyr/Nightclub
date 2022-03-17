@@ -52,7 +52,8 @@ public class AssetManager : MonoBehaviour
 
     private void _createItemFromStore(Item item)
     {
-        Instantiate(item.prefab);
+        var asset = Instantiate(item.prefab);
+        asset.GetComponent<SpriteRenderer>().sortingOrder = 1;
     }
 
     private Vector2 _gridPositionForIndex(int index) 

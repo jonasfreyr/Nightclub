@@ -5,6 +5,7 @@ public class NightclubMenu : MonoBehaviour
 {
     public GameObject hireEmployeeMenu;
     public GameObject changeTrackMenu;
+    public GameObject assetStore;
     
     [Header("Submenus")]
     public GameObject inventoryMenu;
@@ -26,7 +27,12 @@ public class NightclubMenu : MonoBehaviour
     public void OpenChangeTrackMenu()
     {
         changeTrackMenu.SetActive(true);
-    } 
+    }
+
+    public void OpenAssetStore()
+    {
+        assetStore.SetActive(true);
+    }
     
     private void _openMenu(GameObject menu)
     {

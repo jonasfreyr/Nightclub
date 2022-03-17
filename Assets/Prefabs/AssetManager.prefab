@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1574998948195015164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1574998948195015154}
+  - component: {fileID: 1574998948195015155}
+  m_Layer: 0
+  m_Name: AssetManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574998948195015154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574998948195015164}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -71.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1574998948195015155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574998948195015164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ac63be38ddbff4396f0ce13846eedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assetList: {fileID: 0}
+  gridGap: {x: 10, y: 10}
+  tileSize: {x: 50, y: 50}
+  itemsPerRow: 4
+  assetStoreItemPrefab: {fileID: 7733074915405412300, guid: ce0e38ece93f50c47b466ca7a00b63ae, type: 3}
+  assets:
+  - sprite: {fileID: 21300000, guid: 7c30e719b7ce38741955435c0141ddcf, type: 3}
+    prefab: {fileID: 4367790851414261024, guid: 2588d580c8053b64a9a4bab6c68d5097, type: 3}
+    name: Red sofa
+    price: 200
+  - sprite: {fileID: 21300000, guid: 439b601954620fb4d8815c35a58a2fcb, type: 3}
+    prefab: {fileID: 7180327037721107580, guid: 7d46e6737428adb42bee8832ca3ebe37, type: 3}
+    name: Speaker (left)
+    price: 400
+  - sprite: {fileID: 21300000, guid: d006c5cb1edf9354e8f5391f31060e80, type: 3}
+    prefab: {fileID: 2904573082696164276, guid: f09172b66e3b3424ba82d94a9a90bd58, type: 3}
+    name: Speaker (right)
+    price: 400
+  assetStoreMenu: {fileID: 0}

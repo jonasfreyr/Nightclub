@@ -29,7 +29,12 @@ public class CustomerManager : MonoBehaviour
     {
         _customers = new List<GameObject>();
     }
-
+    
+    public Transform GetRandomSpawnpoint(Transform[] pois)
+    {
+        return pois[Random.Range(0, pois.Length)];
+    }
+    
     public PointOfInterest GetRandomPOI(PointOfInterest[] pois)
     {
         return pois[Random.Range(0, pois.Length)];
@@ -44,6 +49,9 @@ public class CustomerManager : MonoBehaviour
     
     void SpawnCustomer()
     {
+        
+        if (!GameManager.Instance.IsNightTime) return;
+        
         var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         var customerSprite = customerSprites[Random.Range(0, customerSprites.Length)];
 

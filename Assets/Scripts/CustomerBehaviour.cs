@@ -85,6 +85,18 @@ public class CustomerBehaviour : MonoBehaviour
     void FixedUpdate()
     {
 
+        if (!GameManager.Instance.IsNightTime)
+        {
+            _targetSetter.SetTarget(customerManager.GetRandomSpawnpoint(customerManager.spawnPoints).position);
+
+            if (_targetSetter.done)
+            {
+                Destroy(gameObject);
+            }
+            
+            return;
+        }
+            
 
         if (peeing)
         {

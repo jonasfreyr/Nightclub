@@ -1161,6 +1161,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1904439297}
     - target: {fileID: 828259179784147856, guid: 98957ca7ed072924a8ba9ae590ad4219, type: 3}
+      propertyPath: startHour
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 828259179784147856, guid: 98957ca7ed072924a8ba9ae590ad4219, type: 3}
       propertyPath: gridManager
       value: 
       objectReference: {fileID: 1688927648}
@@ -22443,6 +22447,10 @@ PrefabInstance:
     - target: {fileID: 6499792667256191029, guid: 2cd9a693d6eba354b94124b055b2ba48, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6499792667799141517, guid: 2cd9a693d6eba354b94124b055b2ba48, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -132
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cd9a693d6eba354b94124b055b2ba48, type: 3}

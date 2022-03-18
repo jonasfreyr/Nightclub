@@ -5,6 +5,7 @@ using Pathfinding;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.UI;
 
 internal enum GameCycleState
 {
@@ -37,6 +38,14 @@ public class GameManager : MonoBehaviour
     public bool IsNightTime => GameClockHours >= clubOpeningHour || GameClockHours < clubClosingHour;
     // In-game clock in minutes
     private int CurrentGameClock => ((int)Time.time + startHour * 60) % (24 * 60);
+
+    public float cozy;
+    public float romantic;
+    public float chaotic;
+    public float satisfaction;
+    public GameObject reviewPrefab;
+    public GameObject reviewPanel;
+    public Scrollbar bar;
 
     private void Start()
     {
@@ -96,5 +105,12 @@ public class GameManager : MonoBehaviour
             
 
         updatePath = false;
+    }
+
+    public void addReview(string review) {
+        var newReview = Instantiate(reviewPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        newReview.transform.SetParent(reviewPanel.transform);
+        TMPro.TextMeshProUGUI reviewText = newReview.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+        reviewText.text = review;
     }
 }

@@ -65,6 +65,7 @@ public class CustomerBehaviour : MonoBehaviour
     {
         _targetSetter = gameObject.GetComponent<AIDestinationSetter>();
         _targetSetter.targetV = null;
+        generateCustomerStats();
     }
 
     private bool DoingSomething()
@@ -84,6 +85,7 @@ public class CustomerBehaviour : MonoBehaviour
             
             if (_targetSetter.done)
             {
+                generateReview();
                 Destroy(gameObject);
             }
             
@@ -249,6 +251,14 @@ public class CustomerBehaviour : MonoBehaviour
             finished_task = false;
             animator.SetTrigger(Walking);
         }
+    }
+
+    private void generateCustomerStats() {
+        // TODO: Add Synergies between customer stats ?
+        cozy = Random.Range(0, maxAttr + 1);
+        romantic = Random.Range(0, maxAttr + 1);
+        chaotic = Random.Range(0, maxAttr + 1);
+        // Debug.Log("Cozy: " + cozy + " Romantic: " + romantic + " Chaotic: " + chaotic);
     }
 
     public void generateReview() {

@@ -96,7 +96,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0096a7d0b9740254686e232db80661f7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8e98e8d4f6fb7974d8c23420b9d9339f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -201,7 +201,7 @@ AudioReverbFilter:
   m_Diffusion: 100
   m_Density: 100
   m_HFReference: 5000
-  m_RoomLF: 0
+  m_RoomLF: -2000
   m_LFReference: 500
   m_ReflectionsDelay: 0
   m_ReverbPreset: 27

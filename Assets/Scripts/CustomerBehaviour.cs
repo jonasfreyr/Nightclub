@@ -68,6 +68,20 @@ public class CustomerBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         
+        
+        if (!GameManager.Instance.IsNightTime)
+        {
+            _targetSetter.SetTarget(customerManager.GetRandomSpawnpoint(customerManager.spawnPoints).position);
+            goingToPOI = true;
+            
+            if (_targetSetter.done)
+            {
+                Destroy(gameObject);
+            }
+            
+            return;
+        }
+        
         if (goingToPOI && _targetSetter.done)
         {
             goingToPOI = false;
@@ -94,19 +108,6 @@ public class CustomerBehaviour : MonoBehaviour
             }
         }
         
-        if (!GameManager.Instance.IsNightTime)
-        {
-            _targetSetter.SetTarget(customerManager.GetRandomSpawnpoint(customerManager.spawnPoints).position);
-            goingToPOI = true;
-            
-            if (_targetSetter.done)
-            {
-                Destroy(gameObject);
-            }
-            
-            return;
-        }
-            
 
         if (peeing)
         {

@@ -570,15 +570,33 @@ MonoBehaviour:
   upperEndTime: 8
   customerPrefab: {fileID: 5938709523273457736, guid: bf6c3c11dcf3a244cb87f5bd6473d216, type: 3}
   customerSprites:
-  - {fileID: 21300000, guid: 46f68855111a73b40a7da6950867f25f, type: 3}
-  - {fileID: 21300000, guid: 0d7103cc495c68d478e8cc22822e3bb4, type: 3}
-  - {fileID: 21300000, guid: d31423d76d2ec4942bc877bb43bfc9fb, type: 3}
-  - {fileID: 21300000, guid: 1f8c1450d5e518248bff9e071b53a3a9, type: 3}
-  - {fileID: 21300000, guid: aa62ed34cc6388c4281ea74e035825a3, type: 3}
-  - {fileID: 21300000, guid: 5ac446eb2118a1648852825783cfadca, type: 3}
-  - {fileID: 21300000, guid: 9affc718eca99a54b9239f9ad8b67ce8, type: 3}
-  - {fileID: 21300000, guid: 69f3e1342d114e24490c16cbc73e1cac, type: 3}
-  - {fileID: 21300000, guid: 41673565a97a07a40bf939931e9e3024, type: 3}
+  - body: {fileID: 0}
+    leftLeg: {fileID: 0}
+    rightLeg: {fileID: 0}
+  - body: {fileID: 0}
+    leftLeg: {fileID: 0}
+    rightLeg: {fileID: 0}
+  - body: {fileID: 0}
+    leftLeg: {fileID: 0}
+    rightLeg: {fileID: 0}
+  - body: {fileID: 0}
+    leftLeg: {fileID: 0}
+    rightLeg: {fileID: 0}
+  - body: {fileID: 0}
+    leftLeg: {fileID: 0}
+    rightLeg: {fileID: 0}
+  - body: {fileID: 0}
+    leftLeg: {fileID: 0}
+    rightLeg: {fileID: 0}
+  - body: {fileID: 0}
+    leftLeg: {fileID: 0}
+    rightLeg: {fileID: 0}
+  - body: {fileID: 0}
+    leftLeg: {fileID: 0}
+    rightLeg: {fileID: 0}
+  - body: {fileID: 0}
+    leftLeg: {fileID: 0}
+    rightLeg: {fileID: 0}
   spawnPoints:
   - {fileID: 1048477879}
   bars:
@@ -22456,14 +22474,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2904573082696164277, guid: f09172b66e3b3424ba82d94a9a90bd58, type: 3}
-      propertyPath: m_RoomLF
-      value: -2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2904573082696164277, guid: f09172b66e3b3424ba82d94a9a90bd58, type: 3}
-      propertyPath: m_ReflectionsLevel
-      value: -711
-      objectReference: {fileID: 0}
     - target: {fileID: 2904573082696164282, guid: f09172b66e3b3424ba82d94a9a90bd58, type: 3}
       propertyPath: m_Name
       value: SpeakerRight
@@ -22550,14 +22560,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7180327037721107553, guid: 7d46e6737428adb42bee8832ca3ebe37, type: 3}
-      propertyPath: m_RoomLF
-      value: -2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7180327037721107553, guid: 7d46e6737428adb42bee8832ca3ebe37, type: 3}
-      propertyPath: m_ReflectionsLevel
-      value: -711
-      objectReference: {fileID: 0}
     - target: {fileID: 7180327037721107578, guid: 7d46e6737428adb42bee8832ca3ebe37, type: 3}
       propertyPath: m_Name
       value: SpeakerLeft

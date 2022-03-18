@@ -41,7 +41,7 @@ public class CustomerBehaviour : MonoBehaviour
     private bool wasPeeing = false;
     
     public bool finished_task = true;
-    private PointOfInterest _currentPOI;
+    public PointOfInterest _currentPOI;
     
     private AIDestinationSetter _targetSetter;
     public CustomerManager customerManager;
@@ -59,12 +59,19 @@ public class CustomerBehaviour : MonoBehaviour
         _targetSetter.targetV = null;
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private bool DoingSomething()
     {
-        if (!other.CompareTag("POI")) return;
-
-        if (other.gameObject == _currentPOI.gameObject && !DoingSomething())
+        return drinking || peeing || dancing || standing;
+    }
+    
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        
+        if (goingToPOI && _targetSetter.done)
         {
+            goingToPOI = false;
+            
             if (_currentPOI.bar)
             {
                 drinking = true;
@@ -86,16 +93,6 @@ public class CustomerBehaviour : MonoBehaviour
                 standing = true;
             }
         }
-    }
-
-    private bool DoingSomething()
-    {
-        return drinking || peeing || dancing || standing || goingToPOI;
-    }
-    
-    // Update is called once per frame
-    void FixedUpdate()
-    {
         
         if (!GameManager.Instance.IsNightTime)
         {
@@ -196,17 +193,13 @@ public class CustomerBehaviour : MonoBehaviour
                 finished_task = true;
             }
         }
-        
-        if (_targetSetter.done)
-            goingToPOI = false;
-        
-        
+
         wasStanding = standing;
         wasDancing = dancing;
         wasPeeing = peeing;
         wasDrinking = drinking;
         
-        if (DoingSomething() || !finished_task) return;
+        if (DoingSomething() || goingToPOI || !finished_task) return;
         
         PointOfInterest target = null;
         

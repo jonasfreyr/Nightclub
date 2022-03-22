@@ -216,7 +216,7 @@ public class CustomerBehaviour : MonoBehaviour
         
         if (pukeness >= pukeThreshold)
         {
-            Instantiate(puke, transform.position, Quaternion.identity);
+            var pukeObject = Instantiate(puke, transform.position, Quaternion.identity);
             pukeness = 0f;
 
             startedStandingTime = Time.time;
@@ -225,6 +225,12 @@ public class CustomerBehaviour : MonoBehaviour
                 
             standing = true;
             
+            GameManager.Instance.employeeManager.tasks.Add(new EmployeeTaskInfo
+            {
+                name = "Clean puke",
+                task = EmployeeTask.CleanPuke,
+                argument = pukeObject
+            });
         }
         else if (mictury >= micturyThreshold)
         {

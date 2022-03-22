@@ -15,7 +15,7 @@ public class PointOfInterest : MonoBehaviour
     public bool commonArea;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _box = gameObject.GetComponent<BoxCollider2D>();
     }
@@ -29,7 +29,7 @@ public class PointOfInterest : MonoBehaviour
             var position = (Vector2) transform.position + _box.offset;
             var x = Random.Range(position.x - (size.x / 2), position.x + (size.x / 2));
             var y = Random.Range(position.y - (size.y / 2), position.y + (size.y / 2));
-
+            
             var tile = GameManager.Instance.gridManager.GetTileFromMousePos(new Vector3(x, y));
 
             var tileScript = tile.GetComponent<Tile>();

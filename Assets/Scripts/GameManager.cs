@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public GameObject draggingObject = null;
     public TextMeshProUGUI clockText;
     public AudioManager audioManager;
+    public CustomerManager customerManager;
+    public EmployeeManager employeeManager;
     public int startHour;
     public int clubOpeningHour = 20;
     public int clubClosingHour = 5;

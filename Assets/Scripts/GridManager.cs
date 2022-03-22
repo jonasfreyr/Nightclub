@@ -16,7 +16,7 @@ public class GridManager : MonoBehaviour
     private bool testing = false;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GridArray = new GameObject[width, height];
         

@@ -17,6 +17,7 @@ public class SpeakerEvent : EventPoint
         }
 
         _isBroken = true;
+        repairStatusCanvas.SetActive(true);
     }
     
     public override void Fix()
@@ -29,5 +30,11 @@ public class SpeakerEvent : EventPoint
         }
 
         _isBroken = false;
+        repairStatusCanvas.SetActive(false);
+    }
+
+    public override bool IsBroken()
+    {
+        return _isBroken;
     }
 }

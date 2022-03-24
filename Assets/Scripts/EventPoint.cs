@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EventPoint : MonoBehaviour
 {
+    public GameObject repairStatusCanvas;
+    
     public virtual void Break()
     {
         throw new NotImplementedException();
@@ -18,5 +20,10 @@ public class EventPoint : MonoBehaviour
     public virtual bool IsBroken()
     {
         throw new NotImplementedException();
+    }
+
+    public void EmployeeFix()
+    {
+        GameManager.Instance.employee.SetTask(this);
     }
 }

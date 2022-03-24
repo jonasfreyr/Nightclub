@@ -60,6 +60,9 @@ public class CustomerBehaviour : MonoBehaviour
     public float romantic;
     public float chaotic;
     public float satisfaction;
+    public int strikes = 0;
+    private bool isIrritated = false;
+    private float irritatedStart;
 
     private void Start()
     {
@@ -234,18 +237,28 @@ public class CustomerBehaviour : MonoBehaviour
         }
         else if (mictury >= micturyThreshold)
         {
+            if (GameManager.Instance.bathroomBroken) {
+                isIrritated = true;
+            }
             target = customerManager.GetRandomPOI(customerManager.bathrooms);
         }
         else if (thirst >= thirstThreshold)
         {
+            if (GameManager.Instance.barBroken) {
+                isIrritated = true;
+            }
             target = customerManager.GetRandomPOI(customerManager.bars);
         }
         else if (funky >= funkThreshold)
         {
+            if (GameManager.Instance.speakersBroken) {
+                isIrritated = true;
+            }
             target = customerManager.GetRandomPOI(customerManager.danceFloors);
         }
         else
         {
+            isIrritated = false;
             target = customerManager.GetRandomPOI(customerManager.commonAreas);
         }
 
@@ -256,6 +269,18 @@ public class CustomerBehaviour : MonoBehaviour
             goingToPOI = true;
             finished_task = false;
             animator.SetTrigger(Walking);
+        }
+
+        if (isIrritated) {
+            if (Time.time - irritatedStart >= 15) {
+                Debug.Log("Strike added");
+                strikes++;
+            }
+            if (strikes >= 5) {
+                Debug.Log("Customer leaves");
+                generateReview();
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -269,85 +294,115 @@ public class CustomerBehaviour : MonoBehaviour
 
     public void generateReview() {
         // Customer gives better reviews the better their preferences are catered to
-        Dictionary<string, float> preferences_dict = new Dictionary<string, float>();
+        // Dictionary<string, float> preferences_dict = new Dictionary<string, float>();
 
-        preferences_dict.Add("cozy", 20);
-        preferences_dict.Add("romantic", 40);
-        preferences_dict.Add("chaotic", 70);
+        // preferences_dict.Add("cozy", 20);
+        // preferences_dict.Add("romantic", 40);
+        // preferences_dict.Add("chaotic", 70);
 
-        double modifier = 0;
-        double cozyScore = 0;
-        double romanticScore = 0;
-        double chaoticScore = 0;
-        string review = "";
-        foreach (KeyValuePair<string, float> kvp in preferences_dict) {
-            if (kvp.Value <= 20f) {
-                // Hates
-                modifier = -0.25;
-            }
-            else if (20f < kvp.Value && kvp.Value <= 40f) {
-                // Dislikes
-                modifier = -0.5;
-            }
-            else if (40f < kvp.Value && kvp.Value <= 60f) {
-                // Doesn't care
-                modifier = 1;
-            }
-            else if (60f < kvp.Value && kvp.Value <= 80f) {
-                // Likes
-                modifier = 1.25;
-            }
-            else if (80f < kvp.Value && kvp.Value <= 100f) {
-                // Loves
-                modifier = 1.5;
-            }
+        // double modifier = 0;
+        // double cozyScore = 0;
+        // double romanticScore = 0;
+        // double chaoticScore = 0;
+        // string review = "";
+        // foreach (KeyValuePair<string, float> kvp in preferences_dict) {
+        //     if (kvp.Value <= 20f) {
+        //         // Hates
+        //         modifier = -0.25;
+        //     }
+        //     else if (20f < kvp.Value && kvp.Value <= 40f) {
+        //         // Dislikes
+        //         modifier = -0.5;
+        //     }
+        //     else if (40f < kvp.Value && kvp.Value <= 60f) {
+        //         // Doesn't care
+        //         modifier = 1;
+        //     }
+        //     else if (60f < kvp.Value && kvp.Value <= 80f) {
+        //         // Likes
+        //         modifier = 1.25;
+        //     }
+        //     else if (80f < kvp.Value && kvp.Value <= 100f) {
+        //         // Loves
+        //         modifier = 1.5;
+        //     }
 
-            if (kvp.Key == "cozy") {
-                cozyScore = GameManager.Instance.cozy * modifier;
-            }
-            else if (kvp.Key == "romantic") {
-                romanticScore = GameManager.Instance.romantic * modifier;
-            }
-            else if (kvp.Key == "chaotic") {
-                chaoticScore = GameManager.Instance.chaotic * modifier;
-            }
-            else {
-                Debug.Log("Trait not recognized");
-            }
-        }
-        double totalScore = cozyScore + romanticScore + chaoticScore;
+        //     if (kvp.Key == "cozy") {
+        //         cozyScore = GameManager.Instance.cozy * modifier;
+        //     }
+        //     else if (kvp.Key == "romantic") {
+        //         romanticScore = GameManager.Instance.romantic * modifier;
+        //     }
+        //     else if (kvp.Key == "chaotic") {
+        //         chaoticScore = GameManager.Instance.chaotic * modifier;
+        //     }
+        //     else {
+        //         Debug.Log("Trait not recognized");
+        //     }
+        // }
+        // double totalScore = cozyScore + romanticScore + chaoticScore;
         // Debug.Log("cozy: " + cozyScore + " romantic: " + romanticScore + " chaotic: " + chaoticScore);
         // Debug.Log("Total Score: " + totalScore);
 
         // TODO: Needs a whole lot of balancing depending on assets and how simple/complex we would like to have the satisfaction measure.
-        if (totalScore <= 25) {
+        // if (totalScore <= 25) {
+        //     // Customer hated the club
+        //     review = "The customer feels like they walked into a tin of sardines";
+        // }
+        // else if (25 < totalScore && totalScore <= 45) {
+        //     // customer disliked the club
+        //     review = "The customer thinks the drinks are crappy and the floors are sticky";
+        // }
+        // else if (45 < totalScore && totalScore <= 65) {
+        //     // It was ok
+        //     review = "The customer compares your club to a mediocre cup of coffee";
+        // }
+        // else if (65 < totalScore && totalScore <= 85) {
+        //     // Liked it
+        //     review = "The customer had a decent time jumping on the dance floor";
+        // }
+        // else if (85 < totalScore && totalScore <= 110) {
+        //     // Loved it
+        //     review = "The customer considers this one of the best clubs out there";
+        // }
+        // else if (totalScore > 110) {
+        //     // Experience of a life time
+        //     review = "The customer considers selling their first born to fund you";
+        // }
+        // else {
+        //     Debug.Log("Review Generation Error");
+        // }
+
+        string review = "";
+
+        // The lower the strikes the better the review
+        if (strikes >= 5) {
             // Customer hated the club
             review = "The customer feels like they walked into a tin of sardines";
         }
-        else if (25 < totalScore && totalScore <= 45) {
+        else if (strikes == 3 || strikes == 4) {
             // customer disliked the club
             review = "The customer thinks the drinks are crappy and the floors are sticky";
         }
-        else if (45 < totalScore && totalScore <= 65) {
+        else if (strikes == 1 || strikes == 2) {
             // It was ok
             review = "The customer compares your club to a mediocre cup of coffee";
         }
-        else if (65 < totalScore && totalScore <= 85) {
+        else if (strikes == 0) {
             // Liked it
             review = "The customer had a decent time jumping on the dance floor";
         }
-        else if (85 < totalScore && totalScore <= 110) {
+        else if (strikes == -1 || strikes == -2) {
             // Loved it
             review = "The customer considers this one of the best clubs out there";
         }
-        else if (totalScore > 110) {
+        else if (strikes <= -3) {
             // Experience of a life time
             review = "The customer considers selling their first born to fund you";
         }
         else {
             Debug.Log("Review Generation Error");
         }
-
         GameManager.Instance.addReview(review);
     }
 }

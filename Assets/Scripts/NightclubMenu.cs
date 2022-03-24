@@ -21,17 +21,27 @@ public class NightclubMenu : MonoBehaviour
 
     public void OpenHireEmployeeMenu()
     {
+        _closeAllMenus();
         hireEmployeeMenu.SetActive(true);
     }
 
     public void OpenChangeTrackMenu()
     {
+        _closeAllMenus();
         changeTrackMenu.SetActive(true);
     }
 
     public void OpenAssetStore()
     {
+        _closeAllMenus();
         assetStore.SetActive(true);
+    }
+
+    private void _closeAllMenus()
+    {
+        hireEmployeeMenu.SetActive(false);
+        changeTrackMenu.SetActive(false);
+        assetStore.SetActive(false);
     }
     
     private void _openMenu(GameObject menu)

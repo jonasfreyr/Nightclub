@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
     public GameObject reviewPrefab;
     public GameObject reviewPanel;
     public Scrollbar bar;
+    public bool speakersBroken = false;
+    public bool bathroomBroken = false;
+    public bool barBroken = false;
 
     private void Start()
     {

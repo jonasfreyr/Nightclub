@@ -87,9 +87,7 @@ public class EmployeeBehaviour : MonoBehaviour
     }
 
     private Vector3 _eventPointPosition(EventPoint task)
-        => task switch
-        {
-            SpeakerEvent ev => ev._objects.First().transform.position,
-            _ => new Vector3(0, 0,0)
-        };
+    {
+        return task.GetEventPosition();
+    }
 }

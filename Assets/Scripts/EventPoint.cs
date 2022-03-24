@@ -26,4 +26,9 @@ public class EventPoint : MonoBehaviour
     {
         GameManager.Instance.employee.SetTask(this);
     }
+
+    public virtual Vector3 GetEventPosition()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -45,12 +45,19 @@ public class CustomerManager : MonoBehaviour
     {
         return pois[Random.Range(0, pois.Length)];
     }
-    
+
     public PointOfInterest GetRandomPOI(PointOfInterest[] pois)
     {
-        return pois[Random.Range(0, pois.Length)];
+        while (true)
+        {
+            var p = pois[Random.Range(0, pois.Length)];
+            if (p.enabled)
+            {
+                return p;
+            }
+        }
     }
-    
+
     public Vector3 GetRandomPOIPosition(PointOfInterest[] pois)
     {
         var poi = GetRandomPOI(pois);

@@ -8,6 +8,8 @@ public class SpeakerEvent : EventPoint
     
     public override void Break()
     {
+        GameManager.Instance.speakersBroken = true;
+        
         foreach (var speaker in _objects)
         {
             speaker.GetComponent<AudioSource>().enabled = false;
@@ -16,6 +18,8 @@ public class SpeakerEvent : EventPoint
     
     public override void Fix()
     {
+        GameManager.Instance.speakersBroken = false;
+        
         foreach (var speaker in _objects)
         {
             speaker.GetComponent<AudioSource>().enabled = true;

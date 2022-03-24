@@ -31,6 +31,7 @@ public class SpeakerEvent : EventPoint
 
     private IEnumerator _fix()
     {
+        _setRepairButtonState(true);
         yield return new WaitForSeconds(fixTime);
         GameManager.Instance.speakersBroken = false;
         
@@ -42,6 +43,7 @@ public class SpeakerEvent : EventPoint
         _isBroken = false;
         _isFixing = false;
         repairStatusCanvas.SetActive(false);
+        _setRepairButtonState(false);
     }
 
     public override bool IsBroken()

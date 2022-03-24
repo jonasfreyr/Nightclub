@@ -30,6 +30,7 @@ public class LightEvent : EventPoint
     
     private IEnumerator _fix()
     {
+        _setRepairButtonState(true);
         yield return new WaitForSeconds(fixTime);
         GameManager.Instance.speakersBroken = false;
         
@@ -40,6 +41,8 @@ public class LightEvent : EventPoint
 
         _isBroken = false;
         _isFixing = false;
+        
+        _setRepairButtonState(false);
     }
 
     public override bool IsBroken()

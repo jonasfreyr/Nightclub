@@ -29268,6 +29268,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RepairStatusBar
       objectReference: {fileID: 0}
+    - target: {fileID: 5841995437380834790, guid: a2730da88d8a8164c8c60baf03df62d4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5841995437380834791, guid: a2730da88d8a8164c8c60baf03df62d4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

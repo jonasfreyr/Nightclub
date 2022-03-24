@@ -32,14 +32,4 @@ public class EmployeeManager : MonoBehaviour
     public PointOfInterest idlePoint;
     [Header("Tasks")]
     public List<EmployeeTaskInfo> tasks;
-
-    public Vector3 TaskPosition(EmployeeTask task, object taskArgument = null)
-        => task switch
-        {
-            EmployeeTask.ReturnToStaffArea => idlePoint.GetRandomPointWithinCollider(),
-            EmployeeTask.Bartender => bar.GetRandomPointWithinCollider(),
-            EmployeeTask.CleanBathroom when taskArgument is int index => GameManager.Instance.customerManager.bathrooms[index]
-                .GetRandomPointWithinCollider(),
-            EmployeeTask.CleanPuke when taskArgument is GameObject puke => puke.transform.position,
-        };
 }

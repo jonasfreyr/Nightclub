@@ -2,19 +2,38 @@
 using Pathfinding;
 using UnityEngine;
 
+class GetShipmentEventPoint : EventPoint
+{
+    public bool isBroken = false;
+    
+    public override void Fix()
+    {
+        isBroken = false;
+    }
+
+    public override void Break()
+    {
+        isBroken = true;
+    }
+
+    public override Vector3 Position()
+    {
+        return new Vector3(0, 0, 0);
+    }
+}
+
 public class EmployeeBehaviour : MonoBehaviour
 {
     public Animator animator;
     public EmployeeManager employeeManager;
     private AIDestinationSetter _targetSetter;
     private bool _goingToTask = false;
-    private object _currentTaskArgument;
     private float _taskStartTime;
     private CapsuleCollider2D _collider;
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Standing = Animator.StringToHash("Standing");
 
-    public EmployeeTask CurrentTask { get; private set; }
+    public EventPoint CurrentTask { get; private set; }
     
     private void Awake()
     {
@@ -46,9 +65,8 @@ public class EmployeeBehaviour : MonoBehaviour
         }
     }
 
-    public void SetTask(EmployeeTask task, object taskArgument = null)
+    public void SetTask(EventPoint task)
     {
-        _currentTaskArgument = taskArgument;
         _onTaskChange(task, CurrentTask);
         CurrentTask = task;
     }
@@ -57,23 +75,11 @@ public class EmployeeBehaviour : MonoBehaviour
     {
         switch (CurrentTask)
         {
-            case EmployeeTask.CleanBathroom:
-                if (_taskStartTime + employeeManager.cleanBathroomTime < Time.time)
+            case null: break;
+            default:
+                if (!CurrentTask.IsBroken())
                 {
-                    if (_currentBathroom() >= GameManager.Instance.customerManager.bathrooms.Length - 1)
-                    {
-                        SetTask(EmployeeTask.Idle);
-                    }
-                    else
-                    {
-                        SetTask(EmployeeTask.CleanBathroom, _currentBathroom() + 1);
-                    }
-                }
-                break;
-            case EmployeeTask.CleanPuke:
-                if (_taskStartTime + employeeManager.cleaningPukeTime < Time.time)
-                {
-                    SetTask(EmployeeTask.Idle);
+                    CurrentTask = null;
                 }
                 break;
         }
@@ -83,56 +89,31 @@ public class EmployeeBehaviour : MonoBehaviour
     {
         switch (CurrentTask)
         {
-            case EmployeeTask.CleanBathroom:
-                _taskStartTime = Time.time;
-                break;
-            case EmployeeTask.ReturnToStaffArea:
-                SetTask(EmployeeTask.Idle);
-                break;
-            case EmployeeTask.CleanPuke:
-                _taskStartTime = Time.time;
+            case null: break;
+            default:
+                CurrentTask.Fix();
                 break;
         }
     }
 
-    private void _onTaskChange(EmployeeTask newTask, EmployeeTask oldTask)
+    private void _onTaskChange(EventPoint newTask, EventPoint oldTask)
     {
-        switch (oldTask)
-        {
-            case EmployeeTask.Bartender:
-                employeeManager.isEmployeeWorkingAtBar = false;
-                break;
-        }
-        
         switch (newTask)
         {
-            case EmployeeTask.Bartender:
-                _walkToTask(newTask);
-                employeeManager.isEmployeeWorkingAtBar = true;
-                break;
-            case EmployeeTask.CleanBathroom:
-                _currentTaskArgument ??= 0;
-                _walkToTask(newTask, _currentTaskArgument);
-                break;
-            case EmployeeTask.CleanPuke:
-                _walkToTask(newTask, _currentTaskArgument);
-                break;
-            case EmployeeTask.Idle:
+            case null:
                 animator.SetTrigger(Standing);
                 break;
-            case EmployeeTask.ReturnToStaffArea:
+            default:
                 _walkToTask(newTask);
                 break;
         }
     }
 
-    private void _walkToTask(EmployeeTask task, object taskArgument = null)
+    private void _walkToTask(EventPoint task)
     {
-        var position = employeeManager.TaskPosition(task, taskArgument);
+        var position = task.Position();
         _targetSetter.SetTarget(position);
         animator.SetTrigger(Walking);
         _goingToTask = true;
     }
-
-    private int _currentBathroom() => (int)_currentTaskArgument;
 }

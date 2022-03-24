@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public AudioManager audioManager;
     public CustomerManager customerManager;
     public EmployeeManager employeeManager;
+    public EventSystem eventSystem;
     public int startHour;
     public int clubOpeningHour = 20;
     public int clubClosingHour = 5;

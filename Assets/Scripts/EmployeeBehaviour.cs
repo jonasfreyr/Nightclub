@@ -22,11 +22,6 @@ public class EmployeeBehaviour : MonoBehaviour
         _collider = GetComponent<CapsuleCollider2D>();
     }
 
-    private void Start()
-    {
-        SetTask(EmployeeTask.CleanBathroom, 1);
-    }
-
     private void Update()
     {
         if (_goingToTask && _targetSetter.done)

@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1197394237767424947}
   - component: {fileID: 1197394237767424946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CameraConfiner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,12 +89,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 5.3506002, y: 18.285276}
-      - {x: -19.298122, y: 18.273315}
-      - {x: -19.275002, y: -10.630377}
-      - {x: 16.31334, y: -10.58266}
+    - - {x: 4.8301864, y: 21.544706}
+      - {x: -19.243341, y: 21.477966}
+      - {x: -19.275002, y: -11.524587}
+      - {x: 16.338478, y: -11.563038}
       - {x: 16.31831, y: 9.305277}
-      - {x: 5.3232026, y: 9.278732}
+      - {x: 16.224497, y: 21.582066}
 --- !u!1 &1197394237816269150
 GameObject:
   m_ObjectHideFlags: 0

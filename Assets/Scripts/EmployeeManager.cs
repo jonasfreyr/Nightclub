@@ -40,6 +40,6 @@ public class EmployeeManager : MonoBehaviour
             EmployeeTask.Bartender => bar.GetRandomPointWithinCollider(),
             EmployeeTask.CleanBathroom when taskArgument is int index => GameManager.Instance.customerManager.bathrooms[index]
                 .GetRandomPointWithinCollider(),
-            EmployeeTask.CleanPuke when taskArgument is GameObject puke => puke.transform.position, 
+            EmployeeTask.CleanPuke when taskArgument is GameObject puke => puke.transform.position,
         };
 }

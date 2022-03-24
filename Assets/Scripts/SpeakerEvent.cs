@@ -6,7 +6,7 @@ public class SpeakerEvent : EventPoint
 {
     public GameObject[] _objects;
     
-    public override void Brake()
+    public override void Break()
     {
         foreach (var speaker in _objects)
         {

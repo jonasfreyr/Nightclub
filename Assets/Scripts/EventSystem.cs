@@ -10,7 +10,7 @@ public class EventSystem : MonoBehaviour
 
     private void DisableObject()
     {
-        _eventPoints[Random.Range(0, _eventPoints.Length)].Brake();
+        _eventPoints[Random.Range(0, _eventPoints.Length)].Break();
     }
     
     // Update is called once per frame

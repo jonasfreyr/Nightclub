@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EventPoint : MonoBehaviour
 {
-    public virtual void Brake()
+    public virtual void Break()
     {
         throw new NotImplementedException();
     }

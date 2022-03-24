@@ -5,9 +5,10 @@ using UnityEngine;
 public class SpeakerEvent : EventPoint
 {
     public GameObject[] _objects;
+    public float fixTime;
     private bool _isBroken;
-
-
+    private bool _isFixing;
+    
     private BoxCollider2D _collider;
     
     public void Start()
@@ -30,6 +31,15 @@ public class SpeakerEvent : EventPoint
     
     public override void Fix()
     {
+        if (_isFixing) return;
+        _isFixing = true;
+        StartCoroutine(_fix());
+    }
+
+    private IEnumerator _fix()
+    {
+        _setRepairButtonState(true);
+        yield return new WaitForSeconds(fixTime);
         GameManager.Instance.speakersBroken = false;
         
         foreach (var speaker in _objects)
@@ -38,7 +48,9 @@ public class SpeakerEvent : EventPoint
         }
 
         _isBroken = false;
+        _isFixing = false;
         repairStatusCanvas.SetActive(false);
+        _setRepairButtonState(false);
     }
 
     public override bool IsBroken()

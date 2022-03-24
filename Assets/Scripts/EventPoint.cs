@@ -2,11 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EventPoint : MonoBehaviour
 {
     public GameObject repairStatusCanvas;
+    protected Image _repairButtonBackground;
     
+    private void Start()
+    {
+        _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
+    }
+
     public virtual void Break()
     {
         throw new NotImplementedException();
@@ -30,5 +37,13 @@ public class EventPoint : MonoBehaviour
     public virtual Vector3 GetEventPosition()
     {
         throw new NotImplementedException();
+    }
+    
+    protected void _setRepairButtonState(bool repairing)
+    {
+        var color = repairing
+            ? new Color(0, 1.0f, 0.02f, 0.517f)
+            : new Color(0.07f, 0, 1.0f, 0.517f);
+        _repairButtonBackground.color = color;
     }
 }

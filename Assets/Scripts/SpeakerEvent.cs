@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpeakerEvent : EventPoint
 {
     public GameObject[] _objects;
+    private bool _isBroken;
     
     public override void Break()
     {
@@ -14,6 +15,8 @@ public class SpeakerEvent : EventPoint
         {
             speaker.GetComponent<AudioSource>().enabled = false;
         }
+
+        _isBroken = true;
     }
     
     public override void Fix()
@@ -24,5 +27,7 @@ public class SpeakerEvent : EventPoint
         {
             speaker.GetComponent<AudioSource>().enabled = true;
         }
+
+        _isBroken = false;
     }
 }

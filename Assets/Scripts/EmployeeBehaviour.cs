@@ -1,26 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Pathfinding;
 using UnityEngine;
-
-class GetShipmentEventPoint : EventPoint
-{
-    public bool isBroken = false;
-    
-    public override void Fix()
-    {
-        isBroken = false;
-    }
-
-    public override void Break()
-    {
-        isBroken = true;
-    }
-
-    public override Vector3 Position()
-    {
-        return new Vector3(0, 0, 0);
-    }
-}
+using UnityEngine.Rendering;
 
 public class EmployeeBehaviour : MonoBehaviour
 {
@@ -111,9 +93,16 @@ public class EmployeeBehaviour : MonoBehaviour
 
     private void _walkToTask(EventPoint task)
     {
-        var position = task.Position();
+        var position = _eventPointPosition(task);
         _targetSetter.SetTarget(position);
         animator.SetTrigger(Walking);
         _goingToTask = true;
     }
+
+    private Vector3 _eventPointPosition(EventPoint task)
+        => task switch
+        {
+            SpeakerEvent ev => ev._objects.First().transform.position,
+            _ => new Vector3(0, 0,0)
+        };
 }

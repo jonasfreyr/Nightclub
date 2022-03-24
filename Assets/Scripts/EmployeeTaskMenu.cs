@@ -45,11 +45,6 @@ public class EmployeeTaskMenu : MonoBehaviour
 
     private void _executeTask(EmployeeTaskInfo task)
     {
-        var eventToExecute = GameManager.Instance.eventSystem._eventPoints.SingleOrDefault(e => e.IsBroken());
-        if (eventToExecute != null)
-        {
-            selectedEmployee.SetTask(eventToExecute);   
-        }
         CloseMenu();
     }
     

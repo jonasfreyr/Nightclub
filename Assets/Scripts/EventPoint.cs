@@ -14,4 +14,9 @@ public class EventPoint : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+
+    public virtual bool IsBroken()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -227,13 +227,6 @@ public class CustomerBehaviour : MonoBehaviour
             standDuration = Random.Range(lowerStandingTime, upperStandingTime);
                 
             standing = true;
-            
-            GameManager.Instance.employeeManager.tasks.Add(new EmployeeTaskInfo
-            {
-                name = "Clean puke",
-                task = EmployeeTask.CleanPuke,
-                argument = pukeObject
-            });
         }
         else if (mictury >= micturyThreshold)
         {

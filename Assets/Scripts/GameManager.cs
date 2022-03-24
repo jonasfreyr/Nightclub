@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI clockText;
     public AudioManager audioManager;
     public CustomerManager customerManager;
-    public EmployeeManager employeeManager;
     public EmployeeBehaviour employee;
     public EventSystem eventSystem;
     public int startHour;

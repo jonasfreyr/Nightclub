@@ -7,11 +7,8 @@ using UnityEngine.Rendering;
 public class EmployeeBehaviour : MonoBehaviour
 {
     public Animator animator;
-    public EmployeeManager employeeManager;
     private AIDestinationSetter _targetSetter;
-    private bool _goingToTask = false;
-    private float _taskStartTime;
-    private CapsuleCollider2D _collider;
+    private bool _goingToTask;
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Standing = Animator.StringToHash("Standing");
 
@@ -20,7 +17,6 @@ public class EmployeeBehaviour : MonoBehaviour
     private void Awake()
     {
         _targetSetter = GetComponent<AIDestinationSetter>();
-        _collider = GetComponent<CapsuleCollider2D>();
     }
 
     private void Update()
@@ -35,15 +31,6 @@ public class EmployeeBehaviour : MonoBehaviour
         if (!_goingToTask)
         {
             _taskUpdate();
-        }
-        
-        if (Input.GetButtonDown("Fire1"))
-        {
-            var mousePos = GameManager.GetMouseTo2DWorldPos();
-            if (_collider.bounds.Contains(mousePos))
-            {
-                employeeManager.taskMenu.OpenMenu(this);
-            }
         }
     }
 

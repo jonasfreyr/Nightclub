@@ -536,7 +536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db2e2bf354162684b90eea1aaa629d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eventPoints: []
+  _eventPoints:
+  - {fileID: 789772203}
   interval: 5
 --- !u!1 &349390535 stripped
 GameObject:

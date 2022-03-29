@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpeakerEvent : EventPoint
 {
@@ -13,6 +14,7 @@ public class SpeakerEvent : EventPoint
     
     public void Start()
     {
+        _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
         _collider = gameObject.GetComponent<BoxCollider2D>();
     }
     

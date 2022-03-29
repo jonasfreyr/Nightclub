@@ -34,6 +34,11 @@ public class SinkEvent : EventPoint
         _setRepairButtonState(false);
     }
 
+    public override Vector3 GetEventPosition()
+    {
+        return transform.position;
+    }
+
     public override bool IsBroken()
     {
         return _isBroken;

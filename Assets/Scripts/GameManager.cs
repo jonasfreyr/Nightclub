@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
     public bool bathroomBroken = false;
     public bool barBroken = false;
 
+    public SliderScript satisfactionSlider;
+    
     private void Start()
     {
         _camera = Camera.main;
@@ -105,7 +107,6 @@ public class GameManager : MonoBehaviour
 
         if (updatePath)
         {
-            Debug.Log("Yay");
             gridPath.Scan();
         }
             

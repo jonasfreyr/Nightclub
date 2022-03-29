@@ -30,6 +30,7 @@ public class PointOfInterest : MonoBehaviour
             var x = Random.Range(position.x - (size.x / 2), position.x + (size.x / 2));
             var y = Random.Range(position.y - (size.y / 2), position.y + (size.y / 2));
             
+            /*
             var tile = GameManager.Instance.gridManager.GetTileFromMousePos(new Vector3(x, y));
 
             var tileScript = tile.GetComponent<Tile>();
@@ -38,7 +39,8 @@ public class PointOfInterest : MonoBehaviour
             {
                 continue;
             }
-
+            */
+            
             return new Vector3(x, y);
         }
     }

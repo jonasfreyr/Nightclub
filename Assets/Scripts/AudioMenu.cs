@@ -8,8 +8,11 @@ using UnityEngine.UI;
 
 public class AudioMenu : MonoBehaviour
 {
+    public GameObject mainAudioMenu;
+    public GameObject changeTrackMenu;
     public Transform trackListItemPrefab;
     public Transform trackList;
+    public Slider volumeSlider;
 
     private void Start()
     {
@@ -19,6 +22,25 @@ public class AudioMenu : MonoBehaviour
         {
             _addTrackListItem(track, i);
         }
+        
+        volumeSlider.value = AudioListener.volume;
+    }
+
+    public void OpenChangeTrackSubmenu()
+    {
+        mainAudioMenu.SetActive(false);
+        changeTrackMenu.SetActive(true);
+    }
+    
+    public void CloseChangeTrackSubmenu()
+    {
+        changeTrackMenu.SetActive(false);
+        mainAudioMenu.SetActive(true);
+    }
+
+    public void OnVolumeChange()
+    {
+        AudioListener.volume = volumeSlider.value;
     }
 
     public void CloseMenu()

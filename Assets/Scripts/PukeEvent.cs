@@ -39,6 +39,11 @@ public class PukeEvent : EventPoint
         repairStatusCanvas.SetActive(false);
         Destroy(gameObject, 1);
     }
+    
+    public override Vector3 GetEventPosition()
+    {
+        return transform.position;
+    }
 
     public override bool IsBroken()
     {

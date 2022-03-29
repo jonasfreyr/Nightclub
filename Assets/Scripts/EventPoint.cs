@@ -31,7 +31,7 @@ public class EventPoint : MonoBehaviour
 
     public void EmployeeFix()
     {
-        GameManager.Instance.employee.SetTask(this);
+        GameManager.Instance.employee.ScheduleTask(this);
     }
 
     public virtual Vector3 GetEventPosition()

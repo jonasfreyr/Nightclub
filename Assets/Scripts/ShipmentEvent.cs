@@ -39,6 +39,11 @@ public class ShipmentEvent : EventPoint
         return _isPackageWaiting;
     }
 
+    public override bool IsFixing()
+    {
+        return false;
+    }
+
     private void _setSpriteVisibility(bool visible)
     {
         var color = _spriteRenderer.color;

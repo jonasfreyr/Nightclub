@@ -49,4 +49,9 @@ public class PukeEvent : EventPoint
     {
         return _isBroken;
     }
+
+    public override bool IsFixing()
+    {
+        return _isFixing;
+    }
 }

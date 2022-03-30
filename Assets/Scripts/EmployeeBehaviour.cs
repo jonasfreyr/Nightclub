@@ -53,7 +53,7 @@ public class EmployeeBehaviour : MonoBehaviour
                 }
                 break;
             default:
-                if (!CurrentTask.IsBroken())
+                if (!CurrentTask.IsBroken() || !CurrentTask.IsFixing())
                 {
                     CurrentTask = null;
                 }

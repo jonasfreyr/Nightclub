@@ -60,6 +60,11 @@ public class SpeakerEvent : EventPoint
         return _isBroken;
     }
 
+    public override bool IsFixing()
+    {
+        return _isFixing;
+    }
+
     public override Vector3 GetEventPosition()
     {
         var size = _collider.size;

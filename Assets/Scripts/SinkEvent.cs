@@ -25,13 +25,24 @@ public class SinkEvent : EventPoint
 
     private IEnumerator _fix()
     {
+        GameManager.Instance.minigames.PlayMinigame(MinigameType.FixPipes);
         _setRepairButtonState(true);
-        yield return new WaitForSeconds(fixTime);
 
-        _isBroken = false;
+        while (GameManager.Instance.minigames.IsPlayingMinigame)
+        {
+            Debug.Log("Playing game...");
+            yield return new WaitForSeconds(0.1f);            
+        }
+        
+        Debug.Log("No longer waiting");
+
         _isFixing = false;
-        repairStatusCanvas.SetActive(false);
         _setRepairButtonState(false);
+        if (GameManager.Instance.minigames.Succeeded)
+        {
+            _isBroken = false;
+            repairStatusCanvas.SetActive(false);
+        }
     }
 
     public override Vector3 GetEventPosition()
@@ -42,5 +53,10 @@ public class SinkEvent : EventPoint
     public override bool IsBroken()
     {
         return _isBroken;
+    }
+
+    public override bool IsFixing()
+    {
+        return _isFixing;
     }
 }

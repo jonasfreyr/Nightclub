@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public CustomerManager customerManager;
     public EmployeeBehaviour employee;
     public EventSystem eventSystem;
+    public Minigames minigames;
     public int startHour;
     public int clubOpeningHour = 20;
     public int clubClosingHour = 5;
@@ -154,9 +155,9 @@ public class GameManager : MonoBehaviour
         CurrentGameClock = startHour * 60;
     }
 
-    public static Vector3 GetMouseTo2DWorldPos()
+    public static Vector3 GetMouseTo2DWorldPos(Camera camera = null)
     {
-        var mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = (camera ? camera : _camera).ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
 
         return mousePos;

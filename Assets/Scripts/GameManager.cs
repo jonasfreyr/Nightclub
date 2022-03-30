@@ -54,7 +54,8 @@ public class GameManager : MonoBehaviour
     public bool barBroken = false;
 
     public SliderScript satisfactionSlider;
-    
+    public TextMeshProUGUI scoreText;
+    public int score;
     private void Start()
     {
         _camera = Camera.main;
@@ -63,8 +64,16 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        
+        SetScore(0);
     }
-
+    
+    public void SetScore(int value)
+    {
+        scoreText.text = value.ToString();
+        score = value;
+    }
+    
     private void Update()
     {
         clockText.text = GameClockString;

@@ -5,22 +5,19 @@ using UnityEngine;
 public enum MinigameType
 {
     FixPipes,
+    UnclogToilet,
 }
 
 public class Minigames : MonoBehaviour
 {
     public FixPipesMinigame fixPipesMinigame;
+    public UnclogToiletMinigame unclogToiletMinigame;
     
     public bool IsPlayingMinigame { get; private set; }
     public bool Succeeded { get; private set; }
 
     private MinigameType _currentMinigame;
-
-    private void Start()
-    {
-        PlayMinigame(MinigameType.FixPipes);
-    }
-
+    
     private void Update()
     {
         if (!IsPlayingMinigame) return;
@@ -36,6 +33,15 @@ public class Minigames : MonoBehaviour
                     gameObject.SetActive(false);
                 }
                 break;
+            case MinigameType.UnclogToilet:
+                if (unclogToiletMinigame.HasWon)
+                {
+                    IsPlayingMinigame = false;
+                    Succeeded = true;
+                    unclogToiletMinigame.gameObject.SetActive(false);
+                    gameObject.SetActive(false);
+                }
+                break;
         }
     }
 
@@ -45,10 +51,17 @@ public class Minigames : MonoBehaviour
         {
             case MinigameType.FixPipes:
                 IsPlayingMinigame = true;
-                _currentMinigame = type;
+                _currentMinigame = MinigameType.FixPipes;
                 gameObject.SetActive(true);
                 fixPipesMinigame.gameObject.SetActive(true);
                 fixPipesMinigame.ResetGame();
+                break;
+            case MinigameType.UnclogToilet:
+                IsPlayingMinigame = true;
+                _currentMinigame = MinigameType.UnclogToilet;
+                gameObject.SetActive(true);
+                unclogToiletMinigame.gameObject.SetActive(true);
+                unclogToiletMinigame.ResetGame();
                 break;
         }
     }

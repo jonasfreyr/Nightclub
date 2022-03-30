@@ -51,7 +51,6 @@ public class FixPipesMinigame : MonoBehaviour
         {
             if (Vector2.Distance(replacementPipe.position, replacementPipePosition.position) < 20)
             {
-                Debug.Log("Replaced pipe");
                 _hasReplacedPipe = true;
                 
                 var position = replacementPipePosition.position;

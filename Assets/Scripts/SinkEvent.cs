@@ -30,11 +30,8 @@ public class SinkEvent : EventPoint
 
         while (GameManager.Instance.minigames.IsPlayingMinigame)
         {
-            Debug.Log("Playing game...");
             yield return new WaitForSeconds(0.1f);            
         }
-        
-        Debug.Log("No longer waiting");
 
         _isFixing = false;
         _setRepairButtonState(false);

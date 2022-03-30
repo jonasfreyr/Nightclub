@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     
     public void SetScore(int value)
     {
-        scoreText.text = value.ToString();
+        // scoreText.text = value.ToString();
         score = value;
     }
     

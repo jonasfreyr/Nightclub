@@ -64,6 +64,8 @@ public class CustomerBehaviour : MonoBehaviour
     private bool isIrritated = false;
     private float irritatedStart;
 
+    private bool _leaving = false;
+    
     private void Start()
     {
         _targetSetter = gameObject.GetComponent<AIDestinationSetter>();
@@ -79,9 +81,7 @@ public class CustomerBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        
-        if (!GameManager.Instance.IsNightTime)
+        if (!GameManager.Instance.IsNightTime || _leaving)
         {
             _targetSetter.SetTarget(customerManager.GetRandomSpawnpoint(customerManager.spawnPoints).position);
             goingToPOI = true;
@@ -89,7 +89,7 @@ public class CustomerBehaviour : MonoBehaviour
             if (_targetSetter.done)
             {
                 generateReview();
-                Destroy(gameObject);
+                customerManager.DeleteCustomer(gameObject);
             }
             
             return;
@@ -270,9 +270,10 @@ public class CustomerBehaviour : MonoBehaviour
                 strikes++;
             }
             if (strikes >= 5) {
-                Debug.Log("Customer leaves");
+                Debug.Log("Customer leaving");
                 generateReview();
-                Destroy(gameObject);
+                _leaving = true;
+                animator.SetTrigger(Walking);
             }
         }
     }

@@ -17,7 +17,7 @@ namespace Pathfinding {
 		/// <summary>The object that the AI should move to</summary>
 		public Transform target;
 		public Vector3? targetV;
-		public bool done = true;
+		public bool done => ai.reachedDestination;
 		IAstarAI ai;
 
 		void OnEnable () {
@@ -43,8 +43,6 @@ namespace Pathfinding {
 		void Update () {
 			if (ai != null)
 			{
-				done = ai.reachedDestination;
-				
 				if (target != null)
 					ai.destination = target.position;
 				else if (targetV != null)

@@ -19,7 +19,7 @@ public class EventSystem : MonoBehaviour
         _timer += Time.deltaTime;
         
         
-        if (_timer >= interval)
+        if (_timer >= interval && GameManager.Instance.IsNightTime)
         {
             _timer = 0f;
 

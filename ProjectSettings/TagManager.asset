@@ -6,6 +6,7 @@ TagManager:
   tags:
   - POI
   - AudioSources
+  - Wire
   layers:
   - Default
   - TransparentFX

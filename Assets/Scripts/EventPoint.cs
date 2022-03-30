@@ -28,6 +28,11 @@ public class EventPoint : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+    
+    public virtual bool IsFixing()
+    {
+        throw new NotImplementedException();
+    }
 
     public void EmployeeFix()
     {

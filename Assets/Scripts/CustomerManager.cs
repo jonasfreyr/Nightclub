@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -31,7 +32,7 @@ public class CustomerManager : MonoBehaviour
     public PointOfInterest[] bathrooms;
     public PointOfInterest[] commonAreas;
     
-    private List<GameObject> _customers;
+    public List<GameObject> _customers;
     private float _timeToNextCustomer;
     private float _lastSpawned;
 
@@ -48,6 +49,11 @@ public class CustomerManager : MonoBehaviour
 
     public PointOfInterest GetRandomPOI(PointOfInterest[] pois)
     {
+        if (pois.All(poi => !poi.enabled))
+        {
+            return null;
+        }
+        
         while (true)
         {
             var p = pois[Random.Range(0, pois.Length)];
@@ -80,6 +86,12 @@ public class CustomerManager : MonoBehaviour
         bodySpriteRenderer.sprite = customerSprite.body;
         leftLegSpriteRenderer.sprite = customerSprite.leftLeg;
         rightLegSpriteRenderer.sprite = customerSprite.rightLeg;
+    }
+
+    public void DeleteCustomer(GameObject customer)
+    {
+        _customers.Remove(customer);
+        Destroy(customer);
     }
     
     void SpawnCustomer()

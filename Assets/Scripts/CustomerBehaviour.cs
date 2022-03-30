@@ -286,116 +286,48 @@ public class CustomerBehaviour : MonoBehaviour
     }
 
     public void generateReview() {
-        // Customer gives better reviews the better their preferences are catered to
-        // Dictionary<string, float> preferences_dict = new Dictionary<string, float>();
-
-        // preferences_dict.Add("cozy", 20);
-        // preferences_dict.Add("romantic", 40);
-        // preferences_dict.Add("chaotic", 70);
-
-        // double modifier = 0;
-        // double cozyScore = 0;
-        // double romanticScore = 0;
-        // double chaoticScore = 0;
-        // string review = "";
-        // foreach (KeyValuePair<string, float> kvp in preferences_dict) {
-        //     if (kvp.Value <= 20f) {
-        //         // Hates
-        //         modifier = -0.25;
-        //     }
-        //     else if (20f < kvp.Value && kvp.Value <= 40f) {
-        //         // Dislikes
-        //         modifier = -0.5;
-        //     }
-        //     else if (40f < kvp.Value && kvp.Value <= 60f) {
-        //         // Doesn't care
-        //         modifier = 1;
-        //     }
-        //     else if (60f < kvp.Value && kvp.Value <= 80f) {
-        //         // Likes
-        //         modifier = 1.25;
-        //     }
-        //     else if (80f < kvp.Value && kvp.Value <= 100f) {
-        //         // Loves
-        //         modifier = 1.5;
-        //     }
-
-        //     if (kvp.Key == "cozy") {
-        //         cozyScore = GameManager.Instance.cozy * modifier;
-        //     }
-        //     else if (kvp.Key == "romantic") {
-        //         romanticScore = GameManager.Instance.romantic * modifier;
-        //     }
-        //     else if (kvp.Key == "chaotic") {
-        //         chaoticScore = GameManager.Instance.chaotic * modifier;
-        //     }
-        //     else {
-        //         Debug.Log("Trait not recognized");
-        //     }
-        // }
-        // double totalScore = cozyScore + romanticScore + chaoticScore;
-        // Debug.Log("cozy: " + cozyScore + " romantic: " + romanticScore + " chaotic: " + chaoticScore);
-        // Debug.Log("Total Score: " + totalScore);
-
-        // TODO: Needs a whole lot of balancing depending on assets and how simple/complex we would like to have the satisfaction measure.
-        // if (totalScore <= 25) {
-        //     // Customer hated the club
-        //     review = "The customer feels like they walked into a tin of sardines";
-        // }
-        // else if (25 < totalScore && totalScore <= 45) {
-        //     // customer disliked the club
-        //     review = "The customer thinks the drinks are crappy and the floors are sticky";
-        // }
-        // else if (45 < totalScore && totalScore <= 65) {
-        //     // It was ok
-        //     review = "The customer compares your club to a mediocre cup of coffee";
-        // }
-        // else if (65 < totalScore && totalScore <= 85) {
-        //     // Liked it
-        //     review = "The customer had a decent time jumping on the dance floor";
-        // }
-        // else if (85 < totalScore && totalScore <= 110) {
-        //     // Loved it
-        //     review = "The customer considers this one of the best clubs out there";
-        // }
-        // else if (totalScore > 110) {
-        //     // Experience of a life time
-        //     review = "The customer considers selling their first born to fund you";
-        // }
-        // else {
-        //     Debug.Log("Review Generation Error");
-        // }
-
+        // TODO: Add satisfaction modifiers.
         string review = "";
 
         // The lower the strikes the better the review
         if (strikes >= 5) {
-            // Customer hated the club
-            review = "The customer feels like they walked into a tin of sardines";
+            // Hated it
+            review = "I would rather have stayed at home and watched season 8 of Game of Thrones";
         }
-        else if (strikes == 3 || strikes == 4) {
-            // customer disliked the club
-            review = "The customer thinks the drinks are crappy and the floors are sticky";
+        else if (strikes == 4) {
+            // Disliked it
+            review = "The customer feels like they walked into a tin of sardines (which is not a good thing)";
         }
-        else if (strikes == 1 || strikes == 2) {
+        else if (strikes == 3) {
+            // Kinda bad
+            review = "It was like a cold cup of coffee... Got the job done, but oof.";
+        }
+        else if (strikes == 2) {
             // It was ok
-            review = "The customer compares your club to a mediocre cup of coffee";
+            review = "Sure, why not.";
         }
-        else if (strikes == 0) {
+        else if (strikes == 1) {
             // Liked it
-            review = "The customer had a decent time jumping on the dance floor";
-        }
-        else if (strikes == -1 || strikes == -2) {
-            // Loved it
-            review = "The customer considers this one of the best clubs out there";
-        }
-        else if (strikes <= -3) {
-            // Experience of a life time
-            review = "The customer considers selling their first born to fund you";
+            review = "I liked the jumping. Made me feel strong and indepenent.";
+        }   
+        else if (strikes == 0) {
+            if (GameManager.Instance.satisfaction >= 90) {
+                // Peak satisfaction
+                review = "I'd consider selling my first born to fund this.";
+            }
+            else if (60 <= GameManager.Instance.satisfaction && GameManager.Instance.satisfaction < 90) {
+                // Very happy
+                review = "One of the best clubs out there.";
+            }
+            else if (GameManager.Instance.satisfaction < 60) {
+                // Great!
+                review = "Loved it!";
+            }
         }
         else {
-            Debug.Log("Review Generation Error");
+            Debug.Log("Wrong number of strikes?");
         }
+
         GameManager.Instance.addReview(review);
     }
 }

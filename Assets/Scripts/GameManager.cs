@@ -140,11 +140,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (gameOver) return;
-    
-        
-        
-        satisfaction -= Time.deltaTime * 5;
-        
+
         satisfactionSlider.SetSliderValue(satisfaction);
         
         if (satisfaction <= 0)
@@ -167,7 +163,7 @@ public class GameManager : MonoBehaviour
             _setupForDayTime();
         }
 
-        CurrentGameClock += Time.deltaTime;
+        CurrentGameClock += Time.deltaTime * 3;
 
         if (GameClockHours == 24)
         {

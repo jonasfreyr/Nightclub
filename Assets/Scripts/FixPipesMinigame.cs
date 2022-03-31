@@ -23,6 +23,14 @@ public class FixPipesMinigame : MonoBehaviour
     private Vector2? _brokenPipe1InitialPosition;
     private Vector2? _brokenPipe2InitialPosition;
 
+    public AudioClip clang;
+    private AudioSource _audioSource;
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
         if (!_hasThrownAwayBrokenPipe1)
@@ -31,6 +39,7 @@ public class FixPipesMinigame : MonoBehaviour
             {
                 _hasThrownAwayBrokenPipe1 = true;
                 brokenPipe1.gameObject.SetActive(false);
+                _audioSource.PlayOneShot(clang, .5f);
             }
         }
 
@@ -40,6 +49,7 @@ public class FixPipesMinigame : MonoBehaviour
             {
                 _hasThrownAwayBrokenPipe2 = true;
                 brokenPipe2.gameObject.SetActive(false);
+                _audioSource.PlayOneShot(clang, .5f);
             }
         }
 
@@ -75,6 +85,8 @@ public class FixPipesMinigame : MonoBehaviour
                 replacementPipe.position = position;
                 _replacementDragging.allowDragging = false;
 
+                _audioSource.PlayOneShot(clang, 1f);
+                
                 StartCoroutine(_startWinningProcess());
             }
         }

@@ -1,26 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-// using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-
-public class DraggableWire : MonoBehaviour, IDragHandler, IEndDragHandler
+public class Wire : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+
+    private Image _image;
+    private LineRenderer _lineRenderer;
+    public Canvas canvas;
+    private bool _isDragStarted;
+
     Vector3 startPoint;
     Vector3 startPos;
     public Image wireEnd;
-    // public GameObject BaseObject;
 
-    void Start() {
-        // Vector2 size = wireEnd.rectTransform.sizeDelta;
-        // Debug.Log(size);
-        // Vector2 pixelPivot = wireEnd.sprite.pivot;
-        // // Vector2 percentPivot = new Vector2(pixelPivot.x / size.x, pixelPivot.y / size.y);
-        // wireEnd.rectTransform.pivot = percentPivot;
-        startPoint = transform.parent.position;
-        startPos = transform.position;
+    void Awake() {
+        _image = GetComponent<Image>();
+        _lineRenderer = GetComponent<LineRenderer>();
+        // _lineRenderer.sortingOrder = 4;
+        // _lineRenderer.sortingLayerName = "UI";
+    }
+
+    void Update() {
+        // if (_isDragStarted) {
+        //     Vector2 movePos;
+        //     RectTransformUtility.ScreenPointToLocalPointInRectangle(
+        //         canvas.transform as RectTransform,
+        //         Input.mousePosition,
+        //         canvas.worldCamera,
+        //         out movePos);
+            
+        //     Debug.Log(canvas.transform.TransformPoint(movePos));
+
+        //     _lineRenderer.SetPosition(0, transform.position);
+        //     _lineRenderer.SetPosition(1, canvas.transform.TransformPoint(movePos));
+        // }
     }
 
     public void OnDrag(PointerEventData eventData) {
@@ -81,4 +97,17 @@ public class DraggableWire : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         // Update scale
     }
+
+    public void SetColor(Color color)
+    {
+        _image.color = color;
+    }
+
+    public void OnBeginDrag(PointerEventData eventData) {
+        _isDragStarted = true;
+    }
+
+    // public void OnEndDrag(PointerEventData eventData) {
+    //     _isDragStarted = false;
+    // }
 }

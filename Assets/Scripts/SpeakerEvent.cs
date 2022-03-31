@@ -40,19 +40,26 @@ public class SpeakerEvent : EventPoint
 
     private IEnumerator _fix()
     {
+        GameManager.Instance.minigames.PlayMinigame(MinigameType.FixSpeakers);
         _setRepairButtonState(true);
-        yield return new WaitForSeconds(fixTime);
-        GameManager.Instance.speakersBroken = false;
-        
-        foreach (var speaker in _objects)
-        {
-            speaker.GetComponent<AudioSource>().enabled = true;
-        }
 
-        _isBroken = false;
+        while (GameManager.Instance.minigames.IsPlayingMinigame) {
+            yield return new WaitForSeconds(0.1f);
+        }
+        
         _isFixing = false;
-        repairStatusCanvas.SetActive(false);
         _setRepairButtonState(false);
+
+        if (GameManager.Instance.minigames.Succeeded) {
+            _isBroken = false;
+            repairStatusCanvas.SetActive(false);
+            foreach (var speaker in _objects)
+            {
+                speaker.GetComponent<AudioSource>().enabled = true;
+                GameManager.Instance.speakersBroken = false;
+
+            }
+        }
     }
 
     public override bool IsBroken()

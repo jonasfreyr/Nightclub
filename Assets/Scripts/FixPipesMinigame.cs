@@ -6,11 +6,12 @@ using UnityEngine;
 public class FixPipesMinigame : MonoBehaviour
 {
     public float winningTimer = 0.5f;
-    public RectTransform trashcan;
+    public RectTransform trashcanTransform;
     public RectTransform brokenPipe1;
     public RectTransform brokenPipe2;
     public RectTransform replacementPipe;
     public RectTransform replacementPipePosition;
+    public Trashcan trashcan;
 
     public bool HasWon => _hasThrownAwayBrokenPipe1 && _hasThrownAwayBrokenPipe2 && _hasReplacedPipe && _hasWinningTimerCompleted;
     private DraggableUIElement _replacementDragging;
@@ -26,7 +27,7 @@ public class FixPipesMinigame : MonoBehaviour
     {
         if (!_hasThrownAwayBrokenPipe1)
         {
-            if (Vector2.Distance(brokenPipe1.position, trashcan.position) < 20)
+            if (Vector2.Distance(brokenPipe1.position, trashcanTransform.position) < 20)
             {
                 _hasThrownAwayBrokenPipe1 = true;
                 brokenPipe1.gameObject.SetActive(false);
@@ -35,11 +36,28 @@ public class FixPipesMinigame : MonoBehaviour
 
         if (!_hasThrownAwayBrokenPipe2)
         {
-            if (Vector2.Distance(brokenPipe2.position, trashcan.position) < 20)
+            if (Vector2.Distance(brokenPipe2.position, trashcanTransform.position) < 20)
             {
                 _hasThrownAwayBrokenPipe2 = true;
                 brokenPipe2.gameObject.SetActive(false);
             }
+        }
+
+        // Forward event from trashcan
+        if (!trashcan.IsDragging)
+        {
+            if (!_hasThrownAwayBrokenPipe1 && Vector2.Distance(brokenPipe1.position, trashcanTransform.position) < 60)
+            {
+                trashcan.forwardEventsToElement = brokenPipe1.GetComponent<DraggableUIElement>();
+            }
+            else if (!_hasThrownAwayBrokenPipe2 && Vector2.Distance(brokenPipe2.position, trashcanTransform.position) < 60)
+            {
+                trashcan.forwardEventsToElement = brokenPipe2.GetComponent<DraggableUIElement>();
+            }
+            else
+            {
+                trashcan.forwardEventsToElement = null;
+            }   
         }
 
         if (_hasThrownAwayBrokenPipe1 && _hasThrownAwayBrokenPipe2 && !_hasReplacedPipe && !_replacementDragging.allowDragging)

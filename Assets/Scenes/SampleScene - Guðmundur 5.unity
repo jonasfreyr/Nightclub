@@ -203,6 +203,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4171957182333938700, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171957182452178763, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7563561455429352066, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
       propertyPath: m_Name
       value: ShipmentEvent
@@ -2480,18 +2488,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1808806713, guid: b5e6b701bc5898145b6486e390592879, type: 3}
-      propertyPath: maxSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1808806713, guid: b5e6b701bc5898145b6486e390592879, type: 3}
-      propertyPath: endReachedDistance
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1808806713, guid: b5e6b701bc5898145b6486e390592879, type: 3}
-      propertyPath: whenCloseToDestination
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 1419355069552320893, guid: b5e6b701bc5898145b6486e390592879, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1970426948978739728, guid: 35fc328605cb83843ba337ac9c30d502, type: 3}
+    - target: {fileID: 1767353474485851018, guid: b5e6b701bc5898145b6486e390592879, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8079922486886326640, guid: 35fc328605cb83843ba337ac9c30d502, type: 3}
+    - target: {fileID: 4896490392224783346, guid: b5e6b701bc5898145b6486e390592879, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7675262176189822710, guid: 35fc328605cb83843ba337ac9c30d502, type: 3}
     - target: {fileID: 5938709523273457736, guid: b5e6b701bc5898145b6486e390592879, type: 3}
       propertyPath: m_Name
       value: Employee

@@ -13,7 +13,7 @@ public class FixPipesMinigame : MonoBehaviour
     public RectTransform replacementPipePosition;
 
     public bool HasWon => _hasThrownAwayBrokenPipe1 && _hasThrownAwayBrokenPipe2 && _hasReplacedPipe && _hasWinningTimerCompleted;
-    private DraggablePipe _replacementDragging;
+    private DraggableUIElement _replacementDragging;
     private bool _hasThrownAwayBrokenPipe1;
     private bool _hasThrownAwayBrokenPipe2;
     private bool _hasReplacedPipe;
@@ -64,7 +64,7 @@ public class FixPipesMinigame : MonoBehaviour
 
     public void ResetGame()
     {
-        _replacementDragging = replacementPipe.gameObject.GetComponent<DraggablePipe>();
+        _replacementDragging = replacementPipe.gameObject.GetComponent<DraggableUIElement>();
         _replacementDragging.allowDragging = false;
 
         // On first call to ResetGame, the positions are correct, so we store those positions

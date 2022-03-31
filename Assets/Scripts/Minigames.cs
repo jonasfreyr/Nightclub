@@ -8,6 +8,7 @@ public enum MinigameType
     UnclogToilet,
     FixSpeakers,
     BarGame,
+    MoveBoxes,
 }
 
 public class Minigames : MonoBehaviour
@@ -15,6 +16,7 @@ public class Minigames : MonoBehaviour
     public FixPipesMinigame fixPipesMinigame;
     public UnclogToiletMinigame unclogToiletMinigame;
     public BarStockMinigame barStockMinigame;
+    public MoveBoxesMinigame moveBoxesMinigame;
     public FixSpeakersMinigame fixSpeakersMinigame;
     
     public bool IsPlayingMinigame { get; private set; }
@@ -55,6 +57,15 @@ public class Minigames : MonoBehaviour
                     gameObject.SetActive(false);
                 }
                 break;
+            case MinigameType.MoveBoxes:
+                if (moveBoxesMinigame.HasWon)
+                {
+                    IsPlayingMinigame = false;
+                    Succeeded = true;
+                    moveBoxesMinigame.gameObject.SetActive(false);
+                    gameObject.SetActive(false);
+                }
+                break;
             // case MinigameType.FixSpeakers:
             //     if (fixSpeakersMinigame.HasWon) {
             //         IsPlayingMinigame = false;
@@ -90,6 +101,13 @@ public class Minigames : MonoBehaviour
                 gameObject.SetActive(true);
                 barStockMinigame.gameObject.SetActive(true);
                 barStockMinigame.ResetGame();
+                break;
+            case MinigameType.MoveBoxes:
+                IsPlayingMinigame = true;
+                _currentMinigame = MinigameType.MoveBoxes;
+                gameObject.SetActive(true);
+                moveBoxesMinigame.gameObject.SetActive(true);
+                moveBoxesMinigame.ResetGame();
                 break;
             // case MinigameType.FixSpeakers:
             //     IsPlayingMinigame = true;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraggablePipe : MonoBehaviour, IDragHandler
+public class DraggableUIElement : MonoBehaviour, IDragHandler
 {
     public bool allowDragging = true;
     

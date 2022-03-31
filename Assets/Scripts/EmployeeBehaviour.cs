@@ -35,6 +35,15 @@ public class EmployeeBehaviour : MonoBehaviour
         {
             _taskUpdate();
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            _scheduledActions.Clear();
+            _targetSetter.SetTarget(transform.position);
+            CurrentTask = null;
+            _goingToTask = false;
+            animator.SetTrigger(Standing);
+        }
     }
 
     public void ScheduleTask(EventPoint task)

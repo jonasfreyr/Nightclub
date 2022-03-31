@@ -105,6 +105,11 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(transitionTime);
         }
 
+        if (eventSystem.interval > 6)
+        {
+            eventSystem.interval -= 2;
+        }
+        
         StartCoroutine(StartNightScreen());
     }
     

@@ -12,6 +12,14 @@ public class ToiletPlunger : MonoBehaviour, IDragHandler
     public int Counter { get; private set; }
     private PlungerStatus _status = PlungerStatus.GoingDown;
 
+    public AudioClip plunge;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void OnDrag (PointerEventData eventData)
     {
         var pos = transform.position;
@@ -21,6 +29,8 @@ public class ToiletPlunger : MonoBehaviour, IDragHandler
         var updatedPos = transform.position;
         if (_status == PlungerStatus.GoingDown && updatedPos.y < 350)
         {
+            
+            audioSource.PlayOneShot(plunge, 1f);
             _status = PlungerStatus.GoingUp;
             Counter++;
         }

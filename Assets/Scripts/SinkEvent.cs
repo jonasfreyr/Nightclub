@@ -10,7 +10,7 @@ public class SinkEvent : EventPoint
     
     public override void Break()
     {
-        GameManager.Instance.speakersBroken = true;
+        // GameManager.Instance.speakersBroken = true;
 
         _isBroken = true;
         repairStatusCanvas.SetActive(true);

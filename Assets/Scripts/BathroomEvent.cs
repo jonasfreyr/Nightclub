@@ -1,25 +1,29 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BathroomEvent : EventPoint
 {
+    public List<PointOfInterest> bathrooms;
     private bool _isBroken;
     private bool _isFixing;
-    private BoxCollider2D _collider;
-    
+    private PointOfInterest _brokenBathroom;
+
     public void Start()
     {
-        _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
-        _collider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     public override void Break()
     {
         GameManager.Instance.bathroomBroken = true;
-        
-        gameObject.GetComponent<PointOfInterest>().enabled = false;
-        
+
+        var indexToBreak = Random.Range(0, bathrooms.Count);
+        _brokenBathroom = bathrooms[indexToBreak];
+        _brokenBathroom.enabled = false;
+
+        repairStatusCanvas = _brokenBathroom.transform.Find("RepairStatusBar").gameObject;
+        _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
         repairStatusCanvas.SetActive(true);
 
         _isBroken = true;
@@ -50,7 +54,8 @@ public class BathroomEvent : EventPoint
             repairStatusCanvas.SetActive(false);
             GameManager.Instance.bathroomBroken = false;
         
-            gameObject.GetComponent<PointOfInterest>().enabled = true;
+            _brokenBathroom.enabled = true;
+            _brokenBathroom = null;
         }
     }
     
@@ -66,8 +71,11 @@ public class BathroomEvent : EventPoint
 
     public override Vector3 GetEventPosition()
     {
-        var size = _collider.size;
-        var position = (Vector2) transform.position + _collider.offset;
+        if (_brokenBathroom == null) return Vector3.zero;
+        
+        var collider = _brokenBathroom.GetComponent<BoxCollider2D>();
+        var size = collider.size;
+        var position = (Vector2) _brokenBathroom.transform.position + collider.offset;
         var x = Random.Range(position.x - (size.x / 2), position.x + (size.x / 2));
         var y = Random.Range(position.y - (size.y / 2), position.y + (size.y / 2));
 

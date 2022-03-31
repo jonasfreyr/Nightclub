@@ -48,7 +48,7 @@ public class BarEvent : EventPoint
         {
             _isBroken = false;
             repairStatusCanvas.SetActive(false);
-            GameManager.Instance.bathroomBroken = false;
+            GameManager.Instance.barBroken = false;
         
             gameObject.GetComponent<PointOfInterest>().enabled = true;
         }

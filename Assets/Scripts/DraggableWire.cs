@@ -12,6 +12,7 @@ public class DraggableWire : MonoBehaviour, IDragHandler, IEndDragHandler
     Vector3 startPos;
     public Image wireEnd;
     public Image snapTo;
+    public GameObject BaseObject;
 
     void Start() {
         // Vector2 size = wireEnd.rectTransform.sizeDelta;
@@ -21,6 +22,7 @@ public class DraggableWire : MonoBehaviour, IDragHandler, IEndDragHandler
         // wireEnd.rectTransform.pivot = percentPivot;
         startPoint = transform.parent.position;
         startPos = transform.position;
+        Debug.Log(startPos);
     }
 
     public void OnDrag(PointerEventData eventData) {
@@ -31,35 +33,23 @@ public class DraggableWire : MonoBehaviour, IDragHandler, IEndDragHandler
         newPos.z = 0;
 
         // Check for connection
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(newPos, .2f);
-        foreach (Collider2D collider in colliders) {
+        // Collider2D[] colliders = Physics2D.OverlapCircleAll(newPos, .2f);
+        // foreach (Collider2D collider in colliders) {
             // Make sure not my own collider
-            if (collider.gameObject != gameObject && collider.transform.parent.tag == "Wire") {
-                Debug.Log("collision");
-                UpdateWire(collider.transform.GetChild(1).transform.position);
+            // if (collider.gameObject != gameObject && collider.transform.parent.tag == "Wire") {
+            //     UpdateWire(collider.transform.GetChild(1).transform.position);
 
-                // Check color
-                if (transform.parent.name.Equals(collider.transform.parent.name)) {
-                    Done();
-                }
-                return;
-            }
-        }
+            //     // Check color
+            //     if (transform.parent.name.Equals(collider.transform.parent.name)) {
+            //         Debug.Log("snapped");
+            //         Done();
+            //     }
+            //     return;
+            // }
+        // }
 
         UpdateWire(newPos);
     }
-
-    // void OnTriggerEnter2D(Collider2D collider) {
-    //     Debug.Log("collision");
-    //     if (collider.gameObject != gameObject) {
-    //         UpdateWire(collider.transform.position);
-
-    //         if (transform.parent.name.Equals(collider.transform.parent.name)) {
-    //             Done();
-    //         }
-    //         return;
-    //     }
-    // }
 
     public void Done() {
         Destroy(this);
@@ -76,10 +66,16 @@ public class DraggableWire : MonoBehaviour, IDragHandler, IEndDragHandler
         Vector3 direction = newPos - startPoint;
         transform.right = direction * transform.lossyScale.x;
 
+        if (newPos == startPos) {
+            BaseObject.transform.localScale = new Vector2(1, 1);
+        }
+        else {
+            float dist = Vector2.Distance(startPoint, newPos);
+            // wireEnd.rectTransform.sizeDelta = new Vector2(dist, wireEnd.rectTransform.sizeDelta.y);
+            // wireEnd.rectTransform.localScale = new Vector2(dist, wireEnd.rectTransform.localScale.y);
+            // wireEnd.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, dist);
+            BaseObject.transform.localScale = new Vector2(dist, BaseObject.transform.localScale.y);
+        }
         // Update scale
-        float dist = Vector2.Distance(startPoint, newPos);
-        // wireEnd.rectTransform.sizeDelta = new Vector2(dist, wireEnd.rectTransform.sizeDelta.y);
-        // wireEnd.rectTransform.localScale = new Vector2(dist, wireEnd.rectTransform.localScale.y);
-        wireEnd.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, dist);
     }
 }

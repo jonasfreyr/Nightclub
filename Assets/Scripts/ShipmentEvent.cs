@@ -15,8 +15,6 @@ public class ShipmentEvent : EventPoint
 
     public override void Break()
     {
-        GameManager.Instance.speakersBroken = true;
-        
         _setSpriteVisibility(true);
         _isPackageWaiting = true;
         repairStatusCanvas.SetActive(true);

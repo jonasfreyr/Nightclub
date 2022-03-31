@@ -15,8 +15,6 @@ public class PukeEvent : EventPoint
     
     public override void Break()
     {
-        GameManager.Instance.speakersBroken = true;
-
         _isBroken = true;
         repairStatusCanvas.SetActive(true);
     }

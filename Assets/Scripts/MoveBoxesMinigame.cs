@@ -19,18 +19,45 @@ public class MoveBoxesMinigame : MonoBehaviour
     private Vector3? shipment1InitialPosition;
     private Vector3? shipment2InitialPosition;
 
+    private bool placed1 = false;
+    private bool placed2 = false;
+
+    private AudioSource _audioSource;
+    public AudioClip crateRattle;
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
         if (Vector2.Distance(shipmenu1.position, shipmenu1destination.position) < 20)
         {
             shipmenu1.position = shipmenu1destination.position;
             shipmenu1.GetComponent<DraggableUIElement>().allowDragging = false;
+
+            if (!placed1)
+            {
+                _audioSource.PlayOneShot(crateRattle, 1f);
+                
+                placed1 = true;
+            }
+            
         }
         
         if (Vector2.Distance(shipmenu2.position, shipmenu2destination.position) < 20)
         {
             shipmenu2.position = shipmenu2destination.position;
             shipmenu2.GetComponent<DraggableUIElement>().allowDragging = false;
+
+            if (!placed2)
+            {
+                _audioSource.PlayOneShot(crateRattle, 1f);
+                
+                placed2 = true;
+            }
+            
         }
 
         if (shipmenu1.position == shipmenu1destination.position &&
@@ -65,5 +92,7 @@ public class MoveBoxesMinigame : MonoBehaviour
 
         _hasWinningTimeCompleted = false;
         _startedWinningtimeCounter = false;
+        placed1 = false;
+        placed2 = false;
     }
 }

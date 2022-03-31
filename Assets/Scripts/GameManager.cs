@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 internal enum GameCycleState
@@ -64,6 +65,10 @@ public class GameManager : MonoBehaviour
     public GameObject dayScreen;
     public TextMeshProUGUI dayScreenText;
     public float transitionTime = 1f;
+
+    public GameObject GameOverScreen;
+    public TextMeshProUGUI gameOverText;
+    private bool gameOver;
     
     private void Start()
     {
@@ -106,6 +111,7 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
+        Time.timeScale = 1f;
         Instance = this;
     }
     
@@ -114,9 +120,40 @@ public class GameManager : MonoBehaviour
         nightText.text = value.ToString();
         night = value;
     }
+
+    public void GameOver()
+    {
+        gameOverText.text = "Survived " + night + " nights";
+        
+        GameOverScreen.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    
+    public void ResetGame()
+    {
+        var scene = SceneManager.GetActiveScene(); 
+        Time.timeScale = 1f;
+        gameOver = false;
+        SceneManager.LoadScene(scene.name);
+    }
     
     private void Update()
     {
+        if (gameOver) return;
+    
+        
+        
+        satisfaction -= Time.deltaTime * 5;
+        
+        satisfactionSlider.SetSliderValue(satisfaction);
+        
+        if (satisfaction <= 0)
+        {
+            gameOver = true;
+
+            GameOver();
+        }
+
         clockText.text = GameClockString;
 
         if (IsNightTime && _gameCycleState != GameCycleState.NightTime)

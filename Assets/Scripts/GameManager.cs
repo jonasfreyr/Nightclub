@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     public bool speakersBroken = false;
     public bool bathroomBroken = false;
     public bool barBroken = false;
-    private int reviewCount = 0;
+    public int reviewCount = 0;
     public float reviewSatisfactionSum = 100;
 
     public SliderScript satisfactionSlider;
@@ -214,10 +214,16 @@ public class GameManager : MonoBehaviour
     public void addReview(string review, float reviewSatisfaction) {
         reviewCount++;
         reviewSatisfactionSum = reviewSatisfactionSum + reviewSatisfaction;
-        var newReview = Instantiate(reviewPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        var newReview = Instantiate(reviewPrefab, new Vector3(transform.position.x, transform.position.y - 50, transform.position.z), Quaternion.identity);
         newReview.transform.SetParent(reviewPanel.transform);
         TMPro.TextMeshProUGUI reviewText = newReview.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+        TMPro.TextMeshProUGUI timestampText = newReview.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>();
+        TMPro.TextMeshProUGUI satisfactionText = newReview.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
         reviewText.text = review;
+        timestampText.text = GameClockString;
+        satisfactionText.text = reviewSatisfaction.ToString() + "/100";
         satisfaction = reviewSatisfactionSum / reviewCount;
+        Canvas.ForceUpdateCanvases();
+        bar.value = 0;
     }
 }

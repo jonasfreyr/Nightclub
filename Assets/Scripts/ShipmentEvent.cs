@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class ShipmentEvent : EventPoint
 {
     private bool _isPackageWaiting;
     private SpriteRenderer _spriteRenderer;
+    private bool _isCollecting;
 
     private void Awake()
     {
@@ -22,9 +24,27 @@ public class ShipmentEvent : EventPoint
     
     public override void Fix()
     {
-        _setSpriteVisibility(false);
-        _isPackageWaiting = false;
-        repairStatusCanvas.SetActive(false);
+        StartCoroutine(_fix());
+    }
+
+    private IEnumerator _fix()
+    {
+        GameManager.Instance.minigames.PlayMinigame(MinigameType.MoveBoxes);
+        _setRepairButtonState(true);
+        
+        while (GameManager.Instance.minigames.IsPlayingMinigame)
+        {
+            yield return new WaitForSeconds(0.1f);            
+        }
+        
+        _isCollecting = false;
+        _setRepairButtonState(false);
+        if (GameManager.Instance.minigames.Succeeded)
+        {
+            _setSpriteVisibility(false);
+            _isPackageWaiting = false;
+            repairStatusCanvas.SetActive(false);
+        }
     }
     
     public override Vector3 GetEventPosition()
@@ -39,7 +59,7 @@ public class ShipmentEvent : EventPoint
 
     public override bool IsFixing()
     {
-        return false;
+        return _isCollecting;
     }
 
     private void _setSpriteVisibility(bool visible)

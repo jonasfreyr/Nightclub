@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EventSystem : MonoBehaviour
 {
@@ -10,7 +12,10 @@ public class EventSystem : MonoBehaviour
 
     private void DisableObject()
     {
-        _eventPoints[Random.Range(0, _eventPoints.Length)].Break();
+        var subObjects = Array.FindAll(_eventPoints, o => !o.IsBroken());
+    
+        if (subObjects.Length > 0) 
+            subObjects[Random.Range(0, subObjects.Length)].Break();
     }
     
     // Update is called once per frame

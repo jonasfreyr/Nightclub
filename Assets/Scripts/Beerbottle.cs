@@ -11,10 +11,14 @@ public class Beerbottle : MonoBehaviour, IDragHandler, IEndDragHandler
     private BoxCollider2D _collider;
 
     private Vector3 _offset = new Vector3(-5, 30);
+
+    public AudioClip clang;
+    private AudioSource _audioSource;
     
     public void Start()
     {
         _collider = GetComponent<BoxCollider2D>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -34,7 +38,9 @@ public class Beerbottle : MonoBehaviour, IDragHandler, IEndDragHandler
             tile.placed = true;
 
             transform.position = tile.transform.position + _offset;
-
+            
+            _audioSource.PlayOneShot(clang, 1f);
+            
         }
     }
 }

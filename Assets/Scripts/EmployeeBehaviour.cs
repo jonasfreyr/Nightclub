@@ -10,7 +10,6 @@ public class EmployeeBehaviour : MonoBehaviour
     public Animator animator;
     private AIDestinationSetter _targetSetter;
     private bool _goingToTask;
-    private List<EventPoint> _scheduledActions;
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Standing = Animator.StringToHash("Standing");
 
@@ -19,7 +18,6 @@ public class EmployeeBehaviour : MonoBehaviour
     private void Awake()
     {
         _targetSetter = GetComponent<AIDestinationSetter>();
-        _scheduledActions = new List<EventPoint>();
     }
 
     private void Update()
@@ -38,7 +36,6 @@ public class EmployeeBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            _scheduledActions.Clear();
             _targetSetter.SetTarget(transform.position);
             CurrentTask = null;
             _goingToTask = false;
@@ -46,21 +43,16 @@ public class EmployeeBehaviour : MonoBehaviour
         }
     }
 
-    public void ScheduleTask(EventPoint task)
+    public void SetTask(EventPoint task)
     {
-        _scheduledActions.Add(task);
+        _setTask(task);
     }
 
     private void _taskUpdate()
     {
         switch (CurrentTask)
         {
-            case null:
-                if (_scheduledActions.Count != 0)
-                {
-                    _switchToNextTask();
-                }
-                break;
+            case null: break;
             default:
                 if (!CurrentTask.IsBroken() || !CurrentTask.IsFixing())
                 {
@@ -94,13 +86,8 @@ public class EmployeeBehaviour : MonoBehaviour
         }
     }
 
-    private void _switchToNextTask()
+    private void _setTask(EventPoint task)
     {
-        if (_scheduledActions.Count == 0) return;
-
-        var task = _scheduledActions.First();
-        _scheduledActions.RemoveAt(0);
-        
         _onTaskChange(task, CurrentTask);
         CurrentTask = task;
     }

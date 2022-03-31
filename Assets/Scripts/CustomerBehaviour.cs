@@ -260,7 +260,7 @@ public class CustomerBehaviour : MonoBehaviour
         }
 
         if (isIrritated) {
-            if (Time.time - irritatedStart >= 10) {
+            if (Time.time - irritatedStart >= 25) {
                 // Debug.Log("Strike added");
                 strikes++;
             }

@@ -45,16 +45,15 @@ public class GameManager : MonoBehaviour
     // In-game clock in minutes
     public float CurrentGameClock = 0;
 
-    public float cozy;
-    public float romantic;
-    public float chaotic;
-    public float satisfaction;
+    public float satisfaction = 100;
     public GameObject reviewPrefab;
     public GameObject reviewPanel;
     public Scrollbar bar;
     public bool speakersBroken = false;
     public bool bathroomBroken = false;
     public bool barBroken = false;
+    private int reviewCount = 0;
+    public float reviewSatisfactionSum = 100;
 
     public SliderScript satisfactionSlider;
     public TextMeshProUGUI nightText;
@@ -140,11 +139,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (gameOver) return;
-    
-        
-        
-        satisfaction -= Time.deltaTime * 5;
-        
+
         satisfactionSlider.SetSliderValue(satisfaction);
         
         if (satisfaction <= 0)
@@ -167,7 +162,7 @@ public class GameManager : MonoBehaviour
             _setupForDayTime();
         }
 
-        CurrentGameClock += Time.deltaTime;
+        CurrentGameClock += Time.deltaTime * 3;
 
         if (GameClockHours == 24)
         {
@@ -211,10 +206,13 @@ public class GameManager : MonoBehaviour
         updatePath = false;
     }
 
-    public void addReview(string review) {
+    public void addReview(string review, float reviewSatisfaction) {
+        reviewCount++;
+        reviewSatisfactionSum = reviewSatisfactionSum + reviewSatisfaction;
         var newReview = Instantiate(reviewPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         newReview.transform.SetParent(reviewPanel.transform);
         TMPro.TextMeshProUGUI reviewText = newReview.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
         reviewText.text = review;
+        satisfaction = reviewSatisfactionSum / reviewCount;
     }
 }

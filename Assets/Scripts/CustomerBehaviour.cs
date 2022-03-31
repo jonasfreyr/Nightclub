@@ -55,10 +55,6 @@ public class CustomerBehaviour : MonoBehaviour
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Standing = Animator.StringToHash("Standing");
 
-    private int maxAttr = 100;
-    public float cozy;
-    public float romantic;
-    public float chaotic;
     public float satisfaction;
     public int strikes = 0;
     private bool isIrritated = false;
@@ -70,7 +66,6 @@ public class CustomerBehaviour : MonoBehaviour
     {
         _targetSetter = gameObject.GetComponent<AIDestinationSetter>();
         _targetSetter.targetV = null;
-        generateCustomerStats();
     }
 
     private bool DoingSomething()
@@ -278,57 +273,56 @@ public class CustomerBehaviour : MonoBehaviour
         }
     }
 
-    private void generateCustomerStats() {
-        // TODO: Add Synergies between customer stats ?
-        cozy = Random.Range(0, maxAttr + 1);
-        romantic = Random.Range(0, maxAttr + 1);
-        chaotic = Random.Range(0, maxAttr + 1);
-        // Debug.Log("Cozy: " + cozy + " Romantic: " + romantic + " Chaotic: " + chaotic);
-    }
-
     public void generateReview() {
-        // TODO: Add satisfaction modifiers.
         string review = "";
 
         // The lower the strikes the better the review
         if (strikes >= 5) {
             // Hated it
+            satisfaction = Random.Range(0, 25);
             review = "I would rather have stayed at home and watched season 8 of Game of Thrones";
         }
         else if (strikes == 4) {
             // Disliked it
+            satisfaction = Random.Range(26, 44);
             review = "The customer feels like they walked into a tin of sardines (which is not a good thing)";
         }
         else if (strikes == 3) {
-            // Kinda bad
+            // Kinda bad, but it's a pass
+            satisfaction = Random.Range(45, 54);
             review = "It was like a cold cup of coffee... Got the job done, but oof.";
         }
         else if (strikes == 2) {
             // It was ok
+            satisfaction = Random.Range(55, 64);
             review = "Sure, why not.";
         }
         else if (strikes == 1) {
             // Liked it
+            satisfaction = Random.Range(65, 74);
             review = "I liked the jumping. Made me feel strong and indepenent.";
         }   
         else if (strikes == 0) {
-            if (GameManager.Instance.satisfaction >= 90) {
+            if (GameManager.Instance.satisfaction >= 90.0) {
                 // Peak satisfaction
+                satisfaction = Random.Range(90, 100);
                 review = "I'd consider selling my first born to fund this.";
             }
-            else if (60 <= GameManager.Instance.satisfaction && GameManager.Instance.satisfaction < 90) {
+            else if (70 <= GameManager.Instance.satisfaction && GameManager.Instance.satisfaction < 90) {
                 // Very happy
+                satisfaction = Random.Range(85, 89);
                 review = "One of the best clubs out there.";
             }
-            else if (GameManager.Instance.satisfaction < 60) {
+            else if (GameManager.Instance.satisfaction < 70) {
                 // Great!
+                satisfaction = Random.Range(75, 84);
                 review = "Loved it!";
             }
         }
         else {
             Debug.Log("Wrong number of strikes?");
         }
-
-        GameManager.Instance.addReview(review);
+        
+        GameManager.Instance.addReview(review, satisfaction);
     }
 }

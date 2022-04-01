@@ -43,6 +43,8 @@ public class EventPoint : MonoBehaviour
         if (_timer >= timeToFail)
         {
             ForceFix();
+
+            GameManager.Instance.AddSatisfaction(-15);
         }
     }
 

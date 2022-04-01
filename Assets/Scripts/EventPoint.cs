@@ -15,7 +15,10 @@ public class EventPoint : MonoBehaviour
     
     private void Start()
     {
-        _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
+        if (repairStatusCanvas != null)
+        {
+            _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();   
+        }
     }
 
     private void SetImageFill(float value)

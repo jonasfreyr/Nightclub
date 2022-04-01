@@ -32,6 +32,17 @@ public class BarEvent : EventPoint
         StartCoroutine(_fix());
     }
 
+    public override void ForceFix()
+    {
+        GameManager.Instance.barBroken = false;
+        
+        gameObject.GetComponent<PointOfInterest>().enabled = true;
+        
+        repairStatusCanvas.SetActive(false);
+
+        _isBroken = true;
+    }
+
     private IEnumerator _fix()
     {
         GameManager.Instance.minigames.PlayMinigame(MinigameType.BarGame);

@@ -21,6 +21,12 @@ public class SinkEvent : EventPoint
         StartCoroutine(_fix());
     }
 
+    public override void ForceFix()
+    {
+        _isBroken = false;
+        repairStatusCanvas.SetActive(false);
+    }
+
     private IEnumerator _fix()
     {
         GameManager.Instance.minigames.PlayMinigame(MinigameType.FixPipes);

@@ -31,6 +31,19 @@ public class SpeakerEvent : EventPoint
         repairStatusCanvas.SetActive(true);
     }
     
+    public override void ForceFix()
+    {
+        GameManager.Instance.speakersBroken = false;
+        
+        foreach (var speaker in _objects)
+        {
+            speaker.GetComponent<AudioSource>().enabled = true;
+        }
+        
+        _isBroken = false;
+        repairStatusCanvas.SetActive(false);
+    }
+    
     public override void Fix()
     {
         if (_isFixing) return;
@@ -56,9 +69,8 @@ public class SpeakerEvent : EventPoint
             foreach (var speaker in _objects)
             {
                 speaker.GetComponent<AudioSource>().enabled = true;
-                GameManager.Instance.speakersBroken = false;
-
             }
+            GameManager.Instance.speakersBroken = false;
         }
     }
 

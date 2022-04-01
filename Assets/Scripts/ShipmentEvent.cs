@@ -27,6 +27,13 @@ public class ShipmentEvent : EventPoint
         StartCoroutine(_fix());
     }
 
+    public override void ForceFix()
+    {
+        _setSpriteVisibility(false);
+        _isPackageWaiting = false;
+        repairStatusCanvas.SetActive(false);
+    }
+
     private IEnumerator _fix()
     {
         GameManager.Instance.minigames.PlayMinigame(MinigameType.MoveBoxes);

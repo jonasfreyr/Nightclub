@@ -36,6 +36,16 @@ public class BathroomEvent : EventPoint
         StartCoroutine(_fix());
     }
 
+    public override void ForceFix()
+    {
+        _isBroken = false;
+        repairStatusCanvas.SetActive(false);
+        GameManager.Instance.bathroomBroken = false;
+        
+        _brokenBathroom.enabled = true;
+        _brokenBathroom = null;
+    }
+
     private IEnumerator _fix()
     {
         GameManager.Instance.minigames.PlayMinigame(MinigameType.UnclogToilet);

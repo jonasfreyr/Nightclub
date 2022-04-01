@@ -12,12 +12,17 @@ public class EmployeeBehaviour : MonoBehaviour
     private bool _goingToTask;
     private static readonly int Walking = Animator.StringToHash("Walking");
     private static readonly int Standing = Animator.StringToHash("Standing");
-
+    public Vector3 initalPosition;
     public EventPoint CurrentTask { get; private set; }
     
     private void Awake()
     {
         _targetSetter = GetComponent<AIDestinationSetter>();
+    }
+
+    private void Start()
+    {
+        initalPosition = transform.position;
     }
 
     private void Update()
@@ -48,6 +53,13 @@ public class EmployeeBehaviour : MonoBehaviour
         _setTask(task);
     }
 
+    public void ResetEmployee()
+    {
+        CurrentTask = null;
+        transform.position = initalPosition;
+        _targetSetter.SetTarget(initalPosition);
+    }
+    
     private void _taskUpdate()
     {
         switch (CurrentTask)

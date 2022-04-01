@@ -34,6 +34,11 @@ public class EventPoint : MonoBehaviour
         throw new NotImplementedException();
     }
 
+    public virtual void ForceFix()
+    {
+        throw new NotImplementedException();
+    }
+    
     public void EmployeeFix()
     {
         GameManager.Instance.employee.SetTask(this);

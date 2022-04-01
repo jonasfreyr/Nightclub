@@ -83,7 +83,7 @@ public class CustomerBehaviour : MonoBehaviour
             
             if (_targetSetter.done)
             {
-                generateReview();
+                // generateReview();
                 customerManager.DeleteCustomer(gameObject);
             }
             
@@ -262,19 +262,19 @@ public class CustomerBehaviour : MonoBehaviour
             animator.SetTrigger(Walking);
         }
 
-        if (isIrritated) {
-            if (Time.time - irritatedStart >= 25 && isIrritated) {
-                strikes++;
-                Debug.Log("Strike added: " + strikes);
-                isIrritated = false;
-            }
-            if (strikes >= 5) {
-                Debug.Log("Customer leaving");
-                generateReview();
-                _leaving = true;
-                animator.SetTrigger(Walking);
-            }
-        }
+        // if (isIrritated) {
+        //     if (Time.time - irritatedStart >= 25 && isIrritated) {
+        //         strikes++;
+        //         Debug.Log("Strike added: " + strikes);
+        //         isIrritated = false;
+        //     }
+        //     if (strikes >= 5) {
+        //         Debug.Log("Customer leaving");
+        //         // generateReview();
+        //         _leaving = true;
+        //         animator.SetTrigger(Walking);
+        //     }
+        // }
     }
 
     public void generateReview() {

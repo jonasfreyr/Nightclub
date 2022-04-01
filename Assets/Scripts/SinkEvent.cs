@@ -7,11 +7,18 @@ public class SinkEvent : EventPoint
     private bool _isBroken;
     private bool _isFixing;
     
+    
+    
     public override void Break()
     {
         _isBroken = true;
         GameManager.Instance.sinkBroken = true;
         repairStatusCanvas.SetActive(true);
+    }
+
+    private void Awake()
+    {
+        _collider = GetComponent<BoxCollider2D>();
     }
     
     public override void Fix()

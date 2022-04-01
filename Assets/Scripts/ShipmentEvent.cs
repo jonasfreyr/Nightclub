@@ -13,6 +13,7 @@ public class ShipmentEvent : EventPoint
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _setSpriteVisibility(false);
+        _collider = GetComponent<BoxCollider2D>();
     }
 
     public override void Break()

@@ -14,9 +14,12 @@ public class EmployeeBehaviour : MonoBehaviour
     private static readonly int Walking = Animator.StringToHash("Walking");
     public EventPoint CurrentTask { get; private set; }
     public Vector2 velocity => _rigidbody.velocity;
+
+    private CapsuleCollider2D _collider;
     
     private void Awake()
     {
+        _collider = GetComponent<CapsuleCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -72,9 +75,9 @@ public class EmployeeBehaviour : MonoBehaviour
 
     public void SetTask(EventPoint task)
     {
-        Debug.Log(task);
-        
-        _setTask(task);
+
+        if (task.IsInBox(_collider))
+            _setTask(task);
     }
 
     public void ResetEmployee()

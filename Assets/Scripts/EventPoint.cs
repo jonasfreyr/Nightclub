@@ -11,7 +11,8 @@ public class EventPoint : MonoBehaviour
     public Image timerImage;
     
     private float _timer;
-
+    protected Collider2D _collider;
+    
     private void Start()
     {
         if (repairStatusCanvas != null)
@@ -83,6 +84,11 @@ public class EventPoint : MonoBehaviour
     public virtual Vector3 GetEventPosition()
     {
         throw new NotImplementedException();
+    }
+
+    public bool IsInBox(Collider2D otherCollider)
+    {
+        return _collider.IsTouching(otherCollider);
     }
     
     protected void _setRepairButtonState(bool repairing)

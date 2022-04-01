@@ -227,6 +227,7 @@ public class CustomerBehaviour : MonoBehaviour
         {
             if (GameManager.Instance.bathroomBroken) {
                 isIrritated = true;
+                irritatedStart = Time.time;
             }
             target = customerManager.GetRandomPOI(customerManager.bathrooms);
         }
@@ -234,6 +235,7 @@ public class CustomerBehaviour : MonoBehaviour
         {
             if (GameManager.Instance.barBroken) {
                 isIrritated = true;
+                irritatedStart = Time.time;
             }
             target = customerManager.GetRandomPOI(customerManager.bars);
         }
@@ -241,6 +243,7 @@ public class CustomerBehaviour : MonoBehaviour
         {
             if (GameManager.Instance.speakersBroken) {
                 isIrritated = true;
+                irritatedStart = Time.time;
             }
             target = customerManager.GetRandomPOI(customerManager.danceFloors);
         }
@@ -260,9 +263,9 @@ public class CustomerBehaviour : MonoBehaviour
         }
 
         if (isIrritated) {
-            if (Time.time - irritatedStart >= 25) {
-                // Debug.Log("Strike added");
+            if (Time.time - irritatedStart >= 25 && isIrritated) {
                 strikes++;
+                Debug.Log("Strike added: " + strikes);
                 isIrritated = false;
             }
             if (strikes >= 5) {

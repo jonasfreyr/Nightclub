@@ -16,6 +16,7 @@ public class PukeEvent : EventPoint
     public override void Break()
     {
         _isBroken = true;
+        GameManager.Instance.pukeOnFloor = true;
         repairStatusCanvas.SetActive(true);
     }
     
@@ -31,6 +32,7 @@ public class PukeEvent : EventPoint
         _setRepairButtonState(true);
         yield return new WaitForSeconds(cleaningTime);
 
+        GameManager.Instance.pukeOnFloor = false;
         _isBroken = false;
         _isFixing = false;
         _setRepairButtonState(false);

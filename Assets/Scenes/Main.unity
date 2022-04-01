@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4171957182452178763, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4478250731626062735, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.013
@@ -275,6 +279,10 @@ PrefabInstance:
       propertyPath: timerImage
       value: 
       objectReference: {fileID: 143060926}
+    - target: {fileID: 8838900799132210209, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
 --- !u!114 &143060926 stripped
@@ -295,6 +303,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2070408790}
     m_Modifications:
+    - target: {fileID: 1323282463234977227, guid: a2730da88d8a8164c8c60baf03df62d4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5841995436335326573, guid: a2730da88d8a8164c8c60baf03df62d4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -393,6 +405,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5841995437380834791, guid: a2730da88d8a8164c8c60baf03df62d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5841995437533128353, guid: a2730da88d8a8164c8c60baf03df62d4, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9066298483746705922, guid: a2730da88d8a8164c8c60baf03df62d4, type: 3}
@@ -2603,6 +2619,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4171957182452178763, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4478250731626062735, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.05
@@ -2663,6 +2683,10 @@ PrefabInstance:
       propertyPath: timerImage
       value: 
       objectReference: {fileID: 1069130552}
+    - target: {fileID: 8838900799132210209, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ae8594ee43bb76419b32f04cc82dc8b, type: 3}
 --- !u!114 &1069130552 stripped

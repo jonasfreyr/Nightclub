@@ -39,7 +39,8 @@ public class ShipmentEvent : EventPoint
     {
         GameManager.Instance.minigames.PlayMinigame(MinigameType.MoveBoxes);
         _setRepairButtonState(true);
-        
+        _isCollecting = true;
+
         while (GameManager.Instance.minigames.IsPlayingMinigame)
         {
             yield return new WaitForSeconds(0.1f);            

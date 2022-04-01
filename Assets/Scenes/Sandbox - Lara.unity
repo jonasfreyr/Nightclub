@@ -2901,7 +2901,7 @@ PrefabInstance:
       objectReference: {fileID: 596079418920898769, guid: 1887a1c416741bc4fbdddb873b2603bf, type: 3}
     - target: {fileID: 828259179784147856, guid: 98957ca7ed072924a8ba9ae590ad4219, type: 3}
       propertyPath: satisfaction
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 828259179784147856, guid: 98957ca7ed072924a8ba9ae590ad4219, type: 3}
       propertyPath: dayScreenText

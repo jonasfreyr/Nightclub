@@ -18,6 +18,7 @@ public class ShipmentEvent : EventPoint
     public override void Break()
     {
         _setSpriteVisibility(true);
+        GameManager.Instance.shipmentWaiting = true;
         _isPackageWaiting = true;
         repairStatusCanvas.SetActive(true);
     }
@@ -48,6 +49,7 @@ public class ShipmentEvent : EventPoint
         _setRepairButtonState(false);
         if (GameManager.Instance.minigames.Succeeded)
         {
+            GameManager.Instance.shipmentWaiting = false;
             _setSpriteVisibility(false);
             _isPackageWaiting = false;
             repairStatusCanvas.SetActive(false);

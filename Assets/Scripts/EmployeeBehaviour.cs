@@ -38,14 +38,6 @@ public class EmployeeBehaviour : MonoBehaviour
         {
             _taskUpdate();
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            _targetSetter.SetTarget(transform.position);
-            CurrentTask = null;
-            _goingToTask = false;
-            animator.SetTrigger(Standing);
-        }
     }
 
     public void SetTask(EventPoint task)

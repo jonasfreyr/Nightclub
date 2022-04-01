@@ -20,7 +20,10 @@ public class HitTheSpeaker : MonoBehaviour
     }
 
     void Update() {
-        hitsLabel.text = (hitsRequired - speaker.hits).ToString();
+        if (hitsRequired - speaker.hits >= 0) {
+            hitsLabel.text = (hitsRequired - speaker.hits).ToString();
+        }
+        
         if (speaker.hits >= hitsRequired) {
             _startedWinningtimeCounter = true;
             StartCoroutine(_startWinningProcess());

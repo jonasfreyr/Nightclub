@@ -17,21 +17,21 @@ public class EventPoint : MonoBehaviour
         _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
     }
 
-    private void Update()
-    {
-        if (!IsBroken())
-        {
-            _timer = 0f;
-            return;
-        }
+    // private void Update()
+    // {
+    //     if (!IsBroken())
+    //     {
+    //         _timer = 0f;
+    //         return;
+    //     }
         
-        _timer += Time.deltaTime;
+    //     _timer += Time.deltaTime;
 
-        if (_timer >= timeToFail)
-        {
-            ForceFix();
-        }
-    }
+    //     if (_timer >= timeToFail)
+    //     {
+    //         ForceFix();
+    //     }
+    // }
 
     public virtual void Break()
     {

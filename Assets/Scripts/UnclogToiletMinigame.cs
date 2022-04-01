@@ -21,7 +21,9 @@ public class UnclogToiletMinigame : MonoBehaviour
 
     private void Update()
     {
-        plungesLabel.text = (plungesRequired - toiletPlunger.Counter).ToString();
+        if (plungesRequired - toiletPlunger.Counter >= 0) {
+            plungesLabel.text = (plungesRequired - toiletPlunger.Counter).ToString();
+        }
 
         if (toiletPlunger.Counter >= plungesRequired && !_startedWinningtimeCounter && !_hasWinningTimeCompleted)
         {

@@ -10,10 +10,6 @@ public class BathroomEvent : EventPoint
     private bool _isFixing;
     private PointOfInterest _brokenBathroom;
 
-    public void Start()
-    {
-    }
-
     public override void Break()
     {
         GameManager.Instance.bathroomBroken = true;
@@ -26,6 +22,9 @@ public class BathroomEvent : EventPoint
         _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
         repairStatusCanvas.SetActive(true);
 
+        timerImage = _brokenBathroom.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+        timerImage.fillAmount = 1f;
+        
         _isBroken = true;
     }
     

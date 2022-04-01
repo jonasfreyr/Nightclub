@@ -16,7 +16,6 @@ public class UnclogToiletMinigame : MonoBehaviour
 
     private void Start() {
         plungesRequired = UnityEngine.Random.Range(3, 7);
-        // Debug.Log("Plunges Required: " + plungesRequired);
     }
 
     private void Update()

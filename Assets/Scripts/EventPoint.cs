@@ -8,30 +8,45 @@ public class EventPoint : MonoBehaviour
 {
     public GameObject repairStatusCanvas;
     protected Image _repairButtonBackground;
-
+    public Image timerImage;
+    
     private float _timer;
-    private float timeToFail;
+    private float timeToFail = 10f;
     
     private void Start()
     {
         _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
     }
 
-    // private void Update()
-    // {
-    //     if (!IsBroken())
-    //     {
-    //         _timer = 0f;
-    //         return;
-    //     }
+    private void SetImageFill(float value)
+    {
+        if (timerImage == null) return;
         
-    //     _timer += Time.deltaTime;
+        
+        timerImage.fillAmount = value;
+    }
+    
+    private void Update()
+    {
+        if (!IsBroken())
+        {
+            SetImageFill(1);
+            _timer = 0f;
+            return;
+        }
 
-    //     if (_timer >= timeToFail)
-    //     {
-    //         ForceFix();
-    //     }
-    // }
+        if (IsFixing()) return;
+        
+        _timer += Time.deltaTime;
+        SetImageFill(timerImage.fillAmount - 1.0f / timeToFail * Time.deltaTime);
+
+        if (_timer >= timeToFail)
+        {
+            ForceFix();
+
+            GameManager.Instance.AddSatisfaction(-15);
+        }
+    }
 
     public virtual void Break()
     {

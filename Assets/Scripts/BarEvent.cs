@@ -40,7 +40,7 @@ public class BarEvent : EventPoint
         
         repairStatusCanvas.SetActive(false);
 
-        _isBroken = true;
+        _isBroken = false;
     }
 
     private IEnumerator _fix()

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SinkEvent : EventPoint
 {
-    public float fixTime;
     private bool _isBroken;
     private bool _isFixing;
     

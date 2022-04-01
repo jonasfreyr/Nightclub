@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
         eventSystem._timer = 0f;
         eventSystem.FixAll();
         employee.ResetEmployee();
+        minigames.CancelMinigame();
         
         StartCoroutine(StartNightScreen());
     }

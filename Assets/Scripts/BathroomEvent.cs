@@ -24,6 +24,8 @@ public class BathroomEvent : EventPoint
 
         timerImage = _brokenBathroom.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>();
         timerImage.fillAmount = 1f;
+
+        _collider = _brokenBathroom.GetComponent<BoxCollider2D>();
         
         _isBroken = true;
     }
@@ -45,6 +47,7 @@ public class BathroomEvent : EventPoint
         
         _brokenBathroom.enabled = true;
         _brokenBathroom = null;
+        _collider = null;
     }
 
     private IEnumerator _fix()
@@ -67,6 +70,7 @@ public class BathroomEvent : EventPoint
         
             _brokenBathroom.enabled = true;
             _brokenBathroom = null;
+            _collider = null;
         }
     }
     

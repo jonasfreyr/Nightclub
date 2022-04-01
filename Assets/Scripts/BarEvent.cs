@@ -6,12 +6,9 @@ public class BarEvent : EventPoint
 {
     private bool _isBroken;
     private bool _isFixing;
-    private BoxCollider2D _collider;
-    
-    public void Start()
+    public void Awake()
     {
-        _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
-        _collider = gameObject.GetComponent<BoxCollider2D>();
+        _collider = gameObject.transform.GetChild(1).GetComponent<BoxCollider2D>();
     }
     
     public override void Break()
@@ -75,15 +72,4 @@ public class BarEvent : EventPoint
     {
         return _isFixing;
     }
-
-    public override Vector3 GetEventPosition()
-    {
-        var size = _collider.size;
-        var position = (Vector2) transform.position + _collider.offset;
-        var x = Random.Range(position.x - (size.x / 2), position.x + (size.x / 2));
-        var y = Random.Range(position.y - (size.y / 2), position.y + (size.y / 2));
-
-        return new Vector3(x, y);
-    }
-    
 }

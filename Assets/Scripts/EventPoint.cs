@@ -13,7 +13,7 @@ public class EventPoint : MonoBehaviour
     public Transform arrowPrefab;
 
     private float _timer;
-    private float timeToFail = 10f;
+    protected Collider2D _collider;
     
     private void Start()
     {
@@ -44,9 +44,9 @@ public class EventPoint : MonoBehaviour
         if (IsFixing()) return;
         
         _timer += Time.deltaTime;
-        SetImageFill(timerImage.fillAmount - 1.0f / timeToFail * Time.deltaTime);
+        SetImageFill(timerImage.fillAmount - 1.0f / GameManager.Instance.timeToFail * Time.deltaTime);
 
-        if (_timer >= timeToFail)
+        if (_timer >= GameManager.Instance.timeToFail)
         {
             ForceFix();
 
@@ -118,6 +118,11 @@ public class EventPoint : MonoBehaviour
     public virtual Vector3 GetEventPosition()
     {
         throw new NotImplementedException();
+    }
+
+    public bool IsInBox(Collider2D otherCollider)
+    {
+        return _collider.IsTouching(otherCollider);
     }
     
     protected void _setRepairButtonState(bool repairing)

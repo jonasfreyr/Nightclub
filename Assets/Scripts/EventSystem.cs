@@ -10,7 +10,7 @@ public class EventSystem : MonoBehaviour
     public EventPoint[] _eventPoints;
     public float _timer = 0f;
     public float interval = 5f;
-    public int maxBreak = 3;
+    public int maxBreak = 4;
     private void DisableObject()
     {
         var subObjects = Array.FindAll(_eventPoints, o => !o.IsBroken());

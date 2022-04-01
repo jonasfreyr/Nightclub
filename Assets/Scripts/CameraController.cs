@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Fire2"))
+        /*if (Input.GetButton("Fire2"))
         {
             var moveX = 0f;
             var moveY = 0f;
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
             {
                 transform.position = realCamera.transform.position;
             }
-        }
+        }*/
     }
 
     private void _moveCamera(Vector3 moveBy)

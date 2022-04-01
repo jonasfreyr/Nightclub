@@ -7,34 +7,64 @@ using UnityEngine.Rendering;
 
 public class EmployeeBehaviour : MonoBehaviour
 {
+    public float maxSpeed = 10.0f;
+    public float speedUpSpeed = 0.4f;
     public Animator animator;
-    private AIDestinationSetter _targetSetter;
-    private bool _goingToTask;
+    private Rigidbody2D _rigidbody;
     private static readonly int Walking = Animator.StringToHash("Walking");
-    private static readonly int Standing = Animator.StringToHash("Standing");
-    public Vector3 initalPosition;
     public EventPoint CurrentTask { get; private set; }
+    public Vector2 velocity => _rigidbody.velocity;
     
     private void Awake()
     {
-        _targetSetter = GetComponent<AIDestinationSetter>();
-    }
-
-    private void Start()
-    {
-        initalPosition = transform.position;
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        if (_goingToTask && _targetSetter.done)
+        var velocity = _rigidbody.velocity;
+
+        var input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        input = input.normalized;
+        
+        if (input.y > 0.1)
         {
-            animator.SetTrigger(Standing);
-            _goingToTask = false;
-            _onTaskReached();
+            if (velocity.y < maxSpeed) velocity.y += speedUpSpeed;
+        }
+        else if (input.y < -0.1)
+        {
+            if (velocity.y > -maxSpeed) velocity.y -= speedUpSpeed;
+        }
+        else
+        {
+            velocity.y = 0;
+        }
+        
+        if (input.x > 0.1)
+        {
+            if (velocity.x < maxSpeed) velocity.x += speedUpSpeed;
+        }
+        else if (input.x < -0.1)
+        {
+            if (velocity.x > -maxSpeed) velocity.x -= speedUpSpeed;
+        }
+        else
+        {
+            velocity.x = 0;
         }
 
-        if (!_goingToTask)
+        if (velocity.x != 0 || velocity.y != 0)
+        {
+            animator.SetBool(Walking, true);
+        }
+        else
+        {
+            animator.SetBool(Walking, false);
+        }
+
+        _rigidbody.velocity = velocity;
+
+        if (CurrentTask != null)
         {
             _taskUpdate();
         }
@@ -48,8 +78,7 @@ public class EmployeeBehaviour : MonoBehaviour
     public void ResetEmployee()
     {
         CurrentTask = null;
-        transform.position = initalPosition;
-        _targetSetter.SetTarget(initalPosition);
+        // _targetSetter.SetTarget(initalPosition);
     }
     
     private void _taskUpdate()
@@ -65,27 +94,14 @@ public class EmployeeBehaviour : MonoBehaviour
                 break;
         }
     }
-
-    private void _onTaskReached()
-    {
-        switch (CurrentTask)
-        {
-            case null: break;
-            default:
-                CurrentTask.Fix();
-                break;
-        }
-    }
-
+    
     private void _onTaskChange(EventPoint newTask, EventPoint oldTask)
     {
         switch (newTask)
         {
-            case null:
-                animator.SetTrigger(Standing);
-                break;
+            case null: break;
             default:
-                _walkToTask(newTask);
+                newTask.Fix();
                 break;
         }
     }
@@ -94,18 +110,5 @@ public class EmployeeBehaviour : MonoBehaviour
     {
         _onTaskChange(task, CurrentTask);
         CurrentTask = task;
-    }
-
-    private void _walkToTask(EventPoint task)
-    {
-        var position = _eventPointPosition(task);
-        _targetSetter.SetTarget(position);
-        animator.SetTrigger(Walking);
-        _goingToTask = true;
-    }
-
-    private Vector3 _eventPointPosition(EventPoint task)
-    {
-        return task.GetEventPosition();
     }
 }

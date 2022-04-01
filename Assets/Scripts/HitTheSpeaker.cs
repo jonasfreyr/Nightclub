@@ -7,6 +7,7 @@ public class HitTheSpeaker : MonoBehaviour
     public float winningTimer = 0.5f;
     public MiniSpeaker speaker;
     private int hitsRequired;
+    public TMPro.TextMeshProUGUI hitsLabel;
     
     public bool HasWon => speaker.hits >= hitsRequired;
     private bool _hasWinningTimeCompleted;
@@ -15,9 +16,14 @@ public class HitTheSpeaker : MonoBehaviour
     void Start()
     {
         hitsRequired = Random.Range(5, 10);
+        // Debug.Log("Hits Required: " + hitsRequired);
     }
 
     void Update() {
+        if (hitsRequired - speaker.hits >= 0) {
+            hitsLabel.text = (hitsRequired - speaker.hits).ToString();
+        }
+        
         if (speaker.hits >= hitsRequired) {
             _startedWinningtimeCounter = true;
             StartCoroutine(_startWinningProcess());

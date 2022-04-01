@@ -37,6 +37,7 @@ public class Minigames : MonoBehaviour
                     Succeeded = true;
                     fixPipesMinigame.gameObject.SetActive(false);
                     gameObject.SetActive(false);
+                    GameManager.Instance.AddSatisfaction(5);
                 }
                 break;
             case MinigameType.UnclogToilet:
@@ -46,6 +47,7 @@ public class Minigames : MonoBehaviour
                     Succeeded = true;
                     unclogToiletMinigame.gameObject.SetActive(false);
                     gameObject.SetActive(false);
+                    GameManager.Instance.AddSatisfaction(5);
                 }
                 break;
             case MinigameType.BarGame:
@@ -55,6 +57,7 @@ public class Minigames : MonoBehaviour
                     Succeeded = true;
                     barStockMinigame.gameObject.SetActive(false);
                     gameObject.SetActive(false);
+                    GameManager.Instance.AddSatisfaction(5);
                 }
                 break;
             case MinigameType.MoveBoxes:
@@ -64,6 +67,7 @@ public class Minigames : MonoBehaviour
                     Succeeded = true;
                     moveBoxesMinigame.gameObject.SetActive(false);
                     gameObject.SetActive(false);
+                    GameManager.Instance.AddSatisfaction(5);
                 }
                 break;
             case MinigameType.FixSpeakers:
@@ -72,6 +76,7 @@ public class Minigames : MonoBehaviour
                     Succeeded = true;
                     fixSpeakersMinigame.gameObject.SetActive(false);
                     gameObject.SetActive(false);
+                    GameManager.Instance.AddSatisfaction(5);
                 }
                 break;
         }

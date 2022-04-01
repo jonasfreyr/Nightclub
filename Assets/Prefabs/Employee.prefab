@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8347863852536042270}
   - component: {fileID: 4896490392224783346}
-  - component: {fileID: 7101604919093122233}
   - component: {fileID: 8276716307952528419}
-  m_Layer: 9
+  - component: {fileID: 1222650471419974417}
+  m_Layer: 6
   m_Name: Employee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7101604919093122233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4633382981736656427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f75c16d242ff2424eaae109ee1d4369d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aiPath: {fileID: 1808806713}
 --- !u!95 &8276716307952528419
 Animator:
   serializedVersion: 3
@@ -109,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 4633382981736656427}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4b53ecbdfa99ebd4396127058f46a865, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5db968030f329d748b880131579cd397, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -118,6 +105,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1222650471419974417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4633382981736656427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2cab7d5be24182b226f80a79596394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  employeeBehaviour: {fileID: 7399851160190616648}
 --- !u!1 &5938709523273457736
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,13 +127,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7879793468623563611}
-  - component: {fileID: 1808806713}
-  - component: {fileID: 1808806714}
-  - component: {fileID: 1808806715}
   - component: {fileID: 2097963843040151915}
   - component: {fileID: 13666464}
   - component: {fileID: 7399851160190616648}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Employee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,90 +152,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1808806713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5938709523273457736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 5
-  radius: 0.1
-  height: 0.1
-  canMove: 1
-  maxSpeed: 5
-  gravity: {x: 0, y: 0, z: 0}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  centerOffsetCompatibility: NaN
-  repathRateCompatibility: NaN
-  canSearchCompability: 0
-  orientation: 1
-  enableRotation: 0
-  autoRepath:
-    mode: 2
-    interval: 0.5
-    sensitivity: 10
-    maximumInterval: 0.5
-    visualizeSensitivity: 0
-  targetCompatibility: {fileID: 0}
-  maxAcceleration: -2.5
-  rotationSpeed: 360
-  slowdownDistance: 0.6
-  pickNextWaypointDist: 1.2
-  endReachedDistance: 2
-  alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
-  constrainInsideGraph: 0
---- !u!114 &1808806714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5938709523273457736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
---- !u!114 &1808806715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5938709523273457736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  target: {fileID: 0}
 --- !u!50 &2097963843040151915
 Rigidbody2D:
   serializedVersion: 4
@@ -270,11 +183,11 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0003783226, y: 0.0017416597}
-  m_Size: {x: 0.03926773, y: 0.10285051}
+  m_Offset: {x: -0.0003783226, y: -0.01882111}
+  m_Size: {x: 0.03926773, y: 0.061724972}
   m_Direction: 0
 --- !u!114 &7399851160190616648
 MonoBehaviour:
@@ -288,6 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0295a8ab13034273b8d742d4416a2491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 10
+  speedUpSpeed: 0.3
   animator: {fileID: 8276716307952528419}
 --- !u!1 &6898615382821820166
 GameObject:
@@ -299,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5112719161386504519}
   - component: {fileID: 1419355069552320893}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4778225286641265156}
   - component: {fileID: 1767353474485851018}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}

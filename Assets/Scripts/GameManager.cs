@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
     // In-game clock in minutes
     public float CurrentGameClock = 0;
 
-    public float satisfaction = 100;
+    private float maxSatisfaction = 100;
+    public float satisfaction = 75;
     public GameObject reviewPrefab;
     public GameObject reviewPanel;
     public Scrollbar bar;
@@ -216,5 +217,16 @@ public class GameManager : MonoBehaviour
         }
 
         updatePath = false;
+    }
+
+    public void AddSatisfaction(float toAdd) {
+        float result = satisfaction + toAdd;
+        if (result >= maxSatisfaction) {
+            result = maxSatisfaction;
+        }
+        if (result < 0) {
+            result = 0;
+        }
+        satisfaction = result;
     }
 }

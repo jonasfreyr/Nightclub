@@ -11,10 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: "Assets/Scenes/SampleScene - J\xF3nas2.unity"
     guid: 129464cb940847e43aeb5d1019792c4f
-  - enabled: 1
-    path: "Assets/Scenes/SampleScene - J\xF3nas3.unity"
-    guid: 6ac6895ebef9f9a479935ae85b6e306b
   - enabled: 0
+    path: Assets/Scenes/Main.unity
+    guid: 6ac6895ebef9f9a479935ae85b6e306b
+  - enabled: 1
     path: Assets/Scenes/StartScreen-Vianey.unity
     guid: e78f8f735a8013c479ad626894e475a8
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 6ac6895ebef9f9a479935ae85b6e306b
   m_configObjects: {}

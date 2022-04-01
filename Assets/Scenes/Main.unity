@@ -2616,6 +2616,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 1197394237850995357, guid: 3c1dbf439c7feea408b08d7f531ab463, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.1631794
+      objectReference: {fileID: 0}
+    - target: {fileID: 1197394237850995357, guid: 3c1dbf439c7feea408b08d7f531ab463, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.5813465
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c1dbf439c7feea408b08d7f531ab463, type: 3}
 --- !u!4 &1039170817 stripped
@@ -34500,6 +34508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winningTimer: 0.5
   toiletPlunger: {fileID: 1999817463478785289}
+  plungesLabel: {fileID: 0}
 --- !u!224 &1999817464646506543
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36014,6 +36023,10 @@ PrefabInstance:
       propertyPath: repairStatusCanvas
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 558225587970243734, guid: 60ea7ebede273974ca232094d65de765, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2453408913959448307, guid: 60ea7ebede273974ca232094d65de765, type: 3}
       propertyPath: m_Size.x
       value: 0.54915166
@@ -36189,6 +36202,10 @@ PrefabInstance:
     - target: {fileID: 2453408915108566347, guid: 60ea7ebede273974ca232094d65de765, type: 3}
       propertyPath: m_Offset.y
       value: -0.33836836
+      objectReference: {fileID: 0}
+    - target: {fileID: 3951356999427986703, guid: 60ea7ebede273974ca232094d65de765, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5365592842094199670, guid: 60ea7ebede273974ca232094d65de765, type: 3}
       propertyPath: m_Type

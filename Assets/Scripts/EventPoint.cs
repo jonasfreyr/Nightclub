@@ -28,16 +28,12 @@ public class EventPoint : MonoBehaviour
     
     private void Update()
     {
-        Debug.Log(IsBroken());
-        
         if (!IsBroken())
         {
             SetImageFill(1);
             _timer = 0f;
             return;
         }
-        
-        Debug.Log(timerImage.fillAmount);
 
         if (IsFixing()) return;
         
@@ -47,8 +43,6 @@ public class EventPoint : MonoBehaviour
         if (_timer >= timeToFail)
         {
             ForceFix();
-            
-            // GameManager.Instance.satisfaction -= 20;
         }
     }
 

@@ -83,7 +83,6 @@ public class CustomerBehaviour : MonoBehaviour
             
             if (_targetSetter.done)
             {
-                generateReview();
                 customerManager.DeleteCustomer(gameObject);
             }
             
@@ -267,63 +266,9 @@ public class CustomerBehaviour : MonoBehaviour
             }
             if (strikes >= 5) {
                 Debug.Log("Customer leaving");
-                generateReview();
                 _leaving = true;
                 animator.SetTrigger(Walking);
             }
         }
-    }
-
-    public void generateReview() {
-        string review = "";
-
-        // The lower the strikes the better the review
-        if (strikes >= 5) {
-            // Hated it
-            satisfaction = Random.Range(0, 25);
-            review = "I would rather have stayed at home and watched season 8 of Game of Thrones";
-        }
-        else if (strikes == 4) {
-            // Disliked it
-            satisfaction = Random.Range(26, 44);
-            review = "The customer feels like they walked into a tin of sardines (which is not a good thing)";
-        }
-        else if (strikes == 3) {
-            // Kinda bad, but it's a pass
-            satisfaction = Random.Range(45, 54);
-            review = "It was like a cold cup of coffee... Got the job done, but oof.";
-        }
-        else if (strikes == 2) {
-            // It was ok
-            satisfaction = Random.Range(55, 64);
-            review = "Sure, why not.";
-        }
-        else if (strikes == 1) {
-            // Liked it
-            satisfaction = Random.Range(65, 74);
-            review = "I liked the jumping. Made me feel strong and indepenent.";
-        }   
-        else if (strikes == 0) {
-            if (GameManager.Instance.satisfaction >= 90.0) {
-                // Peak satisfaction
-                satisfaction = Random.Range(90, 100);
-                review = "I'd consider selling my first born to fund this.";
-            }
-            else if (70 <= GameManager.Instance.satisfaction && GameManager.Instance.satisfaction < 90) {
-                // Very happy
-                satisfaction = Random.Range(85, 89);
-                review = "One of the best clubs out there.";
-            }
-            else if (GameManager.Instance.satisfaction < 70) {
-                // Great!
-                satisfaction = Random.Range(75, 84);
-                review = "Loved it!";
-            }
-        }
-        else {
-            Debug.Log("Wrong number of strikes?");
-        }
-
-        GameManager.Instance.addReview(review, satisfaction);
     }
 }

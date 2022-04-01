@@ -129,5 +129,15 @@ public class Minigames : MonoBehaviour
         IsPlayingMinigame = false;
         Succeeded = false;
         gameObject.SetActive(false);
+        _disableAllMinigames();
+    }
+
+    private void _disableAllMinigames()
+    {
+        fixPipesMinigame.gameObject.SetActive(false);
+        unclogToiletMinigame.gameObject.SetActive(false);
+        barStockMinigame.gameObject.SetActive(false);
+        moveBoxesMinigame.gameObject.SetActive(false);
+        fixSpeakersMinigame.gameObject.SetActive(false);
     }
 }

@@ -34252,6 +34252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winningTimer: 0.5
   toiletPlunger: {fileID: 1999817463478785289}
+  plungesLabel: {fileID: 0}
 --- !u!224 &1999817464646506543
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35973,7 +35974,7 @@ PrefabInstance:
     - target: {fileID: 8593302843754855574, guid: 60ea7ebede273974ca232094d65de765, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1581425973}
     - target: {fileID: 8593302843754855574, guid: 60ea7ebede273974ca232094d65de765, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: EmployeeFix

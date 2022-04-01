@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
     public bool speakersBroken = false;
     public bool bathroomBroken = false;
     public bool barBroken = false;
+    public bool sinkBroken = false;
+    public bool shipmentWaiting = false;
+    public bool pukeOnFloor = false;
     public int reviewCount = 0;
     public float reviewSatisfactionSum = 100;
 

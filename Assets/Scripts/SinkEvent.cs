@@ -11,6 +11,7 @@ public class SinkEvent : EventPoint
     public override void Break()
     {
         _isBroken = true;
+        GameManager.Instance.sinkBroken = true;
         repairStatusCanvas.SetActive(true);
     }
     
@@ -41,6 +42,7 @@ public class SinkEvent : EventPoint
         _setRepairButtonState(false);
         if (GameManager.Instance.minigames.Succeeded)
         {
+            GameManager.Instance.sinkBroken = false;
             _isBroken = false;
             repairStatusCanvas.SetActive(false);
         }

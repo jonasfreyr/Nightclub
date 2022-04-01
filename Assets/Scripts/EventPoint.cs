@@ -11,8 +11,7 @@ public class EventPoint : MonoBehaviour
     public Image timerImage;
     
     private float _timer;
-    private float timeToFail = 10f;
-    
+
     private void Start()
     {
         if (repairStatusCanvas != null)
@@ -41,9 +40,9 @@ public class EventPoint : MonoBehaviour
         if (IsFixing()) return;
         
         _timer += Time.deltaTime;
-        SetImageFill(timerImage.fillAmount - 1.0f / timeToFail * Time.deltaTime);
+        SetImageFill(timerImage.fillAmount - 1.0f / GameManager.Instance.timeToFail * Time.deltaTime);
 
-        if (_timer >= timeToFail)
+        if (_timer >= GameManager.Instance.timeToFail)
         {
             ForceFix();
 

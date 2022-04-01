@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     private bool gameOver;
     
+    public float timeToFail = 30f;
+    
     private void Start()
     {
         CurrentGameClock = startHour * 60;
@@ -112,6 +114,11 @@ public class GameManager : MonoBehaviour
         if (eventSystem.interval > 6)
         {
             eventSystem.interval -= 2;
+        }
+
+        if (timeToFail > 10)
+        {
+            timeToFail -= 2;
         }
 
         eventSystem._timer = 0f;

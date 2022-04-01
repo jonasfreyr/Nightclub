@@ -7,11 +7,10 @@ public class BarEvent : EventPoint
     private bool _isBroken;
     private bool _isFixing;
     private BoxCollider2D _collider;
-    
     public void Start()
     {
         _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
-        _collider = gameObject.GetComponent<BoxCollider2D>();
+        _collider = gameObject.transform.GetChild(1).GetComponent<BoxCollider2D>();
     }
     
     public override void Break()

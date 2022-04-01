@@ -35,6 +35,7 @@ public class BarEvent : EventPoint
     public override void ForceFix()
     {
         GameManager.Instance.barBroken = false;
+        _destroyArrow();
         
         gameObject.GetComponent<PointOfInterest>().enabled = true;
         

@@ -24,6 +24,7 @@ public class SinkEvent : EventPoint
     public override void ForceFix()
     {
         _isBroken = false;
+        _destroyArrow();
         repairStatusCanvas.SetActive(false);
     }
 

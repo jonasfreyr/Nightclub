@@ -9,7 +9,9 @@ public class EventPoint : MonoBehaviour
     public GameObject repairStatusCanvas;
     protected Image _repairButtonBackground;
     public Image timerImage;
-    
+    public RectTransform arrow;
+    public Transform arrowPrefab;
+
     private float _timer;
     private float timeToFail = 10f;
     
@@ -33,6 +35,7 @@ public class EventPoint : MonoBehaviour
     {
         if (!IsBroken())
         {
+            _destroyArrow();
             SetImageFill(1);
             _timer = 0f;
             return;
@@ -49,6 +52,37 @@ public class EventPoint : MonoBehaviour
 
             GameManager.Instance.AddSatisfaction(-15);
         }
+        
+        // Render arrow
+        var screenPos = GameManager.Instance.camera.WorldToViewportPoint(transform.position); //get viewport positions
+ 
+        if(screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1){
+            if (arrow != null)
+            {
+                _destroyArrow();
+            }
+            return;
+        }
+ 
+        var onScreenPos = new Vector2(screenPos.x-0.5f, screenPos.y-0.5f)*2; //2D version, new mapping
+        var max = Mathf.Max(Mathf.Abs(onScreenPos.x), Mathf.Abs(onScreenPos.y)); //get largest offset
+        onScreenPos = (onScreenPos/(max*2))+new Vector2(0.5f, 0.5f); //undo mapping
+        onScreenPos *= 0.9f;
+        
+        if (arrow == null)
+        {
+            var arrowObject = Instantiate(arrowPrefab, GameManager.Instance.arrowsContainer.transform);
+            arrow = arrowObject.GetComponent<RectTransform>();
+        }
+
+        var dir = (transform.position - GameManager.Instance.employee.transform.position).normalized;
+        var rotation = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90;
+        arrow.eulerAngles = new Vector3(0, 0, rotation);
+
+        if (onScreenPos.x < 0.1) onScreenPos.x = 0.1f;
+        arrow.anchoredPosition = new Vector2(
+            ((onScreenPos.x*GameManager.Instance.canvas.sizeDelta.x)-(GameManager.Instance.canvas.sizeDelta.x*0.5f)),
+            ((onScreenPos.y*GameManager.Instance.canvas.sizeDelta.y)-(GameManager.Instance.canvas.sizeDelta.y*0.5f)));
     }
 
     public virtual void Break()
@@ -92,5 +126,13 @@ public class EventPoint : MonoBehaviour
             ? new Color(0, 1.0f, 0.02f, 0.517f)
             : new Color(0.07f, 0, 1.0f, 0.517f);
         _repairButtonBackground.color = color;
+    }
+
+    protected void _destroyArrow()
+    {
+        if (arrow == null) return;
+        
+        Destroy(arrow.gameObject);
+        arrow = null;
     }
 }

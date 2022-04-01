@@ -17,7 +17,7 @@ public class SpeakerEvent : EventPoint
         _repairButtonBackground = repairStatusCanvas.transform.Find("RepairButton").GetComponent<Image>();
         _collider = gameObject.GetComponent<BoxCollider2D>();
     }
-    
+
     public override void Break()
     {
         GameManager.Instance.speakersBroken = true;
@@ -34,6 +34,7 @@ public class SpeakerEvent : EventPoint
     public override void ForceFix()
     {
         GameManager.Instance.speakersBroken = false;
+        _destroyArrow();
         
         foreach (var speaker in _objects)
         {

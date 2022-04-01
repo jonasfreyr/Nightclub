@@ -31,6 +31,7 @@ public class ShipmentEvent : EventPoint
     public override void ForceFix()
     {
         _setSpriteVisibility(false);
+        _destroyArrow();
         _isPackageWaiting = false;
         repairStatusCanvas.SetActive(false);
     }

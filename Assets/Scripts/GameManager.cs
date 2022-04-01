@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
     public int startHour;
     public int clubOpeningHour = 20;
     public int clubClosingHour = 5;
+    public GameObject arrowsContainer;
+    public Camera camera;
+    public RectTransform canvas;
     private static Camera _camera;
     
     public AstarPath gridPath;

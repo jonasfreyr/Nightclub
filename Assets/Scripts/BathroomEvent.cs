@@ -38,6 +38,7 @@ public class BathroomEvent : EventPoint
     public override void ForceFix()
     {
         if (!_isBroken) return;
+        _destroyArrow();
         _isBroken = false;
         repairStatusCanvas.SetActive(false);
         GameManager.Instance.bathroomBroken = false;

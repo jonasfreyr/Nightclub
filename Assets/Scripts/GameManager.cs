@@ -110,16 +110,24 @@ public class GameManager : MonoBehaviour
             StartCoroutine(StartDayScreen());
             yield return new WaitForSeconds(transitionTime);
         }
-
-        if (eventSystem.interval > 6)
+        
+        eventSystem.interval -= 2;
+        
+        if (eventSystem.interval < 5)
         {
-            eventSystem.interval -= 2;
+            eventSystem.interval = 5;
+        }
+        timeToFail -= 2;
+        if (timeToFail <= 10)
+        {
+            timeToFail = 10;
         }
 
-        if (timeToFail > 10)
+        if (night == 3)
         {
-            timeToFail -= 2;
+            eventSystem.maxBreak++;
         }
+        
 
         eventSystem._timer = 0f;
         eventSystem.FixAll();

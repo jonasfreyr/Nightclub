@@ -72,13 +72,14 @@ public class EmployeeBehaviour : MonoBehaviour
 
     public void SetTask(EventPoint task)
     {
+        Debug.Log(task);
+        
         _setTask(task);
     }
 
     public void ResetEmployee()
     {
         CurrentTask = null;
-        // _targetSetter.SetTarget(initalPosition);
     }
     
     private void _taskUpdate()

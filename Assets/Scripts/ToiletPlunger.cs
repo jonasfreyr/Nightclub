@@ -14,6 +14,8 @@ public class ToiletPlunger : MonoBehaviour, IDragHandler
 
     public AudioClip plunge;
     private AudioSource audioSource;
+    private float? bottomPosition;
+    private float? topPosition;
 
     private void Start()
     {
@@ -23,18 +25,18 @@ public class ToiletPlunger : MonoBehaviour, IDragHandler
     public void OnDrag (PointerEventData eventData)
     {
         var pos = transform.position;
-        if (pos.y > 440 && eventData.delta.y > 0 || pos.y < 340 && eventData.delta.y < 0) return;
+        if (pos.y > topPosition && eventData.delta.y > 0 || pos.y < bottomPosition && eventData.delta.y < 0) return;
         transform.position = new Vector3(pos.x, pos.y + eventData.delta.y, pos.z);
         
         var updatedPos = transform.position;
-        if (_status == PlungerStatus.GoingDown && updatedPos.y < 350)
+        if (_status == PlungerStatus.GoingDown && updatedPos.y < bottomPosition + 10)
         {
             
             audioSource.PlayOneShot(plunge, 1f);
             _status = PlungerStatus.GoingUp;
             Counter++;
         }
-        else if (_status == PlungerStatus.GoingUp && updatedPos.y > 420)
+        else if (_status == PlungerStatus.GoingUp && updatedPos.y > topPosition - 20)
         {
             _status = PlungerStatus.GoingDown;
         }
@@ -43,8 +45,14 @@ public class ToiletPlunger : MonoBehaviour, IDragHandler
 
     public void ResetPlunger()
     {
+        if (bottomPosition == null)
+        {
+            bottomPosition = transform.position.y - 50;
+            topPosition = transform.position.y + 50;
+        }
+        
         var pos = transform.position;
-        transform.position = new Vector3(pos.x, 430, pos.z);
+        transform.position = new Vector3(pos.x, topPosition.Value + 10, pos.z);
 
         Counter = 0;
         _status = PlungerStatus.GoingDown;

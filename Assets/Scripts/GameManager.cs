@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI dayScreenText;
     public float transitionTime = 1f;
 
+    public PauseMenu pauseMenu;
+
     public GameObject GameOverScreen;
     public TextMeshProUGUI gameOverText;
     private bool gameOver;
@@ -200,6 +202,18 @@ public class GameManager : MonoBehaviour
         if (GameClockHours == 24)
         {
             CurrentGameClock = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!pauseMenu.IsPaused)
+            {
+                pauseMenu.Pause();   
+            }
+            else
+            {
+                pauseMenu.Resume();
+            }
         }
     }
 

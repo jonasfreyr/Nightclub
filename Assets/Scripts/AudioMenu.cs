@@ -2,17 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AudioMenu : MonoBehaviour
 {
+    public GameObject pauseMenu;
     public GameObject mainAudioMenu;
     public GameObject changeTrackMenu;
     public Transform trackListItemPrefab;
     public Transform trackList;
     public Slider volumeSlider;
+    public bool IsOpen => gameObject.activeSelf;
 
     private void Start()
     {
@@ -45,12 +48,15 @@ public class AudioMenu : MonoBehaviour
 
     public void CloseMenu()
     {
+        CloseChangeTrackSubmenu();
         gameObject.SetActive(false);
+        pauseMenu.SetActive(true);
     }
 
     public void SetTrack(AudioClip track)
     {
         GameManager.Instance.audioManager.PlayOnAllAudioSources(track);
+        GameManager.Instance.audioManager.PauseOnAllSources();
     }
     
     private void _addTrackListItem(AudioManager.AudioTrack track, int listPosition)

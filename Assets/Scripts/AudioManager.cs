@@ -24,4 +24,24 @@ public class AudioManager : MonoBehaviour
             audioSourceComp.Play();
         }
     }
+    
+    public void PauseOnAllSources()
+    {
+        var audioSources = GameObject.FindGameObjectsWithTag("AudioSources");
+        foreach (var audioSource in audioSources)
+        {
+            var audioSourceComp = audioSource.GetComponent<AudioSource>(); 
+            audioSourceComp.Pause();
+        }
+    }
+    
+    public void UnPauseOnAllSources()
+    {
+        var audioSources = GameObject.FindGameObjectsWithTag("AudioSources");
+        foreach (var audioSource in audioSources)
+        {
+            var audioSourceComp = audioSource.GetComponent<AudioSource>(); 
+            audioSourceComp.UnPause();
+        }
+    }   
 }

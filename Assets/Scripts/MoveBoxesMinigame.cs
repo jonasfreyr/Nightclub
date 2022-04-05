@@ -17,8 +17,8 @@ public class MoveBoxesMinigame : MonoBehaviour
     private Vector3 package1Destination;
     private Vector3 package2Destination;
 
-    public bool HasWon => shipmenu1.position == package1Destination &&
-                          shipmenu2.position == package2Destination &&
+    public bool HasWon => placed1 &&
+                          placed2 &&
                           _hasWinningTimeCompleted;
 
     private bool _hasWinningTimeCompleted;
@@ -69,9 +69,11 @@ public class MoveBoxesMinigame : MonoBehaviour
             
         }
 
-        if (shipmenu1.position == package1Destination &&
-            shipmenu2.position == package2Destination)
+        if (placed1 &&
+            placed2 &&
+            !_startedWinningtimeCounter)
         {
+            _startedWinningtimeCounter = true;
             StartCoroutine(_startWinningProcess());
         }
     }

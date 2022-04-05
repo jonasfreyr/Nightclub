@@ -5056,6 +5056,10 @@ PrefabInstance:
       value: Employee
       objectReference: {fileID: 0}
     - target: {fileID: 7399851160190616648, guid: b5e6b701bc5898145b6486e390592879, type: 3}
+      propertyPath: speedUpSpeed
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399851160190616648, guid: b5e6b701bc5898145b6486e390592879, type: 3}
       propertyPath: employeeManager
       value: 
       objectReference: {fileID: 0}
@@ -34500,7 +34504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1999817463562164983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35850,7 +35854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &1999817464646506540
 CanvasRenderer:
   m_ObjectHideFlags: 0
